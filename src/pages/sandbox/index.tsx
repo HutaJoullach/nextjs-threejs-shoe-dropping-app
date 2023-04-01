@@ -5,7 +5,27 @@ import Head from "next/head";
 import { api } from "~/utils/api";
 // import { PageLayout } from "~/components/layout";
 
-const CreateObjectWizard = () => {};
+const CreateObjectWizard = () => {
+  const { user } = useUser();
+
+  console.log(user);
+
+  if (!user) return null;
+
+  return (
+    <div className="flex w-full gap-3">
+      <img
+        src={user.profileImageUrl}
+        alt="Profile image"
+        className="h-10 w-10 rounded-full"
+      />
+      <input
+        placeholder="Type some text"
+        className="grow bg-transparent outline-none"
+      />
+    </div>
+  );
+};
 
 const Sandbox: NextPage = () => {
   const user = useUser();
@@ -24,10 +44,27 @@ const Sandbox: NextPage = () => {
         <link rel="icon" href="/alphabet.svg" />
       </Head>
       {/* <PageLayout></PageLayout> */}
-      <div>
-        {data?.map((object) => (
-          <div>{object.objectType}</div>
-        ))}
+      <div className="h-full w-full md:max-w-7xl">
+        <div className="flex border-b border-slate-400 p-4">
+          {!user.isSignedIn && (
+            <div className="flex justify-center">
+              <SignInButton />
+            </div>
+          )}
+          {!!user.isSignedIn && (
+            <div className="flex justify-center">
+              <CreateObjectWizard />
+              <SignOutButton />
+            </div>
+          )}
+        </div>
+        <div>
+          {data?.map((object) => (
+            <div key={object.id} className="p-2">
+              {object.objectType}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
