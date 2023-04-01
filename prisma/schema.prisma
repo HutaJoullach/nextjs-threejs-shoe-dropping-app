@@ -11,11 +11,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Model {
+model Object {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
 
-    modelType String @db.VarChar(255)
+    objectType String @db.VarChar(255)
     authorId String
 
     @@index([authorId])
