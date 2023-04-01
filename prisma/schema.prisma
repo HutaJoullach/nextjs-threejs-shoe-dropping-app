@@ -22,4 +22,5 @@ model Model {
     createdAt DateTime @default(now())
 
     modelType String @db.VarChar(255)
+    authorId String
 }
