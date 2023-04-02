@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider {...pageProps}>
-      <Toaster />
+      <Toaster position="top-right" />
       <Component className="flex h-screen justify-center" {...pageProps} />
     </ClerkProvider>
   );
