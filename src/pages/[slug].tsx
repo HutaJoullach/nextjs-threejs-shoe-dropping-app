@@ -4,7 +4,6 @@ import { api } from "~/utils/api";
 // import { PageLayout } from "~/components/layout";
 import Image from "next/image";
 import { LoadingPage } from "~/components/loading";
-// import { PostView } from "~/components/postview";
 // import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 
 // const ProfileFeed = (props: { userId: string }) => {
@@ -25,7 +24,7 @@ import { LoadingPage } from "~/components/loading";
 //   );
 // };
 
-const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+const NotFoundPage: NextPage<{ username: string }> = ({ username }) => {
   // const { data } = api.profile.getUserByUsername.useQuery({
   //   username,
   // });
@@ -79,4 +78,4 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
 //   return { paths: [], fallback: "blocking" };
 // };
 
-export default ProfilePage;
+export default NotFoundPage;
