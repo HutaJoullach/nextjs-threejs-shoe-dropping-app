@@ -67,36 +67,24 @@ const addUserDataToObjects = async (objects: Object[]) => {
 };
 
 export const objectsRouter = createTRPCRouter({
+  getById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const object = await ctx.prisma.object.findUnique({
+        where: { id: input.id },
+      });
+
+      if (!object) throw new TRPCError({ code: "NOT_FOUND" });
+
+      return (await addUserDataToObjects([object]))[0];
+    }),
+
   getAll: publicProcedure.query(async ({ ctx }) => {
     const objects = await ctx.prisma.object.findMany({
       take: 100,
       orderBy: [{ createdAt: "desc" }],
     });
-    const users = (
-      await clerkClient.users.getUserList({
-        userId: objects.map((object) => object.authorId),
-        limit: 100,
-      })
-    ).map(filterUserForClient);
-    // console.log(users);
-
-    return objects.map((object) => {
-      const author = users.find((user) => user.id === object.authorId);
-
-      if (!author || !author.username)
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Author for object not found",
-        });
-
-      return {
-        object,
-        author: {
-          ...author,
-          username: author.username,
-        },
-      };
-    });
+    return addUserDataToObjects(objects);
   }),
 
   getObjectsByUserId: publicProcedure
