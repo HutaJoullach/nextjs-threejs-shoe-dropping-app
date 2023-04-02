@@ -2,6 +2,7 @@ import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 import { api } from "~/utils/api";
@@ -101,7 +102,9 @@ const CanvasContainer = (props: ObjectWithUser) => {
           height={56}
         />
         <div className="flex flex-col text-xs font-bold text-slate-300">
-          <span>{`@${author.username}`}</span>
+          <Link href={`/sandbox/@${author.username}`}>
+            <span>{`@${author.username}`}</span>
+          </Link>
           <span className="flex justify-center font-thin">{`${dayjs(
             object.createdAt
           ).fromNow()}`}</span>

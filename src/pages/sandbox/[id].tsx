@@ -4,6 +4,7 @@ import { api } from "~/utils/api";
 // import { PageLayout } from "~/components/layout";
 import Image from "next/image";
 import { LoadingPage } from "~/components/loading";
+// import { PostView } from "~/components/postview";
 // import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 
 // const ProfileFeed = (props: { userId: string }) => {
@@ -24,17 +25,17 @@ import { LoadingPage } from "~/components/loading";
 //   );
 // };
 
-const NotFoundPage: NextPage<{ username: string }> = ({ username }) => {
-  // const { data } = api.profile.getUserByUsername.useQuery({
-  //   username,
-  // });
-  // if (!data) return <div>404</div>;
+const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
+  const { data } = api.profile.getUserByUsername.useQuery({
+    username,
+  });
+  if (!data) return <div>404</div>;
   return (
     <>
-      {/* <Head>
+      <Head>
         <title>{data.username ?? data.externalUsername}</title>
       </Head>
-      <PageLayout>
+      {/* <PageLayout>
         <div className="relative h-36 bg-slate-600">
           <Image
             src={data.profileImageUrl}
@@ -78,4 +79,4 @@ const NotFoundPage: NextPage<{ username: string }> = ({ username }) => {
 //   return { paths: [], fallback: "blocking" };
 // };
 
-export default NotFoundPage;
+export default ProfilePage;
