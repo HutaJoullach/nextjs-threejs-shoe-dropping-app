@@ -70,14 +70,29 @@ const CanvasContainer = (props: ObjectWithUser) => {
   );
 };
 
-const Sandbox: NextPage = () => {
-  const user = useUser();
+const Board = () => {
+  const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
-  const { data, isLoading } = api.objects.getAll.useQuery();
-
-  if (isLoading) return <LoadingPage />;
+  if (objectsLoading) return <LoadingPage />;
 
   if (!data) return <div>Something went wrong</div>;
+
+  return (
+    <div>
+      {data?.map((objectData) => (
+        <CanvasContainer {...objectData} key={objectData.object.id} />
+      ))}
+    </div>
+  );
+};
+
+const Sandbox: NextPage = () => {
+  const { isLoaded: userLoaded, isSignedIn } = useUser();
+
+  // Start fetching data
+  api.objects.getAll.useQuery();
+
+  if (!userLoaded) return <div />;
 
   return (
     <>
@@ -89,23 +104,19 @@ const Sandbox: NextPage = () => {
       {/* <PageLayout></PageLayout> */}
       <div className="h-full w-full md:max-w-7xl">
         <div className="flex border-b border-slate-400 p-4">
-          {!user.isSignedIn && (
+          {!isSignedIn && (
             <div className="flex justify-center">
               <SignInButton />
             </div>
           )}
-          {!!user.isSignedIn && (
+          {!!isSignedIn && (
             <div className="flex justify-center">
               <CreateObjectWizard />
               <SignOutButton />
             </div>
           )}
         </div>
-        <div>
-          {data?.map((objectData) => (
-            <CanvasContainer {...objectData} key={objectData.object.id} />
-          ))}
-        </div>
+        <Board />
       </div>
     </>
   );
