@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
+import { LoadingPage } from "~/components/loading";
 // import { PageLayout } from "~/components/layout";
 
 import dayjs from "dayjs";
@@ -74,7 +75,7 @@ const Sandbox: NextPage = () => {
 
   const { data, isLoading } = api.objects.getAll.useQuery();
 
-  // if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingPage />;
 
   if (!data) return <div>Something went wrong</div>;
 
