@@ -5,7 +5,7 @@ import { api } from "~/utils/api";
 import Image from "next/image";
 import { LoadingPage } from "~/components/loading";
 // import { PostView } from "~/components/postview";
-// import { generateSSGHelper } from "~/server/helpers/ssgHelper";
+import { generateSSGHelper } from "~/server/helpers/ssg-helper";
 
 // const ProfileFeed = (props: { userId: string }) => {
 //   const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
@@ -75,8 +75,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-// export const getStaticPaths = () => {
-//   return { paths: [], fallback: "blocking" };
-// };
+export const getStaticPaths = () => {
+  return { paths: [], fallback: "blocking" };
+};
 
 export default ProfilePage;
