@@ -1,9 +1,16 @@
 import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 
-import { RouterOutputs, api } from "~/utils/api";
+import { api } from "~/utils/api";
+import type { RouterOutputs } from "~/utils/api";
 // import { PageLayout } from "~/components/layout";
+
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 const CreateObjectWizard = () => {
   const { user } = useUser();
@@ -14,10 +21,12 @@ const CreateObjectWizard = () => {
 
   return (
     <div className="flex w-full gap-3">
-      <img
+      <Image
         src={user.profileImageUrl}
         alt="Profile image"
         className="h-10 w-10 rounded-full"
+        width={56}
+        height={56}
       />
       <input
         placeholder="Type some text"
@@ -42,10 +51,18 @@ const CanvasContainer = (props: ObjectWithUser) => {
     <div key={object.id} className="flex gap-2 p-2">
       <span>{object.objectType}</span>
       <div className="flex items-center gap-1 rounded-md bg-zinc-700 p-1">
-        <img src={author.profileImageUrl} className="h-7 w-7 rounded-full" />
+        <Image
+          src={author.profileImageUrl}
+          className="h-7 w-7 rounded-full"
+          alt={`@${author.username}'s profile pic`}
+          width={56}
+          height={56}
+        />
         <div className="flex flex-col text-xs font-bold text-slate-300">
           <span>{`@${author.username}`}</span>
-          <span className="flex justify-center font-thin">{`1 hour ago`}</span>
+          <span className="flex justify-center font-thin">{`${dayjs(
+            object.createdAt
+          ).fromNow()}`}</span>
         </div>
       </div>
     </div>
