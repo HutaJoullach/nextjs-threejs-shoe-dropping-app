@@ -1,10 +1,11 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { api } from "~/utils/api";
-import { PageLayout } from "~/components/layout";
 import Image from "next/image";
+import { api } from "~/utils/api";
+
+import { PageLayout } from "~/components/layout";
 import { LoadingPage } from "~/components/loading";
-// import { PostView } from "~/components/postview";
+import { CanvasContainer } from "~/components/canvas-container";
 import { generateSSGHelper } from "~/server/helpers/ssg-helper";
 
 const ProfileBoard = (props: { userId: string }) => {
@@ -18,8 +19,8 @@ const ProfileBoard = (props: { userId: string }) => {
 
   return (
     <div className="flex flex-col">
-      {data.map((fullPost) => (
-        <PostView {...fullPost} key={fullPost.post.id} />
+      {data.map((objectData) => (
+        <CanvasContainer {...objectData} key={objectData.object.id} />
       ))}
     </div>
   );

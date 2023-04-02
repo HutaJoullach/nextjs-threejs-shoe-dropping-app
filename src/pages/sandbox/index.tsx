@@ -9,11 +9,11 @@ import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { PageLayout } from "~/components/layout";
+import { CanvasContainer } from "~/components/canvas-container";
 import { toast } from "react-hot-toast";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
 dayjs.extend(relativeTime);
 
 const CreateObjectWizard = () => {

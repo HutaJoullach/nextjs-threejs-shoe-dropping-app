@@ -9,6 +9,7 @@ import {
   publicProcedure,
 } from "~/server/api/trpc";
 import { filterUserForClient } from "~/server/helpers/filter-user-for-client";
+import type { Object } from "@prisma/client";
 
 import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 import { Redis } from "@upstash/redis";
@@ -25,6 +26,45 @@ const ratelimit = new Ratelimit({
    */
   prefix: "@upstash/ratelimit",
 });
+
+const addUserDataToObjects = async (objects: Object[]) => {
+  const userId = objects.map((object) => object.authorId);
+  const users = (
+    await clerkClient.users.getUserList({
+      userId: userId,
+      limit: 110,
+    })
+  ).map(filterUserForClient);
+
+  return objects.map((object) => {
+    const author = users.find((user) => user.id === object.authorId);
+
+    if (!author) {
+      console.error("AUTHOR NOT FOUND", object);
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: `Author for object not found. OJECTS ID: ${object.id}, USER ID: ${object.authorId}`,
+      });
+    }
+    if (!author.username) {
+      // use the ExternalUsername
+      if (!author.externalUsername) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Author has no GitHub Account: ${author.id}`,
+        });
+      }
+      author.username = author.externalUsername;
+    }
+    return {
+      object,
+      author: {
+        ...author,
+        username: author.username ?? "(username not found)",
+      },
+    };
+  });
+};
 
 export const objectsRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
@@ -74,7 +114,7 @@ export const objectsRouter = createTRPCRouter({
           take: 100,
           orderBy: [{ createdAt: "desc" }],
         })
-        .then(addUserDataToPosts)
+        .then(addUserDataToObjects)
     ),
 
   create: privateProcedure
