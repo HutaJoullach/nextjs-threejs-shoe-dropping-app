@@ -7,23 +7,23 @@ import { LoadingPage } from "~/components/loading";
 // import { PostView } from "~/components/postview";
 import { generateSSGHelper } from "~/server/helpers/ssg-helper";
 
-// const ProfileFeed = (props: { userId: string }) => {
-//   const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
-//     userId: props.userId,
-//   });
+const ProfileBoard = (props: { userId: string }) => {
+  const { data, isLoading } = api.objects.getObjectsByUserId.useQuery({
+    userId: props.userId,
+  });
 
-//   if (isLoading) return <LoadingPage />;
+  if (isLoading) return <LoadingPage />;
 
-//   if (!data || data.length === 0) return <div>User has not posted</div>;
+  if (!data || data.length === 0) return <div>User hasn't created objects</div>;
 
-//   return (
-//     <div className="flex flex-col">
-//       {data.map((fullPost) => (
-//         <PostView {...fullPost} key={fullPost.post.id} />
-//       ))}
-//     </div>
-//   );
-// };
+  return (
+    <div className="flex flex-col">
+      {data.map((fullPost) => (
+        <PostView {...fullPost} key={fullPost.post.id} />
+      ))}
+    </div>
+  );
+};
 
 const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
   const { data } = api.profile.getUserByUsername.useQuery({
@@ -50,7 +50,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
           data.username ?? data.externalUsername
         }`}</div>
         <div className="w-full border-b border-slate-400" />
-        {/* <ProfileFeed userId={data.id} /> */}
+        <ProfileBoard userId={data.id} />
       </PageLayout>
     </>
   );
