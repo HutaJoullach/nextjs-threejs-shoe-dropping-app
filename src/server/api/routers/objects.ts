@@ -29,7 +29,7 @@ export const objectsRouter = createTRPCRouter({
     return objects.map((object) => {
       const author = users.find((user) => user.id === object.authorId);
 
-      if (!author)
+      if (!author || !author.username)
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Author for object not found",
@@ -37,7 +37,10 @@ export const objectsRouter = createTRPCRouter({
 
       return {
         object,
-        author,
+        author: {
+          ...author,
+          username: author.username,
+        },
       };
     });
   }),

@@ -39,8 +39,15 @@ type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
 const CanvasContainer = (props: ObjectWithUser) => {
   const { object, author } = props;
   return (
-    <div key={object.id} className="p-2">
-      {object.objectType}
+    <div key={object.id} className="flex gap-2 p-2">
+      <span>{object.objectType}</span>
+      <div className="flex items-center gap-1 rounded-md bg-zinc-700 p-1">
+        <img src={author.profileImageUrl} className="h-7 w-7 rounded-full" />
+        <div className="flex flex-col text-xs font-bold text-slate-300">
+          <span>{`@${author.username}`}</span>
+          <span className="flex justify-center font-thin">{`1 hour ago`}</span>
+        </div>
+      </div>
     </div>
   );
 };
