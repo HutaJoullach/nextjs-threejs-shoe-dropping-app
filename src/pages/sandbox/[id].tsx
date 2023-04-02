@@ -56,24 +56,24 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
   );
 };
 
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   const ssg = generateSSGHelper();
+export const getStaticProps: GetStaticProps = async (context) => {
+  const ssg = generateSSGHelper();
 
-//   const slug = context.params?.slug;
+  const slug = context.params?.slug;
 
-//   if (typeof slug !== "string") throw new Error("no slug");
+  if (typeof slug !== "string") throw new Error("no slug");
 
-//   const username = slug.replace("@", "");
+  const username = slug.replace("@", "");
 
-//   await ssg.profile.getUserByUsername.prefetch({ username });
+  await ssg.profile.getUserByUsername.prefetch({ username });
 
-//   return {
-//     props: {
-//       trpcState: ssg.dehydrate(),
-//       username,
-//     },
-//   };
-// };
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+      username,
+    },
+  };
+};
 
 // export const getStaticPaths = () => {
 //   return { paths: [], fallback: "blocking" };
