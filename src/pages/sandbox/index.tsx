@@ -2,6 +2,7 @@ import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
 
 import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
@@ -15,6 +16,17 @@ dayjs.extend(relativeTime);
 
 const CreateObjectWizard = () => {
   const { user } = useUser();
+
+  const [input, setInput] = useState<string>("");
+
+  const ctx = api.useContext();
+
+  const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
+    onSuccess: () => {
+      setInput("");
+      void ctx.objects.getAll.invalidate();
+    },
+  });
 
   // console.log(user);
 
@@ -32,7 +44,12 @@ const CreateObjectWizard = () => {
       <input
         placeholder="Type some text"
         className="grow bg-transparent outline-none"
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        disabled={isPosting}
       />
+      <button onClick={() => mutate({ objectType: input })}>Post</button>
     </div>
   );
 };
@@ -79,7 +96,7 @@ const Board = () => {
 
   return (
     <div>
-      {data?.map((objectData) => (
+      {data.map((objectData) => (
         <CanvasContainer {...objectData} key={objectData.object.id} />
       ))}
     </div>
