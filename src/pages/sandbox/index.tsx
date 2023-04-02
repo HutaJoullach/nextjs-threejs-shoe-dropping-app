@@ -2,13 +2,13 @@ import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
 
-import { api } from "~/utils/api";
+import { RouterOutputs, api } from "~/utils/api";
 // import { PageLayout } from "~/components/layout";
 
 const CreateObjectWizard = () => {
   const { user } = useUser();
 
-  console.log(user);
+  // console.log(user);
 
   if (!user) return null;
 
@@ -23,6 +23,24 @@ const CreateObjectWizard = () => {
         placeholder="Type some text"
         className="grow bg-transparent outline-none"
       />
+    </div>
+  );
+};
+
+// type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
+// const CanvasContainer = (props: { object: ObjectWithUser }) => {};
+
+// type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
+// const CanvasContainer = (props: ObjectWithUser) => {
+//   const {object, author} = props;
+// };
+
+type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
+const CanvasContainer = (props: ObjectWithUser) => {
+  const { object, author } = props;
+  return (
+    <div key={object.id} className="p-2">
+      {object.objectType}
     </div>
   );
 };
@@ -59,10 +77,8 @@ const Sandbox: NextPage = () => {
           )}
         </div>
         <div>
-          {data?.map((object) => (
-            <div key={object.id} className="p-2">
-              {object.objectType}
-            </div>
+          {data?.map((objectData) => (
+            <CanvasContainer {...objectData} key={objectData.object.id} />
           ))}
         </div>
       </div>
