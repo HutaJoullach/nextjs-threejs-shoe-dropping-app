@@ -18,16 +18,37 @@ import {
   githubwhite,
   paperplane,
   sandbucket,
+  menualt,
+  arrowcircleright,
+  nextarrowright,
   menu,
   close,
 } from "../assets";
 
 const Navbar = () => {
+  const [toggle, setToggle] = useState(false);
+  // const [scrolled, setScrolled] = useState(false);
+
   const { route } = useRouter();
   const pathname = route.replace("/", "");
   console.log(pathname);
 
   const { isLoaded: userLoaded, isSignedIn } = useUser();
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollTop = window.scrollY;
+  //     if (scrollTop > 100) {
+  //       setScrolled(true);
+  //     } else {
+  //       setScrolled(false);
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <nav
@@ -147,6 +168,17 @@ const Navbar = () => {
             </li>
           )}
         </ul>
+
+        <div className="flex flex-1 items-center justify-end sm:hidden">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+            <Image
+              src={toggle ? arrowcircleright : menualt}
+              alt="menu"
+              className="h-[28px] w-[28px] object-contain"
+              onClick={() => setToggle(!toggle)}
+            />
+          </div>
+        </div>
       </div>
     </nav>
   );

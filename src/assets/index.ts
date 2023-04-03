@@ -4,6 +4,11 @@ import githubblack from "./githubblack.svg";
 import githubwhite from "./githubwhite.svg";
 import paperplane from "./paperplane.svg";
 import sandbucket from "./sandbucket.svg";
+import menualt from "./menualt.svg";
+import addbox from "./addbox.svg";
+import removebox from "./removebox.svg";
+import arrowcircleright from "./arrowcircleright.svg";
+import nextarrowright from "./nextarrowright.svg";
 
 import backend from "./backend.png";
 import creator from "./creator.png";
@@ -43,6 +48,11 @@ export {
   githubwhite,
   paperplane,
   sandbucket,
+  menualt,
+  addbox,
+  removebox,
+  arrowcircleright,
+  nextarrowright,
   backend,
   creator,
   mobile,
