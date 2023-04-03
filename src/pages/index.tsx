@@ -20,9 +20,7 @@ const Home: NextPage = () => {
   return (
     <>
       <PageLayout>
-        <div className="">
-          <Navbar />
-        </div>
+        <div className=""></div>
       </PageLayout>
     </>
   );
