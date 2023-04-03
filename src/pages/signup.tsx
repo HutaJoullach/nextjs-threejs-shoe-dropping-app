@@ -6,7 +6,12 @@ import { PageLayout } from "~/components/layout";
 const Signup: NextPage = () => (
   <PageLayout>
     <div className="flex h-full w-full items-center justify-center">
-      <SignUp path="/signup" routing="path" signInUrl="/signin" />
+      <SignUp
+        path="/signup"
+        routing="path"
+        signInUrl="/signin"
+        redirectUrl="/sandbox"
+      />
     </div>
   </PageLayout>
 );
