@@ -23,7 +23,7 @@ const theme = {
     color: {
       primary: "text-slate-100",
       fieldInputPlaceholderTextColor: "",
-      navbarForeground: "",
+      navbarForeground: "text-white",
       sidebarForeground: "",
     },
     customTypography: {
@@ -41,7 +41,7 @@ const theme = {
     primary: "bg-stone-950",
     fieldInputBackground: "",
     cardBackground: "",
-    navbarBackground: "",
+    navbarBackground: "bg-red-200",
     sidebarBackground: "",
     headerBarBackground: "",
   },

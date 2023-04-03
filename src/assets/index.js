@@ -1,4 +1,9 @@
 import logo from "./logo.webp";
+import arrowleft from "./arrowleft.svg";
+import githubblack from "./githubblack.svg";
+import githubwhite from "./githubwhite.svg";
+import paperplane from "./paperplane.svg";
+
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
@@ -32,6 +37,10 @@ import tripguide from "./tripguide.png";
 
 export {
   logo,
+  arrowleft,
+  githubblack,
+  githubwhite,
+  paperplane,
   backend,
   creator,
   mobile,
