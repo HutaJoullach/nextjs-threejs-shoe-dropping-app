@@ -5,5 +5,8 @@ export default {
   theme: {
     extend: {},
   },
+  // variants: {
+  //   fill: ["hover", "focus"], // this line is for hover state
+  // },
   plugins: [],
 } satisfies Config;

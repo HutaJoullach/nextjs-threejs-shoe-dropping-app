@@ -3,6 +3,7 @@ import arrowleft from "./arrowleft.svg";
 import githubblack from "./githubblack.svg";
 import githubwhite from "./githubwhite.svg";
 import paperplane from "./paperplane.svg";
+import sandbucket from "./sandbucket.svg";
 
 import backend from "./backend.png";
 import creator from "./creator.png";
@@ -41,6 +42,7 @@ export {
   githubblack,
   githubwhite,
   paperplane,
+  sandbucket,
   backend,
   creator,
   mobile,
