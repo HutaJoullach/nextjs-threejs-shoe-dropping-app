@@ -9,6 +9,8 @@ import addbox from "./addbox.svg";
 import removebox from "./removebox.svg";
 import arrowcircleright from "./arrowcircleright.svg";
 import nextarrowright from "./nextarrowright.svg";
+import arrowleftmd from "./arrowleftmd.svg";
+import arrowleftsm from "./arrowleftsm.svg";
 
 import backend from "./backend.png";
 import creator from "./creator.png";
@@ -53,6 +55,8 @@ export {
   removebox,
   arrowcircleright,
   nextarrowright,
+  arrowleftmd,
+  arrowleftsm,
   backend,
   creator,
   mobile,
