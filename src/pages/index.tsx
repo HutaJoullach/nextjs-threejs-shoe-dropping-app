@@ -4,6 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 import { PageLayout } from "~/components/layout";
+import Navbar from "~/components/navbar";
 
 import { api } from "~/utils/api";
 
@@ -19,7 +20,9 @@ const Home: NextPage = () => {
   return (
     <>
       <PageLayout>
-        <div>home</div>
+        <div className="">
+          <Navbar />
+        </div>
       </PageLayout>
     </>
   );
