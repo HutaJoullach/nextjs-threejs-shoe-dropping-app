@@ -7,6 +7,7 @@ import {
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import theme from "../styles/styles";
 // import { navLinks } from "../constants";
@@ -22,6 +23,12 @@ import {
 } from "../assets";
 
 const Navbar = () => {
+  const { route } = useRouter();
+  const pathname = route.replace("/", "");
+  console.log(pathname);
+
+  const { isLoaded: userLoaded, isSignedIn } = useUser();
+
   return (
     <nav
       className={`${theme.p.x.sm} ${theme.bg.navbarBackground} fixed top-0 z-20 flex w-full items-center py-1`}
@@ -41,45 +48,47 @@ const Navbar = () => {
             width={65}
             height={65}
           />
-          {true ? (
-            <p
-              className={`${theme.font.color.navbarForeground} flex cursor-pointer text-[18px] font-medium hover:text-slate-100`}
-            >
-              huta&nbsp;
-              <span className="hidden sm:block">| react developer</span>
-            </p>
-          ) : (
+          {pathname === "sandbox" ? (
             <div
               className={`${theme.font.color.navbarForeground} flex items-center gap-1 text-[18px] font-medium hover:text-slate-100`}
             >
               <Image
                 src={arrowleft}
                 className="h-5 w-5 rounded-full"
-                alt={"arrow left"}
+                alt="arrowleft"
                 width={65}
                 height={65}
               />
               <span>take me back to home!</span>
             </div>
+          ) : (
+            <p
+              className={`${theme.font.color.navbarForeground} flex cursor-pointer text-[18px] font-medium hover:text-slate-100`}
+            >
+              huta&nbsp;
+              <span className="hidden sm:block">| react developer</span>
+            </p>
           )}
         </Link>
 
         <ul className="hidden list-none flex-row items-center gap-10 sm:flex">
-          <li
-            className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
-              <Link href={"/sandbox/"}>
-                <Image
-                  src={sandbucket}
-                  className="h-7 w-7 rounded-full"
-                  alt="githubblack"
-                  width={56}
-                  height={56}
-                />
-              </Link>
-            </div>
-          </li>
+          {pathname !== "sandbox" && (
+            <li
+              className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+                <Link href={"/sandbox/"}>
+                  <Image
+                    src={sandbucket}
+                    className="h-7 w-7 rounded-full"
+                    alt="sandbucket"
+                    width={56}
+                    height={56}
+                  />
+                </Link>
+              </div>
+            </li>
+          )}
 
           <li className="cursor-pointer">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
@@ -91,7 +100,7 @@ const Navbar = () => {
                 <Image
                   src={githubwhite}
                   className="h-7 w-7 rounded-full"
-                  alt="githubblack"
+                  alt="githubwhite"
                   width={56}
                   height={56}
                 />
@@ -104,14 +113,14 @@ const Navbar = () => {
               <Image
                 src={paperplane}
                 className="h-7 w-7 rounded-full"
-                alt="githubblack"
+                alt="paperplane"
                 width={56}
                 height={56}
               />
             </div>
           </li>
 
-          {true && (
+          {pathname === "sandbox" && !isSignedIn && (
             <li
               className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
             >
