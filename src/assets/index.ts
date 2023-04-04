@@ -11,6 +11,9 @@ import arrowcircleright from "./arrowcircleright.svg";
 import nextarrowright from "./nextarrowright.svg";
 import arrowleftmd from "./arrowleftmd.svg";
 import arrowleftsm from "./arrowleftsm.svg";
+import user01 from "./user01.svg";
+import user02 from "./user02.svg";
+import user03 from "./user03.svg";
 
 import backend from "./backend.png";
 import creator from "./creator.png";
@@ -57,6 +60,9 @@ export {
   nextarrowright,
   arrowleftmd,
   arrowleftsm,
+  user01,
+  user02,
+  user03,
   backend,
   creator,
   mobile,

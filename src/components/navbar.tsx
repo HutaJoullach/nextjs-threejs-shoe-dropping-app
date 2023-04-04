@@ -24,6 +24,9 @@ import {
   menualt,
   arrowcircleright,
   nextarrowright,
+  user01,
+  user02,
+  user03,
   menu,
   close,
 } from "../assets";
@@ -54,11 +57,13 @@ const Navbar = () => {
   // }, []);
 
   type SigninStateControlButtonProps = {
+    mobileView?: boolean | undefined;
     className?: string | null | undefined;
     username?: string | null | undefined;
   };
 
   const SigninStateControlButton = ({
+    mobileView,
     className,
     username,
   }: SigninStateControlButtonProps) => {
@@ -69,26 +74,40 @@ const Navbar = () => {
       <>
         {pathname === "sandbox" && !isSignedIn && (
           <li className="cursor-pointer">
-            <Link href={"/signin/"}>
-              <div
-                className={
-                  className === null ||
-                  className === undefined ||
-                  className === ""
-                    ? defaultClassName
-                    : className
-                }
-              >
-                <Image
-                  src={githubwhite}
-                  className="h-4 w-4 rounded-full"
-                  alt="githubwhite"
-                  width={56}
-                  height={56}
-                />
-                <span>Sign in with Github</span>
+            {mobileView ? (
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+                <Link href={"/signin/"}>
+                  <Image
+                    src={user02}
+                    className="h-7 w-7 rounded-full"
+                    alt="user02"
+                    width={56}
+                    height={56}
+                  />
+                </Link>
               </div>
-            </Link>
+            ) : (
+              <Link href={"/signin/"}>
+                <div
+                  className={
+                    className === null ||
+                    className === undefined ||
+                    className === ""
+                      ? defaultClassName
+                      : className
+                  }
+                >
+                  <Image
+                    src={githubwhite}
+                    className="h-4 w-4 rounded-full"
+                    alt="githubwhite"
+                    width={56}
+                    height={56}
+                  />
+                  <span>Sign in with Github</span>
+                </div>
+              </Link>
+            )}
           </li>
         )}
 
@@ -208,6 +227,68 @@ const Navbar = () => {
               className="h-[28px] w-[28px] object-contain"
               onClick={() => setToggle(!toggle)}
             />
+          </div>
+
+          {/* here */}
+          <div
+            className={`${!toggle ? "hidden" : "flex"} ${
+              theme.bg.navbarBackground
+            } absolute right-0 top-20 z-10 mx-5 rounded-xl p-6`}
+          >
+            {/* <ul className="hidden list-none flex-row items-center gap-10 sm:flex"> */}
+            <ul className="flex flex-1 list-none flex-col items-start justify-end gap-4">
+              {pathname !== "sandbox" && (
+                <li
+                  className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+                    <Link href={"/sandbox/"}>
+                      <Image
+                        src={sandbucket}
+                        className="h-7 w-7 rounded-full"
+                        alt="sandbucket"
+                        width={56}
+                        height={56}
+                      />
+                    </Link>
+                  </div>
+                </li>
+              )}
+
+              <li className="cursor-pointer">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+                  <a
+                    target="_blank"
+                    href="https://github.com/HutaJoullach/"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={githubwhite}
+                      className="h-7 w-7 rounded-full"
+                      alt="githubwhite"
+                      width={56}
+                      height={56}
+                    />
+                  </a>
+                </div>
+              </li>
+
+              <li className="cursor-pointer">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+                  <Image
+                    src={paperplane}
+                    className="h-7 w-7 rounded-full"
+                    alt="paperplane"
+                    width={56}
+                    height={56}
+                  />
+                </div>
+              </li>
+
+              <SigninStateControlButton mobileView={true} />
+
+              {/* <SigninStateControlButton mobileView={true} className="bg-red-800" username={user?.username} /> */}
+            </ul>
           </div>
         </div>
       </div>
