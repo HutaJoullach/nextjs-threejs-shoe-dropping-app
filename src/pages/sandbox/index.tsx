@@ -38,7 +38,7 @@ const CreateObjectWizard = () => {
     },
   });
 
-  // console.log(user);
+  console.log(user);
 
   if (!user) return null;
 

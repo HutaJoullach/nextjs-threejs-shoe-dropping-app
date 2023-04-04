@@ -36,7 +36,7 @@ const Navbar = () => {
   const pathname = route.replace("/", "");
   console.log(pathname);
 
-  const { isLoaded: userLoaded, isSignedIn } = useUser();
+  const { user, isLoaded: userLoaded, isSignedIn } = useUser();
 
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -52,6 +52,57 @@ const Navbar = () => {
 
   //   return () => window.removeEventListener("scroll", handleScroll);
   // }, []);
+
+  type SigninStateControlButtonProps = {
+    className?: string | null | undefined;
+    username?: string | null | undefined;
+  };
+
+  const SigninStateControlButton = ({
+    className,
+    username,
+  }: SigninStateControlButtonProps) => {
+    const defaultClassName =
+      "dark:hover:bg-[#050708]/85 flex items-center gap-1 rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none focus:ring-4 focus:ring-[#24292F]/50 dark:focus:ring-gray-500";
+
+    return (
+      <>
+        {pathname === "sandbox" && !isSignedIn && (
+          <li className="cursor-pointer">
+            <Link href={"/signin/"}>
+              <div
+                className={
+                  className === null ||
+                  className === undefined ||
+                  className === ""
+                    ? defaultClassName
+                    : className
+                }
+              >
+                <Image
+                  src={githubwhite}
+                  className="h-4 w-4 rounded-full"
+                  alt="githubwhite"
+                  width={56}
+                  height={56}
+                />
+                <span>Sign in with Github</span>
+              </div>
+            </Link>
+          </li>
+        )}
+
+        {pathname === "sandbox" && !!isSignedIn && (
+          <li className="flex cursor-pointer gap-1 text-xs">
+            <UserButton />
+            {username && <span className="pt-3">{`@${username}`}</span>}
+          </li>
+        )}
+      </>
+    );
+  };
+
+  // console.log(`here!!! ${user?.username}`);
 
   return (
     <nav
@@ -144,32 +195,9 @@ const Navbar = () => {
             </div>
           </li>
 
-          {pathname === "sandbox" && !isSignedIn && (
-            <li
-              className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
-            >
-              <Link href={"/signin/"}>
-                <div className="dark:hover:bg-[#050708]/85 flex items-center gap-1 rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none focus:ring-4 focus:ring-[#24292F]/50 dark:focus:ring-gray-500">
-                  <Image
-                    src={githubwhite}
-                    className="h-4 w-4 rounded-full"
-                    alt="githubwhite"
-                    width={56}
-                    height={56}
-                  />
-                  <span>Sign in with Github</span>
-                </div>
-              </Link>
-            </li>
-          )}
+          <SigninStateControlButton />
 
-          {pathname === "sandbox" && !!isSignedIn && (
-            <li
-              className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
-            >
-              <UserButton />
-            </li>
-          )}
+          {/* <SigninStateControlButton username={user?.username} className="bg-red-800" /> */}
         </ul>
 
         <div className="flex flex-1 items-center justify-end sm:hidden">
