@@ -57,15 +57,15 @@ const Navbar = () => {
   // }, []);
 
   type SigninStateControlButtonProps = {
-    mobileView?: boolean | undefined;
-    className?: string | null | undefined;
-    username?: string | null | undefined;
+    isMobileSigninButton?: boolean | undefined;
+    signinButtonClassName?: string | null | undefined;
+    githubUsername?: string | null | undefined;
   };
 
   const SigninStateControlButton = ({
-    mobileView,
-    className,
-    username,
+    isMobileSigninButton,
+    signinButtonClassName,
+    githubUsername,
   }: SigninStateControlButtonProps) => {
     const defaultClassName =
       "dark:hover:bg-[#050708]/85 flex items-center gap-1 rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none focus:ring-4 focus:ring-[#24292F]/50 dark:focus:ring-gray-500";
@@ -74,7 +74,7 @@ const Navbar = () => {
       <>
         {pathname === "sandbox" && !isSignedIn && (
           <li className="cursor-pointer">
-            {mobileView ? (
+            {isMobileSigninButton ? (
               <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
                 <Link href={"/signin/"}>
                   <Image
@@ -90,11 +90,11 @@ const Navbar = () => {
               <Link href={"/signin/"}>
                 <div
                   className={
-                    className === null ||
-                    className === undefined ||
-                    className === ""
+                    signinButtonClassName === null ||
+                    signinButtonClassName === undefined ||
+                    signinButtonClassName === ""
                       ? defaultClassName
-                      : className
+                      : signinButtonClassName
                   }
                 >
                   <Image
@@ -114,7 +114,9 @@ const Navbar = () => {
         {pathname === "sandbox" && !!isSignedIn && (
           <li className="flex cursor-pointer gap-1 text-xs">
             <UserButton />
-            {username && <span className="pt-3">{`@${username}`}</span>}
+            {githubUsername && (
+              <span className="pt-3">{`@${githubUsername}`}</span>
+            )}
           </li>
         )}
       </>
@@ -122,6 +124,91 @@ const Navbar = () => {
   };
 
   // console.log(`here!!! ${user?.username}`);
+
+  type NavbarListProps = {
+    isMobileSigninButton?: boolean | undefined;
+    listClassName?: string | null | undefined;
+    signinButtonClassName?: string | null | undefined;
+    githubUsername?: string | null | undefined;
+  };
+
+  const NavbarList = ({
+    isMobileSigninButton,
+    listClassName,
+    signinButtonClassName,
+    githubUsername,
+  }: NavbarListProps) => {
+    const defaultListClassName =
+      "hidden list-none flex-row items-center gap-10 sm:flex";
+
+    console.log(listClassName);
+
+    return (
+      <ul
+        className={
+          listClassName === null ||
+          listClassName === undefined ||
+          listClassName === ""
+            ? defaultListClassName
+            : listClassName
+        }
+      >
+        {pathname !== "sandbox" && (
+          <li
+            className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+              <Link href={"/sandbox/"}>
+                <Image
+                  src={sandbucket}
+                  className="h-7 w-7 rounded-full"
+                  alt="sandbucket"
+                  width={56}
+                  height={56}
+                />
+              </Link>
+            </div>
+          </li>
+        )}
+
+        <li className="cursor-pointer">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+            <a
+              target="_blank"
+              href="https://github.com/HutaJoullach/"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={githubwhite}
+                className="h-7 w-7 rounded-full"
+                alt="githubwhite"
+                width={56}
+                height={56}
+              />
+            </a>
+          </div>
+        </li>
+
+        <li className="cursor-pointer">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
+            <Image
+              src={paperplane}
+              className="h-7 w-7 rounded-full"
+              alt="paperplane"
+              width={56}
+              height={56}
+            />
+          </div>
+        </li>
+
+        <SigninStateControlButton
+          isMobileSigninButton={isMobileSigninButton}
+          signinButtonClassName={signinButtonClassName}
+          githubUsername={githubUsername}
+        />
+      </ul>
+    );
+  };
 
   return (
     <nav
@@ -165,130 +252,27 @@ const Navbar = () => {
           )}
         </Link>
 
-        <ul className="hidden list-none flex-row items-center gap-10 sm:flex">
-          {pathname !== "sandbox" && (
-            <li
-              className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
-                <Link href={"/sandbox/"}>
-                  <Image
-                    src={sandbucket}
-                    className="h-7 w-7 rounded-full"
-                    alt="sandbucket"
-                    width={56}
-                    height={56}
-                  />
-                </Link>
-              </div>
-            </li>
-          )}
-
-          <li className="cursor-pointer">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
-              <a
-                target="_blank"
-                href="https://github.com/HutaJoullach/"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={githubwhite}
-                  className="h-7 w-7 rounded-full"
-                  alt="githubwhite"
-                  width={56}
-                  height={56}
-                />
-              </a>
-            </div>
-          </li>
-
-          <li className="cursor-pointer">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
-              <Image
-                src={paperplane}
-                className="h-7 w-7 rounded-full"
-                alt="paperplane"
-                width={56}
-                height={56}
-              />
-            </div>
-          </li>
-
-          <SigninStateControlButton />
-
-          {/* <SigninStateControlButton username={user?.username} className="bg-red-800" /> */}
-        </ul>
+        <NavbarList isMobileSigninButton={false} />
 
         <div className="flex flex-1 items-center justify-end sm:hidden">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
             <Image
               src={toggle ? arrowcircleright : menualt}
-              alt="menu"
+              alt="menualt"
               className="h-[28px] w-[28px] object-contain"
               onClick={() => setToggle(!toggle)}
             />
           </div>
 
-          {/* here */}
           <div
             className={`${!toggle ? "hidden" : "flex"} ${
               theme.bg.navbarBackground
             } absolute right-0 top-20 z-10 mx-5 rounded-xl p-6`}
           >
-            {/* <ul className="hidden list-none flex-row items-center gap-10 sm:flex"> */}
-            <ul className="flex flex-1 list-none flex-col items-start justify-end gap-4">
-              {pathname !== "sandbox" && (
-                <li
-                  className={`${theme.font.color.navbarForeground} cursor-pointer text-[18px] font-medium hover:text-slate-100`}
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
-                    <Link href={"/sandbox/"}>
-                      <Image
-                        src={sandbucket}
-                        className="h-7 w-7 rounded-full"
-                        alt="sandbucket"
-                        width={56}
-                        height={56}
-                      />
-                    </Link>
-                  </div>
-                </li>
-              )}
-
-              <li className="cursor-pointer">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
-                  <a
-                    target="_blank"
-                    href="https://github.com/HutaJoullach/"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      src={githubwhite}
-                      className="h-7 w-7 rounded-full"
-                      alt="githubwhite"
-                      width={56}
-                      height={56}
-                    />
-                  </a>
-                </div>
-              </li>
-
-              <li className="cursor-pointer">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
-                  <Image
-                    src={paperplane}
-                    className="h-7 w-7 rounded-full"
-                    alt="paperplane"
-                    width={56}
-                    height={56}
-                  />
-                </div>
-              </li>
-
-              <SigninStateControlButton mobileView={true} />
-
-              {/* <SigninStateControlButton mobileView={true} className="bg-red-800" username={user?.username} /> */}
-            </ul>
+            <NavbarList
+              isMobileSigninButton={true}
+              listClassName="list-none flex-row items-center gap-10 sm:flex space-y-4"
+            />
           </div>
         </div>
       </div>
