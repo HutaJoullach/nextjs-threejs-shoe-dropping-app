@@ -24,6 +24,7 @@ const theme = {
   },
   rounded: {
     cardBorder: "",
+    utilityCardBorder: "rounded-md",
     navbarBorderBottom: "",
   },
   font: {
@@ -49,6 +50,7 @@ const theme = {
     primary: "bg-stone-950",
     fieldInputBackground: "",
     cardBackground: "",
+    utilityCardBackground: "bg-zinc-700",
     navbarBackground: "bg-red-200",
     sidebarBackground: "",
     headerBarBackground: "",

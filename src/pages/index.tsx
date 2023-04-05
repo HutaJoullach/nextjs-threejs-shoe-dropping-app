@@ -6,7 +6,7 @@ import Link from "next/link";
 import theme from "../styles/styles";
 import { PageLayout } from "~/components/layout";
 import Navbar from "~/components/navbar";
-import { CatCanvas } from "~/components/canvas";
+import { CatCanvas, DogCanvas } from "~/components/canvas";
 import { api } from "~/utils/api";
 
 import { motion } from "framer-motion";
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
 
   const Jumbotron = () => {
     return (
-      <div className="relative mx-auto w-full">
+      <div className="relative mx-auto h-full w-full">
         <div
           className={`${theme.p.x.sm} mx-auto flex flex-row items-start gap-5`}
         >
@@ -42,7 +42,8 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <CatCanvas />
+        {/* <CatCanvas /> */}
+        <DogCanvas />
       </div>
     );
   };

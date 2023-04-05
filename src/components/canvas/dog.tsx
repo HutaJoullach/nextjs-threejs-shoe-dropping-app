@@ -4,13 +4,12 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "./canvas-loader";
 
-type CatProps = {
+type DogProps = {
   isMobile?: boolean | undefined;
 };
 
-const Cat = ({ isMobile }: CatProps) => {
-  const cat = useGLTF("./");
-  // const dog = useGLTF("./dog/Doguinho.gltf");
+const Dog = ({ isMobile }: DogProps) => {
+  const dog = useGLTF("./dog/doguinho.gltf");
 
   return (
     <mesh>
@@ -25,7 +24,7 @@ const Cat = ({ isMobile }: CatProps) => {
       />
       <pointLight intensity={1} />
       <primitive
-        object={cat.scene}
+        object={dog.scene}
         scale={isMobile ? 0.7 : 0.75}
         position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
@@ -34,7 +33,7 @@ const Cat = ({ isMobile }: CatProps) => {
   );
 };
 
-const CatCanvas = () => {
+const DogCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -72,7 +71,7 @@ const CatCanvas = () => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
-        <Cat isMobile={isMobile} />
+        <Dog isMobile={isMobile} />
       </Suspense>
 
       <Preload all />
@@ -80,4 +79,4 @@ const CatCanvas = () => {
   );
 };
 
-export default CatCanvas;
+export default DogCanvas;

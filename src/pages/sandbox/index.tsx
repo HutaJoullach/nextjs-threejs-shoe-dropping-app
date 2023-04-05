@@ -7,10 +7,12 @@ import { useState } from "react";
 
 import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
+import theme from "../../styles/styles";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { PageLayout } from "~/components/layout";
 import { CanvasContainer } from "~/components/canvas-container";
 import { toast } from "react-hot-toast";
+import { editwrite } from "../../assets";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -43,11 +45,13 @@ const CreateObjectWizard = () => {
   if (!user) return null;
 
   return (
-    <div className="flex w-full gap-3">
+    <div
+      className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex w-full gap-3 p-1`}
+    >
       <Image
         src={user.profileImageUrl}
         alt="Profile image"
-        className="h-10 w-10 rounded-full"
+        className="h-6 w-6 rounded-full"
         width={56}
         height={56}
       />
@@ -67,10 +71,22 @@ const CreateObjectWizard = () => {
         }}
         disabled={isPosting}
       />
-      {input !== "" && !isPosting && (
-        <button onClick={() => mutate({ objectType: input })}>Post</button>
+      {!isPosting && (
+        <button
+          onClick={() => {
+            if (input !== "") mutate({ objectType: input });
+          }}
+        >
+          <Image
+            src={editwrite}
+            className="h-5 w-5 rounded-full"
+            alt="editwrite"
+            width={56}
+            height={56}
+          />
+        </button>
       )}
-      {isPosting && (
+      {!!isPosting && (
         <div className="flex items-center justify-center">
           <LoadingSpinner size={20} />
         </div>
@@ -88,6 +104,7 @@ const CreateObjectWizard = () => {
 // };
 
 const Board = () => {
+  const { isLoaded: userLoaded, isSignedIn } = useUser();
   const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
   if (objectsLoading) return <LoadingPage />;
@@ -95,10 +112,19 @@ const Board = () => {
   if (!data) return <div>Something went wrong</div>;
 
   return (
-    <div>
-      {data.map((objectData) => (
-        <CanvasContainer {...objectData} key={objectData.object.id} />
-      ))}
+    <div className="h-full w-full">
+      <div className="fixed right-2 mt-2">
+        {isSignedIn && (
+          <div className="flex justify-center">
+            <CreateObjectWizard />
+          </div>
+        )}
+      </div>
+      <div className="flex h-full w-full items-center justify-center">
+        {data.map((objectData) => (
+          <CanvasContainer {...objectData} key={objectData.object.id} />
+        ))}
+      </div>
     </div>
   );
 };
@@ -117,7 +143,7 @@ const Sandbox: NextPage = () => {
         <title>Sandbox</title>
       </Head>
       <PageLayout>
-        <div className="flex border-b border-slate-400 p-4">
+        {/* <div className="flex border-b border-slate-400 p-4">
           {!isSignedIn && (
             <div className="flex justify-center">
               <SignInButton />
@@ -129,7 +155,7 @@ const Sandbox: NextPage = () => {
               <SignOutButton />
             </div>
           )}
-        </div>
+        </div> */}
         <Board />
       </PageLayout>
     </>

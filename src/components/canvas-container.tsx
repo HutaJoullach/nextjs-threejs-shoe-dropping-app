@@ -1,18 +1,47 @@
-import type { RouterOutputs } from "~/utils/api";
 import Image from "next/image";
 import Link from "next/link";
+
+import type { RouterOutputs } from "~/utils/api";
+import theme from "../styles/styles";
+import { CatCanvas, DogCanvas } from "~/components/canvas";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
+type CanvasWrapperProps = {
+  objectType: string;
+};
+
+const CanvasWrapper = ({ objectType }: CanvasWrapperProps) => {
+  const renderSwitch = () => {
+    switch (objectType) {
+      case "dog":
+        return <DogCanvas />;
+        break;
+      case "cat":
+        return <CatCanvas />;
+        break;
+      default:
+        return <div />;
+        break;
+    }
+  };
+
+  return <div className="">{renderSwitch()}</div>;
+};
+
 type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
 export const CanvasContainer = (props: ObjectWithUser) => {
   const { object, author } = props;
+
   return (
     <div key={object.id} className="flex gap-2 p-2">
-      <span>{object.objectType}</span>
-      <div className="flex items-center gap-1 rounded-md bg-zinc-700 p-1">
+      {/* <span>{object.objectType}</span> */}
+      <CanvasWrapper objectType={object.objectType} />
+      <div
+        className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex h-[44px] items-center gap-1 p-1`}
+      >
         <Image
           src={author.profileImageUrl}
           className="h-7 w-7 rounded-full"
