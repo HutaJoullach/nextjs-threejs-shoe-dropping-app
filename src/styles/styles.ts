@@ -15,6 +15,13 @@ const theme = {
       sm: "sm:px-18 px-8 sm:py-18 py-12",
     },
   },
+  h: {
+    navbar: "h-[48px]",
+    content: "h-[calc(100vh-48px)]",
+  },
+  top: {
+    content: "mt-[48px]",
+  },
   rounded: {
     cardBorder: "",
     navbarBorderBottom: "",

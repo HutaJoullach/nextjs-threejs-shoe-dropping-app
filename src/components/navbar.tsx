@@ -212,7 +212,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${theme.p.x.sm} ${theme.bg.navbarBackground} fixed top-0 z-20 flex w-full items-center py-1`}
+      className={`${theme.p.x.sm} ${theme.bg.navbarBackground} ${theme.h.navbar} fixed top-0 z-20 flex w-full items-center`}
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
         <Link

@@ -5,8 +5,10 @@ import Link from "next/link";
 
 import { PageLayout } from "~/components/layout";
 import Navbar from "~/components/navbar";
-
+import theme from "../styles/styles";
 import { api } from "~/utils/api";
+
+import { motion } from "framer-motion";
 
 const Home: NextPage = () => {
   const user = useUser();
@@ -17,10 +19,18 @@ const Home: NextPage = () => {
 
   // if (!data) return <div>Something went wrong</div>;
 
+  const Jumbotron = () => {
+    return (
+      <div className="relative mx-auto w-full">
+        <div>hey</div>
+      </div>
+    );
+  };
+
   return (
     <>
       <PageLayout>
-        <div className=""></div>
+        <Jumbotron />
       </PageLayout>
     </>
   );
