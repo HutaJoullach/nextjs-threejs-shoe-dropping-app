@@ -10,6 +10,7 @@ type CatProps = {
 
 const Cat = ({ isMobile }: CatProps) => {
   // const cat = useGLTF("./");
+  const dog = useGLTF("./dog/Doguinho.gltf");
 
   return (
     <mesh>
@@ -24,7 +25,8 @@ const Cat = ({ isMobile }: CatProps) => {
       />
       <pointLight intensity={1} />
       <primitive
-        object={cat.scene}
+        // object={cat.scene}
+        object={dog.scene}
         scale={isMobile ? 0.7 : 0.75}
         position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}

@@ -3,9 +3,10 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
+import theme from "../styles/styles";
 import { PageLayout } from "~/components/layout";
 import Navbar from "~/components/navbar";
-import theme from "../styles/styles";
+import { CatCanvas } from "~/components/canvas";
 import { api } from "~/utils/api";
 
 import { motion } from "framer-motion";
@@ -41,7 +42,7 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div>3d model here</div>
+        <CatCanvas />
       </div>
     );
   };
