@@ -22,7 +22,26 @@ const Home: NextPage = () => {
   const Jumbotron = () => {
     return (
       <div className="relative mx-auto w-full">
-        <div>hey</div>
+        <div
+          className={`${theme.p.x.sm} mx-auto flex flex-row items-start gap-5`}
+        >
+          <div>
+            <h2
+              className={`${theme.font.customTypography.heroHeaderText} text-white`}
+            >
+              Hi, I'm{" "}
+              <span className={`${theme.font.color.keyword}`}>huta</span>
+            </h2>
+            <p
+              className={`${theme.font.customTypography.heroSubText} ${theme.font.color.primary} pt-2`}
+            >
+              I develop React, React Native <br className="hidden sm:block" />
+              web applications and Node.js, Go backend
+            </p>
+          </div>
+        </div>
+
+        <div>3d model here</div>
       </div>
     );
   };
