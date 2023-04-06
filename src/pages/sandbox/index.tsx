@@ -105,7 +105,6 @@ const CreateObjectWizard = () => {
 // };
 
 const Board = () => {
-  const { isLoaded: userLoaded, isSignedIn } = useUser();
   const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
   if (objectsLoading) return <LoadingPage />;
@@ -113,14 +112,7 @@ const Board = () => {
   if (!data) return <div>Something went wrong</div>;
 
   return (
-    <div className="h-full w-full">
-      <div className="fixed right-2 mt-2">
-        {isSignedIn && (
-          <div className="flex justify-center">
-            <CreateObjectWizard />
-          </div>
-        )}
-      </div>
+    <>
       <div className="flex h-full w-full items-center justify-center">
         {data.map((objectData) => (
           <ObjectContainer {...objectData} key={objectData.object.id} />
@@ -129,7 +121,7 @@ const Board = () => {
       {/* <Canvas>
         <div></div>
       </Canvas> */}
-    </div>
+    </>
   );
 };
 
@@ -147,6 +139,13 @@ const Sandbox: NextPage = () => {
         <title>Sandbox</title>
       </Head>
       <PageLayout>
+        <div className="fixed right-2 mt-2">
+          {isSignedIn && (
+            <div className="flex justify-center">
+              <CreateObjectWizard />
+            </div>
+          )}
+        </div>
         <Board />
       </PageLayout>
     </>
