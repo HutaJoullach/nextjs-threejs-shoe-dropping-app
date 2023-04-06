@@ -5,7 +5,7 @@ import { Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 // import { useControls } from "./useControls";
-// import { useWheels } from "./useWheels";
+import useWheels from "../canvas/vehicle-wheels";
 // import { WheelDebug } from "./WheelDebug";
 
 const Car = ({ thirdPerson }: any) => {
@@ -34,7 +34,7 @@ const Car = ({ thirdPerson }: any) => {
     useRef(null)
   );
 
-  // const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
+  const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
 
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
