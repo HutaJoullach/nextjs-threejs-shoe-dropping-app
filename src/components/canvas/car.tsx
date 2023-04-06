@@ -6,12 +6,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 // import { useControls } from "./useControls";
 import useWheels from "../canvas/vehicle-wheels";
-// import { WheelDebug } from "./WheelDebug";
+import WheelDebug from "../canvas/wheel-debug";
 
 const Car = ({ thirdPerson }: any) => {
   let result = useLoader(
     GLTFLoader,
-    // process.env.PUBLIC_URL + "/models/car.glb"
     process.env.PUBLIC_URL
       ? `${process.env.PUBLIC_URL}/models/car.glb`
       : `http://localhost:3000/models/car.glb`
@@ -93,10 +92,10 @@ const Car = ({ thirdPerson }: any) => {
         <boxGeometry args={chassisBodyArgs} />
       </mesh>
 
-      {/* <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
+      <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
       <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
       <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
-      <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} /> */}
+      <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
     </group>
   );
 };
