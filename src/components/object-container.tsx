@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import type { RouterOutputs } from "~/utils/api";
 import theme from "../styles/styles";
-import { CatCanvas, DogCanvas } from "~/components/canvas";
+import { DogCanvas } from "~/components/canvas";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -20,7 +20,7 @@ const ObjectWrapper = ({ objectType }: ObjectWrapperProps) => {
         return <DogCanvas />;
         break;
       case "cat":
-        return <CatCanvas />;
+        // return <CatCanvas />;
         break;
       default:
         return <div />;

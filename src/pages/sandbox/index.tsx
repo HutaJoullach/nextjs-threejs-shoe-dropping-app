@@ -122,7 +122,11 @@ const Scene = () => {
     // </div>
     <Suspense fallback={null}>
       <Environment
-        files={"http://localhost:3000/textures/envmap.hdr"}
+        files={
+          process.env.PUBLIC_URL
+            ? `${process.env.PUBLIC_URL}/textures/envmap.hdr`
+            : `http://localhost:3000/textures/envmap.hdr`
+        }
         background={"only"}
       />
 
