@@ -111,12 +111,8 @@ const CreateObjectWizard = () => {
 //   const {object, author} = props;
 // };
 
-const Board = () => {
+const Scene = () => {
   const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
-
-  if (objectsLoading) return <LoadingPage />;
-
-  if (!data) return <div>Something went wrong</div>;
 
   return (
     // <div className="flex h-full w-full items-center justify-center">
@@ -140,9 +136,15 @@ const Sandbox: NextPage = () => {
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
   // Start fetching data
-  api.objects.getAll.useQuery();
+  // api.objects.getAll.useQuery();
+
+  const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
   if (!userLoaded) return <div />;
+
+  if (objectsLoading) return <LoadingPage />;
+
+  if (!data) return <div>Something went wrong</div>;
 
   return (
     <>
@@ -159,7 +161,7 @@ const Sandbox: NextPage = () => {
         </div>
         <Canvas>
           <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
-            <Board />
+            <Scene />
           </Physics>
         </Canvas>
       </PageLayout>
