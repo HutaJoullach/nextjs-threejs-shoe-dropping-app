@@ -36,14 +36,14 @@ const Car = ({ thirdPerson }: any) => {
 
   // const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
-  // const [vehicle, vehicleApi] = useRaycastVehicle(
-  //   () => ({
-  //     chassisBody,
-  //     wheelInfos,
-  //     wheels,
-  //   }),
-  //   useRef(null)
-  // );
+  const [vehicle, vehicleApi] = useRaycastVehicle(
+    () => ({
+      chassisBody,
+      wheelInfos,
+      wheels,
+    }),
+    useRef(null)
+  );
 
   // useControls(vehicleApi, chassisApi);
 
@@ -93,10 +93,10 @@ const Car = ({ thirdPerson }: any) => {
         <boxGeometry args={chassisBodyArgs} />
       </mesh>
 
-      <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
+      {/* <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
       <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
       <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
-      <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
+      <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} /> */}
     </group>
   );
 };
