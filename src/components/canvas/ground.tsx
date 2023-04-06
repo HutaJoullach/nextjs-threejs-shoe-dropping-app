@@ -3,8 +3,7 @@ import { useLoader } from "@react-three/fiber";
 import { MeshReflectorMaterial } from "@react-three/drei";
 import { usePlane } from "@react-three/cannon";
 import { BufferAttribute } from "three";
-
-// import { TextureLoader } from "three/src/loaders/TextureLoader";
+import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 const Ground = () => {
   const [ref] = usePlane(
@@ -17,21 +16,28 @@ const Ground = () => {
 
   const gridMap = useLoader(
     TextureLoader,
-    process.env.PUBLIC_URL + "/textures/grid.png"
+    process.env.PUBLIC_URL
+      ? `${process.env.PUBLIC_URL}/textures/grid.png`
+      : `http://localhost:3000/textures/grid.png`
   );
 
   const aoMap = useLoader(
     TextureLoader,
-    process.env.PUBLIC_URL + "/textures/ground-ao.png"
+    process.env.PUBLIC_URL
+      ? `${process.env.PUBLIC_URL}/textures/ground-ao.png`
+      : `http://localhost:3000/textures/ground-ao.png`
   );
 
   const alphaMap = useLoader(
     TextureLoader,
-    process.env.PUBLIC_URL + "/textures/alpha-map.png"
+    process.env.PUBLIC_URL
+      ? `${process.env.PUBLIC_URL}/textures/alpha-map.png`
+      : `http://localhost:3000/textures/alpha-map.png`
   );
 
-  const meshRef = useRef(null);
-  const meshRef2 = useRef(null);
+  // fix type error for mesh ref!!
+  const meshRef = useRef<any>(null);
+  const meshRef2 = useRef<any>(null);
 
   useEffect(() => {
     if (!gridMap) return;
@@ -40,7 +46,8 @@ const Ground = () => {
   }, [gridMap]);
 
   useEffect(() => {
-    if (!meshRef.current) return;
+    // if (!meshRef.current) return;
+    if (!meshRef.current || !meshRef2.current) return;
 
     var uvs = meshRef.current.geometry.attributes.uv.array;
     meshRef.current.geometry.setAttribute("uv2", new BufferAttribute(uvs, 2));

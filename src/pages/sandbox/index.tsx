@@ -12,6 +12,7 @@ import { PageLayout } from "~/components/layout";
 import { ObjectContainer } from "~/components/object-container";
 import { toast } from "react-hot-toast";
 import { editwrite } from "../../assets";
+import Ground from "~/components/canvas/ground";
 
 import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { Canvas } from "@react-three/fiber";
@@ -132,6 +133,8 @@ const Scene = () => {
 
       <PerspectiveCamera makeDefault position={[-6, 3.9, 6.21]} fov={40} />
       <OrbitControls target={[-2.64, -0.71, 0.03]} />
+
+      <Ground />
     </Suspense>
   );
 };
