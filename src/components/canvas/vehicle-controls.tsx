@@ -12,6 +12,7 @@ interface IControls {
   r?: boolean | undefined;
 }
 
+// fix type errors
 type useControlsProps = {
   vehicleApi: any;
   chassisApi: any;
