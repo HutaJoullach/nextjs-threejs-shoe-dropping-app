@@ -4,7 +4,7 @@ import { useBox, useRaycastVehicle } from "@react-three/cannon";
 import { Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-// import { useControls } from "./useControls";
+import useControls from "../canvas/vehicle-controls";
 import useWheels from "../canvas/vehicle-wheels";
 import WheelDebug from "../canvas/wheel-debug";
 
@@ -44,7 +44,7 @@ const Car = ({ thirdPerson }: any) => {
     useRef(null)
   );
 
-  // useControls(vehicleApi, chassisApi);
+  useControls({ vehicleApi, chassisApi });
 
   useFrame((state) => {
     if (!thirdPerson) return;

@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-const useControls = (vehicleApi, chassisApi) => {
+type useControlsProps = {
+  vehicleApi: any;
+  chassisApi: any;
+};
+
+const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
   let [controls, setControls] = useState({});
 
   useEffect(() => {
