@@ -1,4 +1,5 @@
 import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { Canvas } from "@react-three/fiber";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -10,7 +11,7 @@ import type { RouterOutputs } from "~/utils/api";
 import theme from "../../styles/styles";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { PageLayout } from "~/components/layout";
-import { CanvasContainer } from "~/components/canvas-container";
+import { ObjectContainer } from "~/components/object-container";
 import { toast } from "react-hot-toast";
 import { editwrite } from "../../assets";
 
@@ -96,10 +97,10 @@ const CreateObjectWizard = () => {
 };
 
 // type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
-// const CanvasContainer = (props: { object: ObjectWithUser }) => {};
+// const ObjectContainer = (props: { object: ObjectWithUser }) => {};
 
 // type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
-// const CanvasContainer = (props: ObjectWithUser) => {
+// const ObjectContainer = (props: ObjectWithUser) => {
 //   const {object, author} = props;
 // };
 
@@ -122,9 +123,12 @@ const Board = () => {
       </div>
       <div className="flex h-full w-full items-center justify-center">
         {data.map((objectData) => (
-          <CanvasContainer {...objectData} key={objectData.object.id} />
+          <ObjectContainer {...objectData} key={objectData.object.id} />
         ))}
       </div>
+      {/* <Canvas>
+        <div></div>
+      </Canvas> */}
     </div>
   );
 };
@@ -143,19 +147,6 @@ const Sandbox: NextPage = () => {
         <title>Sandbox</title>
       </Head>
       <PageLayout>
-        {/* <div className="flex border-b border-slate-400 p-4">
-          {!isSignedIn && (
-            <div className="flex justify-center">
-              <SignInButton />
-            </div>
-          )}
-          {!!isSignedIn && (
-            <div className="flex justify-center">
-              <CreateObjectWizard />
-              <SignOutButton />
-            </div>
-          )}
-        </div> */}
         <Board />
       </PageLayout>
     </>

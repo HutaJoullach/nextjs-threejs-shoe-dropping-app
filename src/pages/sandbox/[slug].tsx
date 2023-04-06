@@ -5,7 +5,7 @@ import { api } from "~/utils/api";
 
 import { PageLayout } from "~/components/layout";
 import { LoadingPage } from "~/components/loading";
-import { CanvasContainer } from "~/components/canvas-container";
+import { CanvasContainer } from "~/components/object-container";
 import { generateSSGHelper } from "~/server/helpers/ssg-helper";
 
 const ProfileBoard = (props: { userId: string }) => {

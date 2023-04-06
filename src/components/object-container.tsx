@@ -9,11 +9,11 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-type CanvasWrapperProps = {
+type ObjectWrapperProps = {
   objectType: string;
 };
 
-const CanvasWrapper = ({ objectType }: CanvasWrapperProps) => {
+const ObjectWrapper = ({ objectType }: ObjectWrapperProps) => {
   const renderSwitch = () => {
     switch (objectType) {
       case "dog":
@@ -32,14 +32,14 @@ const CanvasWrapper = ({ objectType }: CanvasWrapperProps) => {
 };
 
 type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
-export const CanvasContainer = (props: ObjectWithUser) => {
+export const ObjectContainer = (props: ObjectWithUser) => {
   const { object, author } = props;
 
   return (
     <div key={object.id} className="flex gap-2 p-2">
       {/* <span>{object.objectType}</span> */}
-      <CanvasWrapper objectType={object.objectType} />
-      <div
+      <ObjectWrapper objectType={object.objectType} />
+      {/* <div
         className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex h-[44px] items-center gap-1 p-1`}
       >
         <Image
@@ -57,7 +57,7 @@ export const CanvasContainer = (props: ObjectWithUser) => {
             object.createdAt
           ).fromNow()}`}</span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
