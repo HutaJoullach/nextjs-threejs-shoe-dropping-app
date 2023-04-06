@@ -1,5 +1,17 @@
 import { useEffect, useState } from "react";
 
+interface IControls {
+  w?: boolean | undefined;
+  s?: boolean | undefined;
+  a?: boolean | undefined;
+  d?: boolean | undefined;
+  arrowdown?: boolean | undefined;
+  arrowup?: boolean | undefined;
+  arrowleft?: boolean | undefined;
+  arrowright?: boolean | undefined;
+  r?: boolean | undefined;
+}
+
 type useControlsProps = {
   vehicleApi: any;
   chassisApi: any;
@@ -7,7 +19,8 @@ type useControlsProps = {
 
 const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
   // export const useControls = (vehicleApi, chassisApi) => {
-  let [controls, setControls] = useState({});
+  // let [controls, setControls] = useState({});
+  let [controls, setControls] = useState<IControls>({});
 
   useEffect(() => {
     const keyDownPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
