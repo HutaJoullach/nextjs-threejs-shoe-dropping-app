@@ -8,7 +8,8 @@ type useWheelsProps = {
   radius: number;
 };
 
-const useWheels = ({ width, height, front, radius }: useWheelsProps) => {
+// const useWheels = ({ width, height, front, radius }: useWheelsProps) => {
+const useWheels = (width, height, front, radius) => {
   const wheels = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
   const wheelInfo = {

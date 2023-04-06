@@ -33,7 +33,8 @@ const Car = ({ thirdPerson }: any) => {
     useRef(null)
   );
 
-  const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
+  // const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
+  const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
@@ -44,7 +45,8 @@ const Car = ({ thirdPerson }: any) => {
     useRef(null)
   );
 
-  useControls({ vehicleApi, chassisApi });
+  // useControls({ vehicleApi, chassisApi });
+  useControls(vehicleApi, chassisApi);
 
   useFrame((state) => {
     if (!thirdPerson) return;

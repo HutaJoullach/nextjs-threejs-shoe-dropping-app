@@ -5,15 +5,16 @@ type useControlsProps = {
   chassisApi: any;
 };
 
-const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
+// const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
+export const useControls = (vehicleApi, chassisApi) => {
   let [controls, setControls] = useState({});
 
   useEffect(() => {
-    const keyDownPressHandler = (e) => {
+    const keyDownPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
       setControls((controls) => ({ ...controls, [e.key.toLowerCase()]: true }));
     };
 
-    const keyUpPressHandler = (e) => {
+    const keyUpPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
       setControls((controls) => ({
         ...controls,
         [e.key.toLowerCase()]: false,
@@ -30,6 +31,8 @@ const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
 
   useEffect(() => {
     if (!vehicleApi || !chassisApi) return;
+
+    console.log(controls);
 
     if (controls.w) {
       vehicleApi.applyEngineForce(150, 2);
