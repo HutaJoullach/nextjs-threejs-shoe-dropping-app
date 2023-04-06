@@ -5,8 +5,8 @@ type useControlsProps = {
   chassisApi: any;
 };
 
-// const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
-export const useControls = (vehicleApi, chassisApi) => {
+const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
+  // export const useControls = (vehicleApi, chassisApi) => {
   let [controls, setControls] = useState({});
 
   useEffect(() => {
