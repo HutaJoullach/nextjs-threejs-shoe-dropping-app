@@ -1,10 +1,8 @@
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
-import { Canvas } from "@react-three/fiber";
+import React, { Suspense, useEffect, useState } from "react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
@@ -14,6 +12,15 @@ import { PageLayout } from "~/components/layout";
 import { ObjectContainer } from "~/components/object-container";
 import { toast } from "react-hot-toast";
 import { editwrite } from "../../assets";
+
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { Canvas } from "@react-three/fiber";
+import { Physics } from "@react-three/cannon";
+import {
+  Environment,
+  OrbitControls,
+  PerspectiveCamera,
+} from "@react-three/drei";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -112,16 +119,20 @@ const Board = () => {
   if (!data) return <div>Something went wrong</div>;
 
   return (
-    <>
-      <div className="flex h-full w-full items-center justify-center">
-        {data.map((objectData) => (
-          <ObjectContainer {...objectData} key={objectData.object.id} />
-        ))}
-      </div>
-      {/* <Canvas>
-        <div></div>
-      </Canvas> */}
-    </>
+    // <div className="flex h-full w-full items-center justify-center">
+    //   {data.map((objectData) => (
+    //     <ObjectContainer {...objectData} key={objectData.object.id} />
+    //   ))}
+    // </div>
+    <Suspense fallback={null}>
+      <Environment
+        files={"http://localhost:3000/textures/envmap.hdr"}
+        background={"only"}
+      />
+
+      <PerspectiveCamera makeDefault position={[-6, 3.9, 6.21]} fov={40} />
+      <OrbitControls target={[-2.64, -0.71, 0.03]} />
+    </Suspense>
   );
 };
 
@@ -146,7 +157,11 @@ const Sandbox: NextPage = () => {
             </div>
           )}
         </div>
-        <Board />
+        <Canvas>
+          <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
+            <Board />
+          </Physics>
+        </Canvas>
       </PageLayout>
     </>
   );
