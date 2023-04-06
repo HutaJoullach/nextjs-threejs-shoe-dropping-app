@@ -1,7 +1,7 @@
 import { Triplet, useBox } from "@react-three/cannon";
 import { Vector3 } from "@react-three/fiber";
 
-const debug = false;
+const debug = true;
 
 // fix type errors
 type ColliderBoxProps = {
@@ -13,16 +13,23 @@ const ColliderBox = ({ position, scale }: ColliderBoxProps) => {
   useBox(() => ({
     args: scale,
     position,
-    type: "Static",
+    // type: "Static",
+    type: "Dynamic",
   }));
 
+  if (!debug) return null;
+
   return (
-    debug && (
-      <mesh position={position}>
-        <boxGeometry args={scale} />
-        <meshBasicMaterial transparent={true} opacity={0.25} />
-      </mesh>
-    )
+    <mesh position={position}>
+      <boxGeometry args={scale} />
+      <meshBasicMaterial transparent={true} opacity={0.25} />
+    </mesh>
+    // debug && (
+    //   <mesh position={position}>
+    //     <boxGeometry args={scale} />
+    //     <meshBasicMaterial transparent={true} opacity={0.25} />
+    //   </mesh>
+    // )
   );
 };
 

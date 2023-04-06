@@ -5,6 +5,8 @@ import { usePlane } from "@react-three/cannon";
 import { BufferAttribute } from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
+import ColliderBox from "./collider-box";
+
 const Ground = () => {
   const [ref] = usePlane(
     () => ({
@@ -102,6 +104,8 @@ const Ground = () => {
           reflectorOffset={0.02} // Offsets the virtual camera that projects the reflection. Useful when the reflective
         ></MeshReflectorMaterial>
       </mesh>
+
+      <ColliderBox position={[1.75, 0, 0.5]} scale={[0.3, 1, 0.3]} />
     </>
   );
 };

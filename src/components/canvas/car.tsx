@@ -16,6 +16,8 @@ const Car = ({ thirdPerson }: any) => {
       : `http://localhost:3000/models/car.glb`
   ).scene;
 
+  // console.log(`here!!! ${result}`);
+
   const position = [-1.5, 0.5, 3];
   const width = 0.15;
   const height = 0.07;
@@ -89,10 +91,10 @@ const Car = ({ thirdPerson }: any) => {
         />
       </group>
 
-      <mesh ref={chassisBody}>
+      {/* <mesh ref={chassisBody}>
         <meshBasicMaterial transparent={true} opacity={0.3} />
         <boxGeometry args={chassisBodyArgs} />
-      </mesh>
+      </mesh> */}
 
       <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
       <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
