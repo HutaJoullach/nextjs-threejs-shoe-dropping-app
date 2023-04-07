@@ -118,7 +118,13 @@ export const ObjectContainer = (props: ObjectWithUser) => {
 
   console.log(nodes.Scene.position);
 
-  const [ref] = useSphere(() => ({ args: [0.1], mass: 6 }));
+  const [ref] = useSphere((index) => ({
+    args: [0.01],
+    mass: 6,
+    position: [Math.random() - 9, Math.random() - 0.3, index * 4],
+  }));
+
+  const args = [0.2, 32, 32];
 
   return (
     // <div key={object.id} className="flex gap-2 p-2">
@@ -157,7 +163,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
       //   e.stopPropagation(), (state.current = e.object.material.name)
       // )}
     >
-      <group ref={ref}>
+      <instancedMesh ref={ref}>
         <mesh
           geometry={nodes.shoe.geometry}
           material={materials.laces}
@@ -199,6 +205,8 @@ export const ObjectContainer = (props: ObjectWithUser) => {
           // material-color={snap.items.patch}
         />
 
+        <sphereBufferGeometry args={args} />
+
         {/* <ColliderBox position={[1, 0, 0.5]} scale={[0.3, 1, 0.3]} /> */}
         {/* <ColliderBox
         position={[
@@ -208,7 +216,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
         ]}
         scale={[0.001, 1, 0.001]}
       /> */}
-      </group>
+      </instancedMesh>
     </group>
   );
 };

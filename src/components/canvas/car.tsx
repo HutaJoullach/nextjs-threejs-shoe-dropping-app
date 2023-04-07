@@ -98,7 +98,7 @@ const Car = ({ thirdPerson }: any) => {
           object={result}
           // object={car.scene}
           rotation-y={Math.PI}
-          position={[0, -0.09, 0]}
+          position={[0, -0.06, 0]}
         />
         <spotLight
           position={[-20, 50, 10]}

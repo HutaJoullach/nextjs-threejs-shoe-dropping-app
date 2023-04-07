@@ -182,7 +182,20 @@ const Sandbox: NextPage = () => {
           )}
         </div>
         <Canvas>
-          <Physics broadphase="SAP" gravity={[0, -2.6, 0]}>
+          <Physics
+            broadphase="SAP"
+            gravity={[0, -10, 0]}
+            size={100}
+            tolerance={0.001}
+            iterations={5}
+            broadphase={"Naive"}
+            step={1 / 60}
+            shouldInvalidate={true}
+            // children
+            allowSleep={false}
+            axisIndex={0}
+            defaultContactMaterial={1e6}
+          >
             <Scene />
           </Physics>
         </Canvas>
