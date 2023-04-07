@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,18 +6,25 @@ import type { RouterOutputs } from "~/utils/api";
 import theme from "../styles/styles";
 import { DogCanvas } from "~/components/canvas";
 
-import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+import {
+  ContactShadows,
+  Environment,
+  OrbitControls,
+  Preload,
+  useGLTF,
+} from "@react-three/drei";
 import { useControls } from "leva";
 import { Color } from "three";
-
+import { HexColorPicker } from "react-colorful";
+// import { proxy, useProxy } from "valtio";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { gltfLoader } from "./canvas/loaders";
 
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-dayjs.extend(relativeTime);
+// import dayjs from "dayjs";
+// import relativeTime from "dayjs/plugin/relativeTime";
+// dayjs.extend(relativeTime);
 
 // type ObjectWrapperProps = {
 //   objectType: string;
@@ -45,7 +52,7 @@ type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
 export const ObjectContainer = (props: ObjectWithUser) => {
   const { object, author } = props;
 
-  const [hovered, setHovered] = useState(false);
+  // const [hovered, setHovered] = useState(false);
   // const { nodes, materials } = useGLTF(
   //   "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
   // );
@@ -56,34 +63,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   //     ? `${process.env.PUBLIC_URL}/models/shoe-draco.glb`
   //     : `http://localhost:3000/models/shoe-draco.glb`
   // ).scene;
-
-  // let shoe = useLoader(
-  //   GLTFLoader,
-  //   process.env.PUBLIC_URL
-  //     ? `${process.env.PUBLIC_URL}/models/shoe-draco.glb`
-  //     : `http://localhost:3000/models/shoe-draco.glb`
-  // ).scene;
-
-  // gltfLoader.load(
-  //   "http://localhost:3000/models/shoe-draco.glb",
-  //   function (gltf) {
-  //     scene.add(gltf.scene);
-
-  //   },
-  //   undefined,
-  //   function (error) {
-  //     console.error(error);
-  //   }
-  // );
-
-  gltfLoader.load(
-    "http://localhost:3000/models/shoe-draco.glb",
-    function (glb) {
-      console.log(`here!!!${glb.scene}`);
-    }
-  );
-
-  // console.log(shoe);
 
   // useEffect(() => {
   //   document.body.style.cursor = hovered ? 'pointer' : 'auto'
@@ -130,6 +109,11 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   //   mesh.children[0].position.set(-365, -18, -67);
   // }, [shoe]);
 
+  const objectRef = useRef();
+  const { nodes, materials } = useGLTF(
+    "http://localhost:3000/models/shoe-draco.glb"
+  );
+
   return (
     // <div key={object.id} className="flex gap-2 p-2">
     //   <span>{object.objectType}</span>
@@ -154,34 +138,61 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     //     </div>
     //   </div>
     // </div>
-    <group
-      dispose={null}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-      // onClick={(e) => {
-      //   e.stopPropagation();
-      //   document.getElementById("Shoe." + e.object.material.name).focus();
-      // }}
-    >
-      {/* <primitive
-        object={shoe}
-        object={car.scene}
-        rotation-y={Math.PI}
-        position={[0, -0.09, 0]}
-      /> */}
 
-      {/* <mesh geometry={nodes.shoe.geometry} material={materials.laces} />
-      <mesh geometry={nodes.shoe_1.geometry} material={materials.mesh} />
-      <mesh geometry={nodes.shoe_2.geometry} material={materials.caps} />
-      <mesh geometry={nodes.shoe_3.geometry} material={materials.inner} />
-      <mesh geometry={nodes.shoe_4.geometry} material={materials.sole} />
-      <mesh geometry={nodes.shoe_5.geometry} material={materials.stripes} />
-      <mesh geometry={nodes.shoe_6.geometry} material={materials.band} />
-      <mesh geometry={nodes.shoe_7.geometry} material={materials.patch} /> */}
+    <group
+      ref={objectRef}
+      dispose={null}
+      // onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
+      // onPointerOut={(e) => e.intersections.length === 0 && set(null)}
+      // onPointerMissed={() => (state.current = null)}
+      // onPointerDown={(e) => (
+      //   e.stopPropagation(), (state.current = e.object.material.name)
+      // )}
+    >
+      <mesh
+        geometry={nodes.shoe.geometry}
+        material={materials.laces}
+        // material-color={snap.items.laces}
+      />
+      <mesh
+        geometry={nodes.shoe_1.geometry}
+        material={materials.mesh}
+        // material-color={snap.items.mesh}
+      />
+      <mesh
+        geometry={nodes.shoe_2.geometry}
+        material={materials.caps}
+        // material-color={snap.items.caps}
+      />
+      <mesh
+        geometry={nodes.shoe_3.geometry}
+        material={materials.inner}
+        // material-color={snap.items.inner}
+      />
+      <mesh
+        geometry={nodes.shoe_4.geometry}
+        material={materials.sole}
+        // material-color={snap.items.sole}
+      />
+      <mesh
+        geometry={nodes.shoe_5.geometry}
+        material={materials.stripes}
+        // material-color={snap.items.stripes}
+      />
+      <mesh
+        geometry={nodes.shoe_6.geometry}
+        material={materials.band}
+        // material-color={snap.items.band}
+      />
+      <mesh
+        geometry={nodes.shoe_7.geometry}
+        material={materials.patch}
+        // material-color={snap.items.patch}
+      />
     </group>
   );
 };
 
-useGLTF.preload(
-  "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
-);
+// useGLTF.preload(
+//   "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
+// );
