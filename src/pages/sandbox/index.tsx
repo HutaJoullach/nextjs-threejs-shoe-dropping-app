@@ -120,7 +120,10 @@ const RenderStoredObjects = () => {
 
   return (
     <>
-      {data.map((objectData) => (
+      {/* {data.map((objectData) => (
+        <ObjectContainer {...objectData} key={objectData.object.id} />
+      ))} */}
+      {[...data, ...data, ...data].map((objectData) => (
         <ObjectContainer {...objectData} key={objectData.object.id} />
       ))}
     </>
