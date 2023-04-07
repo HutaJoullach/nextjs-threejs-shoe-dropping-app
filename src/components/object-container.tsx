@@ -13,6 +13,7 @@ import { Color } from "three";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import { gltfLoader } from "./canvas/loaders";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -49,18 +50,40 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   //   "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
   // );
 
-  // const shoe = useGLTF(
-  //   "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
+  // let shoe = useLoader(
+  //   GLTFLoader,
+  //   process.env.PUBLIC_URL
+  //     ? `${process.env.PUBLIC_URL}/models/shoe-draco.glb`
+  //     : `http://localhost:3000/models/shoe-draco.glb`
   // ).scene;
 
-  let shoe = useLoader(
-    GLTFLoader,
-    process.env.PUBLIC_URL
-      ? `${process.env.PUBLIC_URL}/models/shoe-draco.glb`
-      : `http://localhost:3000/models/shoe-draco.glb`
-  ).scene;
+  // let shoe = useLoader(
+  //   GLTFLoader,
+  //   process.env.PUBLIC_URL
+  //     ? `${process.env.PUBLIC_URL}/models/shoe-draco.glb`
+  //     : `http://localhost:3000/models/shoe-draco.glb`
+  // ).scene;
 
-  console.log(shoe);
+  // gltfLoader.load(
+  //   "http://localhost:3000/models/shoe-draco.glb",
+  //   function (gltf) {
+  //     scene.add(gltf.scene);
+
+  //   },
+  //   undefined,
+  //   function (error) {
+  //     console.error(error);
+  //   }
+  // );
+
+  gltfLoader.load(
+    "http://localhost:3000/models/shoe-draco.glb",
+    function (glb) {
+      console.log(`here!!!${glb.scene}`);
+    }
+  );
+
+  // console.log(shoe);
 
   // useEffect(() => {
   //   document.body.style.cursor = hovered ? 'pointer' : 'auto'
@@ -98,14 +121,14 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   //   );
   // });
 
-  useEffect(() => {
-    if (!shoe) return;
+  // useEffect(() => {
+  //   if (!shoe) return;
 
-    let mesh = shoe;
-    mesh.scale.set(0.0012, 0.0012, 0.0012);
+  //   let mesh = shoe;
+  //   mesh.scale.set(0.0012, 0.0012, 0.0012);
 
-    mesh.children[0].position.set(-365, -18, -67);
-  }, [shoe]);
+  //   mesh.children[0].position.set(-365, -18, -67);
+  // }, [shoe]);
 
   return (
     // <div key={object.id} className="flex gap-2 p-2">
@@ -140,12 +163,13 @@ export const ObjectContainer = (props: ObjectWithUser) => {
       //   document.getElementById("Shoe." + e.object.material.name).focus();
       // }}
     >
-      <primitive
+      {/* <primitive
         object={shoe}
-        // object={car.scene}
-        // rotation-y={Math.PI}
+        object={car.scene}
+        rotation-y={Math.PI}
         position={[0, -0.09, 0]}
-      />
+      /> */}
+
       {/* <mesh geometry={nodes.shoe.geometry} material={materials.laces} />
       <mesh geometry={nodes.shoe_1.geometry} material={materials.mesh} />
       <mesh geometry={nodes.shoe_2.geometry} material={materials.caps} />

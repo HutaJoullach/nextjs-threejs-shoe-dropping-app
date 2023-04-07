@@ -5,7 +5,8 @@ import * as THREE from "three";
 
 // draco
 const draco = new DRACOLoader();
-draco.setDecoderPath("../node_modules/three/examples/js/libs/draco/gltf/");
+// draco.setDecoderPath("../node_modules/three/examples/js/libs/draco/gltf/");
+draco.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
 draco.setDecoderConfig({ type: "js" });
 export const dracoLoader = draco;
 
