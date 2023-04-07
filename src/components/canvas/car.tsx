@@ -8,6 +8,8 @@ import useControls from "../canvas/vehicle-controls";
 import useWheels from "../canvas/vehicle-wheels";
 import WheelDebug from "../canvas/wheel-debug";
 
+import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
+
 const Car = ({ thirdPerson }: any) => {
   let result = useLoader(
     GLTFLoader,
@@ -15,6 +17,14 @@ const Car = ({ thirdPerson }: any) => {
       ? `${process.env.PUBLIC_URL}/models/car.glb`
       : `http://localhost:3000/models/car.glb`
   ).scene;
+
+  // const car = useGLTF("./models/mercedes_s_class.glb");
+  let car = useGLTF("./models/mercedes_s_class.glb");
+
+  // let result = useLoader(
+  //   GLTFLoader,
+  //   "http://localhost:3000/models/mercedes_s_class.glb"
+  // ).scene;
 
   // console.log(`here!!! ${result}`);
 
@@ -86,9 +96,19 @@ const Car = ({ thirdPerson }: any) => {
       <group ref={chassisBody} name="chassisBody">
         <primitive
           object={result}
+          // object={car.scene}
           rotation-y={Math.PI}
           position={[0, -0.09, 0]}
         />
+        <spotLight
+          position={[-20, 50, 10]}
+          angle={0.12}
+          penumbra={1}
+          intensity={0}
+          castShadow
+          shadow-mapSize={1024}
+        />
+        <pointLight intensity={0.4} />
       </group>
 
       {/* <mesh ref={chassisBody}>
