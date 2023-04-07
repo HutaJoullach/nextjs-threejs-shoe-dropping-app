@@ -19,7 +19,7 @@ const Car = ({ thirdPerson }: any) => {
   ).scene;
 
   // const car = useGLTF("./models/mercedes_s_class.glb");
-  let car = useGLTF("./models/mercedes_s_class.glb");
+  // let car = useGLTF("./models/mercedes_s_class.glb");
 
   // let result = useLoader(
   //   GLTFLoader,
