@@ -113,15 +113,24 @@ const CreateObjectWizard = () => {
 //   const {object, author} = props;
 // };
 
-const Scene = () => {
+const RenderStoredObjects = () => {
   const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
+  if (!data) return null;
+
   return (
-    // <div className="flex h-full w-full items-center justify-center">
-    //   {data.map((objectData) => (
-    //     <ObjectContainer {...objectData} key={objectData.object.id} />
-    //   ))}
-    // </div>
+    <>
+      {data.map((objectData) => (
+        <ObjectContainer {...objectData} key={objectData.object.id} />
+      ))}
+    </>
+  );
+};
+
+const Scene = () => {
+  // const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
+
+  return (
     <Suspense fallback={null}>
       <Environment
         files={
@@ -136,6 +145,7 @@ const Scene = () => {
       <OrbitControls target={[-2.64, -0.71, 0.03]} />
 
       <Ground />
+      <RenderStoredObjects />
       <Car />
     </Suspense>
   );
