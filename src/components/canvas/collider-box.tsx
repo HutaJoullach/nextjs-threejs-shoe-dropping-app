@@ -3,10 +3,9 @@ import { Vector3 } from "@react-three/fiber";
 
 const debug = true;
 
-// fix type errors
 type ColliderBoxProps = {
   position?: Triplet | undefined;
-  scale?: any;
+  scale?: Triplet | undefined;
 };
 
 const ColliderBox = ({ position, scale }: ColliderBoxProps) => {

@@ -21,6 +21,7 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { gltfLoader } from "./canvas/loaders";
+import ColliderBox from "./canvas/collider-box";
 
 // import dayjs from "dayjs";
 // import relativeTime from "dayjs/plugin/relativeTime";
@@ -114,6 +115,8 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     "http://localhost:3000/models/shoe-draco.glb"
   );
 
+  console.log(nodes.Scene.position);
+
   return (
     // <div key={object.id} className="flex gap-2 p-2">
     //   <span>{object.objectType}</span>
@@ -194,7 +197,3 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     </group>
   );
 };
-
-// useGLTF.preload(
-//   "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
-// );
