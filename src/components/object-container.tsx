@@ -142,6 +142,8 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     <group
       ref={objectRef}
       dispose={null}
+      scale={0.06}
+      position={[0, 0.02, 0]}
       // onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
       // onPointerOut={(e) => e.intersections.length === 0 && set(null)}
       // onPointerMissed={() => (state.current = null)}
