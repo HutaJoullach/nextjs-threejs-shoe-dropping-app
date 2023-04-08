@@ -15,7 +15,7 @@ import { editwrite } from "../../assets";
 import Ground from "~/components/canvas/ground";
 import Car from "~/components/canvas/car";
 
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/cannon";
 import {
@@ -27,6 +27,8 @@ import {
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
+
+const CowControlButton = () => {};
 
 const CreateObjectWizard = () => {
   const { user } = useUser();
@@ -123,11 +125,25 @@ const RenderStoredObjects = () => {
       {/* {data.map((objectData) => (
         <ObjectContainer {...objectData} key={objectData.object.id} />
       ))} */}
-      {[...data, ...data, ...data, ...data, ...data, ...data, ...data].map(
-        (objectData) => (
-          <ObjectContainer {...objectData} key={objectData.object.id} />
-        )
-      )}
+      {[
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+        ...data,
+      ].map((objectData) => (
+        <ObjectContainer {...objectData} key={objectData.object.id} />
+      ))}
     </>
   );
 };
@@ -157,6 +173,7 @@ const Scene = () => {
 };
 
 const Sandbox: NextPage = () => {
+  const [isCowOpened, setIsCowOpened] = useState(false);
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
   // Start fetching data
@@ -176,31 +193,33 @@ const Sandbox: NextPage = () => {
         <title>Sandbox</title>
       </Head>
       <PageLayout>
-        <div className="fixed right-2 mt-2">
+        <div className="fixed right-2 z-10 mt-2">
           {isSignedIn && (
             <div className="flex justify-center">
               <CreateObjectWizard />
             </div>
           )}
         </div>
-        <Canvas>
-          <Physics
-            broadphase="SAP"
-            gravity={[0, -10, 0]}
-            size={100}
-            tolerance={0.001}
-            iterations={5}
-            // broadphase={"Naive"}
-            step={1 / 60}
-            shouldInvalidate={true}
-            // children
-            allowSleep={false}
-            axisIndex={0}
-            defaultContactMaterial={1e6}
-          >
-            <Scene />
-          </Physics>
-        </Canvas>
+        {!isCowOpened && (
+          <Canvas>
+            <Physics
+              broadphase="SAP"
+              gravity={[0, -10, 0]}
+              size={100}
+              tolerance={0.001}
+              iterations={5}
+              // broadphase={"Naive"}
+              step={1 / 60}
+              shouldInvalidate={true}
+              // children
+              allowSleep={false}
+              axisIndex={0}
+              defaultContactMaterial={1e6}
+            >
+              <Scene />
+            </Physics>
+          </Canvas>
+        )}
       </PageLayout>
     </>
   );
