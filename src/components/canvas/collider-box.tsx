@@ -13,8 +13,8 @@ const ColliderBox = ({ position, scale }: ColliderBoxProps) => {
     args: scale,
     position,
     // type: "Static",
-    // type: "Dynamic",
-    type: "Kinematic",
+    type: "Dynamic",
+    // type: "Kinematic",
   }));
 
   if (!debug) return null;

@@ -188,7 +188,7 @@ const Sandbox: NextPage = () => {
             size={100}
             tolerance={0.001}
             iterations={5}
-            broadphase={"Naive"}
+            // broadphase={"Naive"}
             step={1 / 60}
             shouldInvalidate={true}
             // children

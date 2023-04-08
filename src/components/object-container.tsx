@@ -118,7 +118,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
 
   console.log(nodes.Scene.position);
 
-  const [ref] = useSphere((index) => ({
+  const [ref, api] = useSphere((index) => ({
     args: [0.01],
     mass: 6,
     position: [Math.random() - 9, Math.random() - 0.3, index * 4],
@@ -163,60 +163,77 @@ export const ObjectContainer = (props: ObjectWithUser) => {
       //   e.stopPropagation(), (state.current = e.object.material.name)
       // )}
     >
-      <instancedMesh ref={ref}>
-        <mesh
-          geometry={nodes.shoe.geometry}
-          material={materials.laces}
-          // material-color={snap.items.laces}
-        />
-        <mesh
-          geometry={nodes.shoe_1.geometry}
-          material={materials.mesh}
-          // material-color={snap.items.mesh}
-        />
-        <mesh
-          geometry={nodes.shoe_2.geometry}
-          material={materials.caps}
-          // material-color={snap.items.caps}
-        />
-        <mesh
-          geometry={nodes.shoe_3.geometry}
-          material={materials.inner}
-          // material-color={snap.items.inner}
-        />
-        <mesh
-          geometry={nodes.shoe_4.geometry}
-          material={materials.sole}
-          // material-color={snap.items.sole}
-        />
-        <mesh
-          geometry={nodes.shoe_5.geometry}
-          material={materials.stripes}
-          // material-color={snap.items.stripes}
-        />
-        <mesh
-          geometry={nodes.shoe_6.geometry}
-          material={materials.band}
-          // material-color={snap.items.band}
-        />
-        <mesh
-          geometry={nodes.shoe_7.geometry}
-          material={materials.patch}
-          // material-color={snap.items.patch}
-        />
+      {/* <instancedMesh ref={ref}> */}
+      <mesh
+        geometry={nodes.shoe.geometry}
+        material={materials.laces}
+        // material-color={snap.items.laces}
+      />
+      <mesh
+        geometry={nodes.shoe_1.geometry}
+        material={materials.mesh}
+        // material-color={snap.items.mesh}
+      />
+      <mesh
+        geometry={nodes.shoe_2.geometry}
+        material={materials.caps}
+        // material-color={snap.items.caps}
+      />
+      <mesh
+        geometry={nodes.shoe_3.geometry}
+        material={materials.inner}
+        // material-color={snap.items.inner}
+      />
+      <mesh
+        geometry={nodes.shoe_4.geometry}
+        material={materials.sole}
+        // material-color={snap.items.sole}
+      />
+      <mesh
+        geometry={nodes.shoe_5.geometry}
+        material={materials.stripes}
+        // material-color={snap.items.stripes}
+      />
+      <mesh
+        geometry={nodes.shoe_6.geometry}
+        material={materials.band}
+        // material-color={snap.items.band}
+      />
+      <mesh
+        geometry={nodes.shoe_7.geometry}
+        material={materials.patch}
+        // material-color={snap.items.patch}
+      />
 
-        <sphereBufferGeometry args={args} />
+      {/* <sphereBufferGeometry args={args} /> */}
+      {/* <sphereGeometry args={args} /> */}
 
-        {/* <ColliderBox position={[1, 0, 0.5]} scale={[0.3, 1, 0.3]} /> */}
-        {/* <ColliderBox
-        position={[
-          nodes.Scene.position.x,
-          nodes.Scene.position.y,
-          nodes.Scene.position.z,
-        ]}
-        scale={[0.001, 1, 0.001]}
-      /> */}
-      </instancedMesh>
+      {/* <Sphere position={[-2, 3, 0]} /> */}
+
+      {/* <ColliderBox position={[1, 0, 0.5]} scale={[0.3, 1, 0.3]} /> */}
+      {/* <ColliderBox
+          position={[
+            nodes.Scene.position.x,
+            nodes.Scene.position.y,
+            nodes.Scene.position.z,
+          ]}
+          scale={[0.001, 1, 0.001]}
+        /> */}
+      {/* </instancedMesh> */}
     </group>
   );
 };
+
+// function Sphere(props) {
+//   const [ref, api] = useSphere(
+//     () => ({ args: [0.75], mass: 1, ...props }),
+//     useRef()
+//   );
+
+//   return (
+//     <mesh ref={ref} castShadow onPointerDown={() => api.velocity.set(0, 5, 0)}>
+//       <sphereGeometry args={[0.75]} />
+//       <meshNormalMaterial />
+//     </mesh>
+//   );
+// }
