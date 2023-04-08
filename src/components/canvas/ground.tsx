@@ -82,7 +82,7 @@ const Ground = () => {
       >
         <circleGeometry args={[6.12, 50]} />
         <MeshReflectorMaterial
-          aoMap={aoMap}
+          // aoMap={aoMap}
           alphaMap={alphaMap}
           transparent={true}
           color={[0.5, 0.5, 0.5]}

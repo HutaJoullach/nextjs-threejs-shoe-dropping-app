@@ -16,38 +16,19 @@ import {
 import { useControls } from "leva";
 import { Color } from "three";
 import { HexColorPicker } from "react-colorful";
-// import { proxy, useProxy } from "valtio";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { gltfLoader } from "./canvas/loaders";
 import ColliderBox from "./canvas/collider-box";
-import { useSphere } from "@react-three/cannon";
-
-// import dayjs from "dayjs";
-// import relativeTime from "dayjs/plugin/relativeTime";
-// dayjs.extend(relativeTime);
+import { useBox, useSphere } from "@react-three/cannon";
 
 // type ObjectWrapperProps = {
 //   objectType: string;
 // };
 
 // const ObjectWrapper = ({ objectType }: ObjectWrapperProps) => {
-//   const renderSwitch = () => {
-//     switch (objectType) {
-//       case "dog":
-//         return <DogCanvas />;
-//         break;
-//       case "cat":
-//         // return <CatCanvas />;
-//         break;
-//       default:
-//         return <div />;
-//         break;
-//     }
-//   };
-
-//   return <div className="">{renderSwitch()}</div>;
+//   return <></>;
 // };
 
 type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
@@ -111,20 +92,32 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   //   mesh.children[0].position.set(-365, -18, -67);
   // }, [shoe]);
 
-  const objectRef = useRef();
+  // const objectRef = useRef();
   const { nodes, materials } = useGLTF(
     "http://localhost:3000/models/shoe-draco.glb"
   );
 
   console.log(nodes.Scene.position);
 
-  const [ref, api] = useSphere((index) => ({
-    args: [0.01],
-    mass: 6,
-    position: [Math.random() - 9, Math.random() - 0.3, index * 4],
-  }));
+  const position = [
+    (0.5 - Math.random()) * 8,
+    20 + (0.5 - Math.random()) * 2,
+    (0.5 - Math.random()) * 8,
+  ];
+  const width = 0.15;
+  const height = 0.07;
+  const front = 0.15;
 
-  const args = [0.2, 32, 32];
+  const shoeBodyArgs = [width, height, front * 2];
+  const [shoeBody, shoeApi] = useBox(
+    () => ({
+      allowSleep: false,
+      args: shoeBodyArgs,
+      mass: 1,
+      position,
+    }),
+    useRef(null)
+  );
 
   return (
     // <div key={object.id} className="flex gap-2 p-2">
@@ -152,10 +145,10 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     // </div>
 
     <group
-      ref={objectRef}
+      ref={shoeBody}
       dispose={null}
       scale={0.06}
-      position={[0, 0.02, 0]}
+      // position={[0, 0.02, 0]}
       // onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
       // onPointerOut={(e) => e.intersections.length === 0 && set(null)}
       // onPointerMissed={() => (state.current = null)}
@@ -163,7 +156,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
       //   e.stopPropagation(), (state.current = e.object.material.name)
       // )}
     >
-      {/* <instancedMesh ref={ref}> */}
+      <ambientLight intensity={0.008} />
       <mesh
         geometry={nodes.shoe.geometry}
         material={materials.laces}
@@ -205,16 +198,14 @@ export const ObjectContainer = (props: ObjectWithUser) => {
         // material-color={snap.items.patch}
       />
 
-      {/* <ColliderBox position={[1, 0, 0.5]} scale={[0.3, 1, 0.3]} /> */}
       {/* <ColliderBox
-          position={[
-            nodes.Scene.position.x,
-            nodes.Scene.position.y,
-            nodes.Scene.position.z,
-          ]}
-          scale={[0.001, 1, 0.001]}
-        /> */}
-      {/* </instancedMesh> */}
+        position={[
+          nodes.Scene.position.x,
+          nodes.Scene.position.y,
+          nodes.Scene.position.z,
+        ]}
+        scale={[0.001, 1, 0.001]}
+      /> */}
     </group>
   );
 };
