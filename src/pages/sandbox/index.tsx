@@ -35,7 +35,7 @@ const CowControlButton = ({ isCowOpened, setIsCowOpened }) => {
 
   return (
     <div
-      className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex w-full gap-3 p-1`}
+      className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex w-full gap-3 px-2 py-1`}
     >
       <Image
         src={caticon}
@@ -54,7 +54,7 @@ const CowControlButton = ({ isCowOpened, setIsCowOpened }) => {
         <div className="flex items-center justify-center">
           {!objectsLoading ? (
             <>
-              <span>fetch shoes!!</span>
+              <span>fetch new shoes</span>
               <Image
                 src={caticon}
                 className="h-5 w-5 rounded-full"
@@ -75,7 +75,7 @@ const CowControlButton = ({ isCowOpened, setIsCowOpened }) => {
         }}
       >
         <div className="flex items-center justify-center">
-          <span>add my shoe</span>
+          <span>add my shoe!</span>
           <Image
             src={caticon}
             className="h-5 w-5 rounded-full"
@@ -253,8 +253,8 @@ const Sandbox: NextPage = () => {
         <title>Sandbox</title>
       </Head>
       <PageLayout>
-        <div className="fixed right-2 z-10 mt-2">
-          {isSignedIn && (
+        {isSignedIn && (
+          <div className="fixed right-2 z-10 mt-2">
             <div className="flex justify-center">
               {!isCowOpened ? (
                 <CowControlButton isCowOpened setIsCowOpened />
@@ -262,8 +262,8 @@ const Sandbox: NextPage = () => {
                 <CreateObjectWizard />
               )}
             </div>
-          )}
-        </div>
+          </div>
+        )}
         {!isCowOpened && (
           <Canvas>
             <Physics
