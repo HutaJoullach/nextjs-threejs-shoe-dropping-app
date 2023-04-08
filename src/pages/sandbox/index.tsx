@@ -30,7 +30,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-const CowControlButton = () => {
+const CowControlButton = ({ isCowOpened, setIsCowOpened }) => {
   const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
   return (
@@ -51,20 +51,40 @@ const CowControlButton = () => {
         }}
         disabled={objectsLoading}
       >
-        <Image
-          src={editwrite}
-          className="h-5 w-5 rounded-full"
-          alt="editwrite"
-          width={56}
-          height={56}
-        />
+        <div className="flex items-center justify-center">
+          {!objectsLoading ? (
+            <>
+              <span>fetch shoes!!</span>
+              <Image
+                src={caticon}
+                className="h-5 w-5 rounded-full"
+                alt="caticon"
+                width={56}
+                height={56}
+              />
+            </>
+          ) : (
+            <LoadingSpinner size={20} />
+          )}
+        </div>
       </button>
 
-      {!!isPosting && (
+      <button
+        onClick={() => {
+          if (!isCowOpened) setIsCowOpened(!isCowOpened);
+        }}
+      >
         <div className="flex items-center justify-center">
-          <LoadingSpinner size={20} />
+          <span>add my shoe</span>
+          <Image
+            src={caticon}
+            className="h-5 w-5 rounded-full"
+            alt="caticon"
+            width={56}
+            height={56}
+          />
         </div>
-      )}
+      </button>
     </div>
   );
 };
@@ -236,7 +256,11 @@ const Sandbox: NextPage = () => {
         <div className="fixed right-2 z-10 mt-2">
           {isSignedIn && (
             <div className="flex justify-center">
-              <CreateObjectWizard />
+              {!isCowOpened ? (
+                <CowControlButton isCowOpened setIsCowOpened />
+              ) : (
+                <CreateObjectWizard />
+              )}
             </div>
           )}
         </div>
