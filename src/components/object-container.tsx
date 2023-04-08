@@ -205,11 +205,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
         // material-color={snap.items.patch}
       />
 
-      {/* <sphereBufferGeometry args={args} /> */}
-      {/* <sphereGeometry args={args} /> */}
-
-      {/* <Sphere position={[-2, 3, 0]} /> */}
-
       {/* <ColliderBox position={[1, 0, 0.5]} scale={[0.3, 1, 0.3]} /> */}
       {/* <ColliderBox
           position={[
@@ -223,17 +218,3 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     </group>
   );
 };
-
-// function Sphere(props) {
-//   const [ref, api] = useSphere(
-//     () => ({ args: [0.75], mass: 1, ...props }),
-//     useRef()
-//   );
-
-//   return (
-//     <mesh ref={ref} castShadow onPointerDown={() => api.velocity.set(0, 5, 0)}>
-//       <sphereGeometry args={[0.75]} />
-//       <meshNormalMaterial />
-//     </mesh>
-//   );
-// }
