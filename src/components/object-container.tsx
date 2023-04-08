@@ -35,6 +35,19 @@ type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
 export const ObjectContainer = (props: ObjectWithUser) => {
   const { object, author } = props;
 
+  const [fallbackColor, setFallbackColor] = useState({
+    shoe: {
+      laces: "#ffffff",
+      mesh: "#3f3cbb",
+      caps: "#121063",
+      inner: "#565584",
+      sole: "#3ab7bf",
+      stripes: "#ecebff",
+      band: "#ff77e9",
+      patch: "#78dcca",
+    },
+  });
+
   // const [hovered, setHovered] = useState(false);
   // const { nodes, materials } = useGLTF(
   //   "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
@@ -83,15 +96,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   //   );
   // });
 
-  // useEffect(() => {
-  //   if (!shoe) return;
-
-  //   let mesh = shoe;
-  //   mesh.scale.set(0.0012, 0.0012, 0.0012);
-
-  //   mesh.children[0].position.set(-365, -18, -67);
-  // }, [shoe]);
-
   // const objectRef = useRef();
   const { nodes, materials } = useGLTF(
     "http://localhost:3000/models/shoe-draco.glb"
@@ -100,9 +104,9 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   console.log(nodes.Scene.position);
 
   const position = [
-    (0.5 - Math.random()) * 8,
+    (0.5 - Math.random()) * 7,
     20 + (0.5 - Math.random()) * 2,
-    (0.5 - Math.random()) * 8,
+    (0.5 - Math.random()) * 7,
   ];
   const width = 0.15;
   const height = 0.07;
@@ -160,42 +164,42 @@ export const ObjectContainer = (props: ObjectWithUser) => {
       <mesh
         geometry={nodes.shoe.geometry}
         material={materials.laces}
-        // material-color={snap.items.laces}
+        material-color={fallbackColor.shoe.laces}
       />
       <mesh
         geometry={nodes.shoe_1.geometry}
         material={materials.mesh}
-        // material-color={snap.items.mesh}
+        material-color={fallbackColor.shoe.mesh}
       />
       <mesh
         geometry={nodes.shoe_2.geometry}
         material={materials.caps}
-        // material-color={snap.items.caps}
+        material-color={fallbackColor.shoe.caps}
       />
       <mesh
         geometry={nodes.shoe_3.geometry}
         material={materials.inner}
-        // material-color={snap.items.inner}
+        material-color={fallbackColor.shoe.inner}
       />
       <mesh
         geometry={nodes.shoe_4.geometry}
         material={materials.sole}
-        // material-color={snap.items.sole}
+        material-color={fallbackColor.shoe.sole}
       />
       <mesh
         geometry={nodes.shoe_5.geometry}
         material={materials.stripes}
-        // material-color={snap.items.stripes}
+        material-color={fallbackColor.shoe.stripes}
       />
       <mesh
         geometry={nodes.shoe_6.geometry}
         material={materials.band}
-        // material-color={snap.items.band}
+        material-color={fallbackColor.shoe.band}
       />
       <mesh
         geometry={nodes.shoe_7.geometry}
         material={materials.patch}
-        // material-color={snap.items.patch}
+        material-color={fallbackColor.shoe.patch}
       />
 
       {/* <ColliderBox
