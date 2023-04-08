@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import theme from "../styles/styles";
 // import { navLinks } from "../constants";
 import {
-  logo,
+  catlogo,
   arrowleft,
   arrowleftmd,
   arrowleftsm,
@@ -223,7 +223,7 @@ const Navbar = () => {
           }}
         >
           <Image
-            src={logo}
+            src={catlogo}
             className="h-9 w-9 rounded-full"
             alt="@hutajoullach"
             width={65}

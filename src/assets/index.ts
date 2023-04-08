@@ -1,4 +1,5 @@
-import logo from "./logo.webp";
+import catlogo from "./catlogo.webp";
+import caticon from "./caticon.webp";
 import arrowleft from "./arrowleft.svg";
 import githubblack from "./githubblack.svg";
 import githubwhite from "./githubwhite.svg";
@@ -48,7 +49,8 @@ import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
 
 export {
-  logo,
+  catlogo,
+  caticon,
   arrowleft,
   githubblack,
   githubwhite,

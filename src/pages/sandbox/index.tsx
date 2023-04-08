@@ -24,11 +24,50 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 
+import { caticon } from "../../assets";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-const CowControlButton = () => {};
+const CowControlButton = () => {
+  const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
+
+  return (
+    <div
+      className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex w-full gap-3 p-1`}
+    >
+      <Image
+        src={caticon}
+        alt="caticon"
+        className="h-6 w-6 rounded-full"
+        width={56}
+        height={56}
+      />
+
+      <button
+        onClick={() => {
+          if (!objectsLoading) api.objects.getAll.useQuery();
+        }}
+        disabled={objectsLoading}
+      >
+        <Image
+          src={editwrite}
+          className="h-5 w-5 rounded-full"
+          alt="editwrite"
+          width={56}
+          height={56}
+        />
+      </button>
+
+      {!!isPosting && (
+        <div className="flex items-center justify-center">
+          <LoadingSpinner size={20} />
+        </div>
+      )}
+    </div>
+  );
+};
 
 const CreateObjectWizard = () => {
   const { user } = useUser();
@@ -57,53 +96,54 @@ const CreateObjectWizard = () => {
   if (!user) return null;
 
   return (
-    <div
-      className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex w-full gap-3 p-1`}
-    >
-      <Image
-        src={user.profileImageUrl}
-        alt="Profile image"
-        className="h-6 w-6 rounded-full"
-        width={56}
-        height={56}
-      />
-      <input
-        placeholder="Type some text"
-        className="grow bg-transparent outline-none"
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-            if (input !== "") {
-              mutate({ objectType: input });
-            }
-          }
-        }}
-        disabled={isPosting}
-      />
-      {!isPosting && (
-        <button
-          onClick={() => {
-            if (input !== "") mutate({ objectType: input });
-          }}
-        >
-          <Image
-            src={editwrite}
-            className="h-5 w-5 rounded-full"
-            alt="editwrite"
-            width={56}
-            height={56}
-          />
-        </button>
-      )}
-      {!!isPosting && (
-        <div className="flex items-center justify-center">
-          <LoadingSpinner size={20} />
-        </div>
-      )}
-    </div>
+    // <div
+    //   className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex w-full gap-3 p-1`}
+    // >
+    //   <Image
+    //     src={user.profileImageUrl}
+    //     alt="Profile image"
+    //     className="h-6 w-6 rounded-full"
+    //     width={56}
+    //     height={56}
+    //   />
+    //   <input
+    //     placeholder="Type some text"
+    //     className="grow bg-transparent outline-none"
+    //     type="text"
+    //     value={input}
+    //     onChange={(e) => setInput(e.target.value)}
+    //     onKeyDown={(e) => {
+    //       if (e.key === "Enter") {
+    //         e.preventDefault();
+    //         if (input !== "") {
+    //           mutate({ objectType: input });
+    //         }
+    //       }
+    //     }}
+    //     disabled={isPosting}
+    //   />
+    //   {!isPosting && (
+    //     <button
+    //       onClick={() => {
+    //         if (input !== "") mutate({ objectType: input });
+    //       }}
+    //     >
+    //       <Image
+    //         src={editwrite}
+    //         className="h-5 w-5 rounded-full"
+    //         alt="editwrite"
+    //         width={56}
+    //         height={56}
+    //       />
+    //     </button>
+    //   )}
+    //   {!!isPosting && (
+    //     <div className="flex items-center justify-center">
+    //       <LoadingSpinner size={20} />
+    //     </div>
+    //   )}
+    // </div>
+    <></>
   );
 };
 
@@ -173,7 +213,7 @@ const Scene = () => {
 };
 
 const Sandbox: NextPage = () => {
-  const [isCowOpened, setIsCowOpened] = useState(false);
+  const [isCowOpened, setIsCowOpened] = useState<boolean>(false);
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
   // Start fetching data
