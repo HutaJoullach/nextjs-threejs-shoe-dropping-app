@@ -51,30 +51,39 @@ const CowControlButton = ({
 
   const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
 
-  // console.log(`here!!! ${canvasMountState.isMainCanvasMounted}`);
+  const [showMessage, setShowMessage] = useState<boolean>(true);
 
   return (
     <div
       className={`${theme.rounded.utilityCardBorder} flex w-full items-center justify-center gap-3 px-2 py-1`}
     >
-      <div
-        className={`flex items-center justify-center rounded-2xl border border-red-400 bg-red-100 px-2 py-1 text-xs text-red-700`}
-        role="alert"
-      >
-        <strong className="mr-1">Hey!</strong>
-        <span className="block sm:inline">got a shoe for me?</span>
-        <span className="-mr-1 flex">
-          <svg
-            className="h-6 w-6 fill-current text-red-500"
-            role="button"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
+      {showMessage && (
+        <div
+          className={`flex items-center justify-center rounded-2xl border border-red-400 bg-red-100 px-2 py-1 text-xs text-red-700`}
+          role="alert"
+        >
+          <strong className="mr-1">Hey!</strong>
+          <span className="block sm:inline">got a shoe for me?</span>
+          <button
+            onClick={() => {
+              // store this in local storage instead
+              if (showMessage) setShowMessage(false);
+            }}
           >
-            <title>Close</title>
-            <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-          </svg>
-        </span>
-      </div>
+            <span className="-mr-1 flex">
+              <svg
+                className="h-6 w-6 fill-current text-red-500"
+                role="button"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <title>Close</title>
+                <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+              </svg>
+            </span>
+          </button>
+        </div>
+      )}
 
       <Image
         src={caticon}
@@ -86,11 +95,6 @@ const CowControlButton = ({
 
       <button
         onClick={() => {
-          // if (canvasMountState.isMainCanvasMounted)
-          //   setCanvasMountState({
-          //     ...canvasMountState,
-          //     isMainCanvasMounted: !canvasMountState.isMainCanvasMounted,
-          //   });
           setCanvasMountState({
             ...canvasMountState,
             isMainCanvasMounted: !canvasMountState.isMainCanvasMounted,
@@ -124,7 +128,6 @@ const CowControlButton = ({
           if (isFetched) setIsDataRefetched(true);
 
           // window.location.reload();
-          // console.log(`here!!!${isFetched}`);
         }}
         type="button"
         disabled={objectsLoading}
@@ -336,9 +339,6 @@ interface ICanvasMountState {
 }
 
 const Sandbox: NextPage = () => {
-  // const [isCowOpened, setIsCowOpened] = useState<boolean>(false);
-  // const [isMainCanvasMounted, setIsMainCanvasMounted] = useState<boolean>(true);
-
   const [canvasMountState, setCanvasMountState] = useState<ICanvasMountState>({
     isCowOpened: false,
     isMainCanvasMounted: true,
@@ -366,7 +366,6 @@ const Sandbox: NextPage = () => {
         {isSignedIn && (
           <div className="fixed right-2 z-10 mt-2">
             <div className="flex justify-center">
-              {/* <CowControlButton canvasMountState setCanvasMountState /> */}
               <CowControlButton
                 canvasMountState={canvasMountState}
                 setCanvasMountState={setCanvasMountState}
