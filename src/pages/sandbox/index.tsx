@@ -28,7 +28,13 @@ import {
   useGLTF,
 } from "@react-three/drei";
 
-import { caticon, closemodal } from "../../assets";
+import {
+  caticon,
+  closemodal,
+  arrowleft,
+  arrowleftmd,
+  arrowleftmdplain,
+} from "../../assets";
 
 import { useAtom } from "jotai";
 import { isDataRefetchedAtom } from "../../states/object-data";
@@ -172,6 +178,58 @@ const CowControlButton = ({
           <span>👟</span>
         </div>
       </button>
+    </div>
+  );
+};
+
+// type CowControlButtonProps = {
+//   canvasMountState: ICanvasMountState;
+//   setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
+// };
+
+// const CowControlButton = ({
+//   canvasMountState,
+//   setCanvasMountState,
+// }: CowControlButtonProps) => {}
+
+type MutateObjectButtonProps = {
+  canvasMountState: ICanvasMountState;
+  setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
+};
+
+const MutateObjectButton = ({
+  canvasMountState,
+  setCanvasMountState,
+}: MutateObjectButtonProps) => {
+  return (
+    <div
+      className={`${theme.rounded.utilityCardBorder} fixed bottom-8 right-8 z-10 mt-2`}
+    >
+      <div className="flex items-center justify-center gap-2">
+        <button onClick={() => {}}>
+          <div
+            className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+          >
+            <Image
+              src={arrowleftmdplain}
+              alt="arrowleftmdplain"
+              className="h-5 w-5 border-red-200"
+              width={56}
+              height={56}
+            />
+          </div>
+        </button>
+
+        <button>
+          <div
+            className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+          >
+            <span>drop my shoe!</span>
+            &nbsp;
+            <span>✋🎤</span>
+          </div>
+        </button>
+      </div>
     </div>
   );
 };
@@ -424,24 +482,32 @@ const Sandbox: NextPage = () => {
         <title>Sandbox</title>
       </Head>
       <PageLayout>
-        {isSignedIn && (
+        {isSignedIn && !canvasMountState.isCowOpened && (
           <div className="fixed right-2 z-10 mt-2">
             <div className="flex justify-center">
               <CowControlButton
                 canvasMountState={canvasMountState}
                 setCanvasMountState={setCanvasMountState}
               />
-              {canvasMountState.isCowOpened && (
-                <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
-                  <Environment preset="forest" />
-                  <CreateObjectWizard />
-                  <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
-                  <OrbitControls autoRotate />
-                </Canvas>
-              )}
             </div>
           </div>
         )}
+
+        {isSignedIn && canvasMountState.isCowOpened && (
+          <div className={`flex h-full w-full items-center justify-center`}>
+            <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
+              <Environment preset="forest" />
+              <CreateObjectWizard />
+              <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
+              <OrbitControls autoRotate />
+            </Canvas>
+            <MutateObjectButton
+              canvasMountState={canvasMountState}
+              setCanvasMountState={setCanvasMountState}
+            />
+          </div>
+        )}
+
         {canvasMountState.isCowOpened ||
         !canvasMountState.isMainCanvasMounted ? (
           <div

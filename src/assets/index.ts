@@ -17,6 +17,7 @@ import user02 from "./user02.svg";
 import user03 from "./user03.svg";
 import editwrite from "./editwrite.svg";
 import closemodal from "./closemodal.svg";
+import arrowleftmdplain from "./arrowleftmdplain.svg";
 
 import backend from "./backend.png";
 import creator from "./creator.png";
@@ -69,6 +70,7 @@ export {
   user03,
   editwrite,
   closemodal,
+  arrowleftmdplain,
   backend,
   creator,
   mobile,
