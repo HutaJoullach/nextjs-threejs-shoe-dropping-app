@@ -182,16 +182,6 @@ const CowControlButton = ({
   );
 };
 
-// type CowControlButtonProps = {
-//   canvasMountState: ICanvasMountState;
-//   setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
-// };
-
-// const CowControlButton = ({
-//   canvasMountState,
-//   setCanvasMountState,
-// }: CowControlButtonProps) => {}
-
 type MutateObjectButtonProps = {
   canvasMountState: ICanvasMountState;
   setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
@@ -206,7 +196,15 @@ const MutateObjectButton = ({
       className={`${theme.rounded.utilityCardBorder} fixed bottom-8 right-8 z-10 mt-2`}
     >
       <div className="flex items-center justify-center gap-2">
-        <button onClick={() => {}}>
+        <button
+          onClick={() => {
+            if (canvasMountState.isCowOpened)
+              setCanvasMountState({
+                ...canvasMountState,
+                isCowOpened: !canvasMountState.isCowOpened,
+              });
+          }}
+        >
           <div
             className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
           >
@@ -220,7 +218,7 @@ const MutateObjectButton = ({
           </div>
         </button>
 
-        <button>
+        <button onClick={() => {}}>
           <div
             className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
           >
@@ -238,6 +236,9 @@ const CreateObjectWizard = () => {
   const { user } = useUser();
   const [input, setInput] = useState<string>("");
   const ctx = api.useContext();
+
+  // here
+  // const [shoeColor, setShoeColor] = useState("");
 
   const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
     onSuccess: () => {
@@ -258,7 +259,6 @@ const CreateObjectWizard = () => {
   if (!user) return null;
 
   const [hovered, setHovered] = useState(false);
-  // const { nodes, materials } = useGLTF("./models/shoe-draco.glb");
   const { nodes, materials } = useGLTF(
     "http://localhost:3000/models/shoe-draco.glb"
   );
@@ -292,6 +292,8 @@ const CreateObjectWizard = () => {
               ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
             onChange: (v) => {
               materials[m].color = new Color(v);
+              // console.log(v);
+              // console.log(m);
             },
           },
         }),
