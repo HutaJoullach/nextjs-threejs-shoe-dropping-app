@@ -37,7 +37,10 @@ import {
 } from "../../assets";
 
 import { useAtom } from "jotai";
-import { isDataRefetchedAtom } from "../../states/object-data";
+import {
+  isDataRefetchedAtom,
+  objectDataToMutateAtom,
+} from "../../states/object-data";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -234,6 +237,11 @@ const MutateObjectButton = ({
 
 const CreateObjectWizard = () => {
   const { user } = useUser();
+
+  const [objectDataToMutate, setObjectDataToMutate] = useAtom(
+    objectDataToMutateAtom
+  );
+
   const [input, setInput] = useState<string>("");
   const ctx = api.useContext();
 
@@ -264,6 +272,9 @@ const CreateObjectWizard = () => {
     document.body.style.cursor = hovered ? "pointer" : "auto";
   }, [hovered]);
 
+  // for testing, delete later
+  // let obj = {};
+
   useControls("Shoe", () => {
     console.log("creating color pickers");
 
@@ -287,10 +298,13 @@ const CreateObjectWizard = () => {
             value:
               "#" +
               ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
-            onChange: (v) => {
+            onChange: (v: any) => {
               materials[m].color = new Color(v);
               // console.log(v);
               // console.log(m);
+
+              // obj = { ...obj, [m]: v };
+              // console.log(obj);
             },
           },
         }),
@@ -456,11 +470,25 @@ interface ICanvasMountState {
   isMainCanvasMounted: boolean;
 }
 
+interface IObjectDataToMutate {
+  laces: string;
+  mesh: string;
+  caps: string;
+  inner: string;
+  sole: string;
+  stripes: string;
+  band: string;
+  patch: string;
+}
+
 const Sandbox: NextPage = () => {
   const [canvasMountState, setCanvasMountState] = useState<ICanvasMountState>({
     isCowOpened: false,
     isMainCanvasMounted: true,
   });
+
+  const [objectDataToMutate, setObjectDataToMutate] =
+    useState<IObjectDataToMutate | null>(null);
 
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
