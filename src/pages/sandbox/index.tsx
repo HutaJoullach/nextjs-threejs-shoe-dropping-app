@@ -26,26 +26,12 @@ import {
 
 import { caticon, closemodal } from "../../assets";
 
+import { useAtom } from "jotai";
+import { isDataRefetchedAtom } from "../../states/object-data";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
-
-// const [isCowOpened, setIsCowOpened] = useState<boolean>(false);
-//   const [isMainCanvasMounted, setIsMainCanvasMounted] = useState<boolean>(true);
-
-//   interface ICanvasMountState {
-//     isCowOpened: boolean;
-//     isMainCanvasMounted: boolean;
-//   }
-
-//   const [canvasMountState, setCanvasMountState] = useState<ICanvasMountState>({
-//     isCowOpened: false,
-//     isMainCanvasMounted: true,
-//   });
-
-// <CowControlButton canvasMountState setCanvasMountState />
-
-// import { Dispatch, SetStateAction } from "react";
 
 type CowControlButtonProps = {
   canvasMountState: ICanvasMountState;
@@ -62,6 +48,8 @@ const CowControlButton = ({
     refetch,
     isFetched,
   } = api.objects.getAll.useQuery();
+
+  const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
 
   // console.log(`here!!! ${canvasMountState.isMainCanvasMounted}`);
 
@@ -133,7 +121,9 @@ const CowControlButton = ({
         onClick={() => {
           // if (!objectsLoading) api.objects.getAll.useQuery();
           if (!objectsLoading) refetch;
-          window.location.reload();
+          if (isFetched) setIsDataRefetched(true);
+
+          // window.location.reload();
           // console.log(`here!!!${isFetched}`);
         }}
         type="button"
@@ -276,10 +266,17 @@ const RenderStoredObjects = () => {
     isStale,
   } = api.objects.getAll.useQuery();
 
-  // const [, updateState] = React.useState();
-  // const forceUpdate = React.useCallback(() => updateState({}), []);
+  const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
+
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   if (!data) return null;
+
+  if (isDataRefetched) {
+    forceUpdate();
+    setIsDataRefetched(false);
+  }
 
   return (
     <>
