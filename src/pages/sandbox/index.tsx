@@ -18,10 +18,14 @@ import Car from "~/components/canvas/car";
 import { useUser } from "@clerk/nextjs";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/cannon";
+import { useControls } from "leva";
+import { Color } from "three";
 import {
   Environment,
   OrbitControls,
   PerspectiveCamera,
+  ContactShadows,
+  useGLTF,
 } from "@react-three/drei";
 
 import { caticon, closemodal } from "../../assets";
@@ -174,9 +178,7 @@ const CowControlButton = ({
 
 const CreateObjectWizard = () => {
   const { user } = useUser();
-
   const [input, setInput] = useState<string>("");
-
   const ctx = api.useContext();
 
   const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
@@ -194,9 +196,50 @@ const CreateObjectWizard = () => {
     },
   });
 
-  console.log(user);
-
+  // console.log(user);
   if (!user) return null;
+
+  const [hovered, setHovered] = useState(false);
+  // const { nodes, materials } = useGLTF("./models/shoe-draco.glb");
+  const { nodes, materials } = useGLTF(
+    "http://localhost:3000/models/shoe-draco.glb"
+  );
+
+  useEffect(() => {
+    document.body.style.cursor = hovered ? "pointer" : "auto";
+  }, [hovered]);
+
+  useControls("Shoe", () => {
+    console.log("creating color pickers");
+
+    // using forEach
+    // const colorPickers = {}
+    // Object.keys(materials).forEach((m) => {
+    //   colorPickers[m] = {
+    //     value: '#' + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, '0'),
+    //     onChange: (v) => {
+    //       materials[m].color = new Color(v)
+    //     }
+    //   }
+    // })
+    // return colorPickers
+
+    // using reduce
+    return Object.keys(materials).reduce(
+      (acc, m) =>
+        Object.assign(acc, {
+          [m]: {
+            value:
+              "#" +
+              ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
+            onChange: (v) => {
+              materials[m].color = new Color(v);
+            },
+          },
+        }),
+      {}
+    );
+  });
 
   return (
     // <div
@@ -246,7 +289,25 @@ const CreateObjectWizard = () => {
     //     </div>
     //   )}
     // </div>
-    <></>
+
+    <group
+      dispose={null}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+      onClick={(e) => {
+        e.stopPropagation();
+        document.getElementById("Shoe." + e.object.material.name).focus();
+      }}
+    >
+      <mesh geometry={nodes.shoe.geometry} material={materials.laces} />
+      <mesh geometry={nodes.shoe_1.geometry} material={materials.mesh} />
+      <mesh geometry={nodes.shoe_2.geometry} material={materials.caps} />
+      <mesh geometry={nodes.shoe_3.geometry} material={materials.inner} />
+      <mesh geometry={nodes.shoe_4.geometry} material={materials.sole} />
+      <mesh geometry={nodes.shoe_5.geometry} material={materials.stripes} />
+      <mesh geometry={nodes.shoe_6.geometry} material={materials.band} />
+      <mesh geometry={nodes.shoe_7.geometry} material={materials.patch} />
+    </group>
   );
 };
 
@@ -370,7 +431,14 @@ const Sandbox: NextPage = () => {
                 canvasMountState={canvasMountState}
                 setCanvasMountState={setCanvasMountState}
               />
-              {canvasMountState.isCowOpened && <CreateObjectWizard />}
+              {canvasMountState.isCowOpened && (
+                <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
+                  <Environment preset="forest" />
+                  <CreateObjectWizard />
+                  <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
+                  <OrbitControls autoRotate />
+                </Canvas>
+              )}
             </div>
           </div>
         )}

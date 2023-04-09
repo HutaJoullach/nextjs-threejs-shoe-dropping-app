@@ -101,7 +101,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     "http://localhost:3000/models/shoe-draco.glb"
   );
 
-  console.log(nodes.Scene.position);
+  // console.log(nodes.Scene.position);
 
   const position = [
     (0.5 - Math.random()) * 7,
