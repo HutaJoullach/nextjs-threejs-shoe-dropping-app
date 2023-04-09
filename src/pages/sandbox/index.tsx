@@ -24,20 +24,35 @@ import {
   PerspectiveCamera,
 } from "@react-three/drei";
 
-import { caticon } from "../../assets";
+import { caticon, closemodal } from "../../assets";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
+// const [isCowOpened, setIsCowOpened] = useState<boolean>(false);
+//   const [isMainCanvasMounted, setIsMainCanvasMounted] = useState<boolean>(true);
+
+//   interface ICanvasMountState {
+//     isCowOpened: boolean;
+//     isMainCanvasMounted: boolean;
+//   }
+
+//   const [canvasMountState, setCanvasMountState] = useState<ICanvasMountState>({
+//     isCowOpened: false,
+//     isMainCanvasMounted: true,
+//   });
+
+// <CowControlButton canvasMountState setCanvasMountState />
+
 type CowControlButtonProps = {
-  isCowOpened: boolean;
-  setIsCowOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  canvasMountState: ICanvasMountState;
+  setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
 };
 
 const CowControlButton = ({
-  isCowOpened,
-  setIsCowOpened,
+  canvasMountState,
+  setCanvasMountState,
 }: CowControlButtonProps) => {
   const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
@@ -45,8 +60,8 @@ const CowControlButton = ({
     <div
       className={`${theme.rounded.utilityCardBorder} flex w-full items-center justify-center gap-3 px-2 py-1`}
     >
-      {/* <div
-        className={`flex items-center justify-center rounded border border-red-400 bg-red-100 px-2 py-1 text-xs text-red-700`}
+      <div
+        className={`flex items-center justify-center rounded-2xl border border-red-400 bg-red-100 px-2 py-1 text-xs text-red-700`}
         role="alert"
       >
         <strong className="mr-1">Hey!</strong>
@@ -62,7 +77,7 @@ const CowControlButton = ({
             <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
           </svg>
         </span>
-      </div> */}
+      </div>
 
       <Image
         src={caticon}
@@ -72,48 +87,59 @@ const CowControlButton = ({
         height={56}
       />
 
+      <button onClick={() => null} type="button">
+        <div
+          className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+        >
+          <>
+            <span>got laggy comp?</span>
+            &nbsp;
+            <span>💻</span>
+          </>
+        </div>
+      </button>
+
       <button
         onClick={() => {
           if (!objectsLoading) api.objects.getAll.useQuery();
         }}
+        type="button"
         disabled={objectsLoading}
       >
         <div
-          className={`${theme.rounded.utilityCardBorder} flex items-center justify-center gap-1 bg-zinc-500 px-2 py-1 text-xs`}
+          className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
         >
           {!objectsLoading ? (
             <>
               <span>fetch new shoes</span>
-              <Image
-                src={caticon}
-                className="h-5 w-5 rounded-full"
-                alt="caticon"
-                width={56}
-                height={56}
-              />
+              &nbsp;
+              <span>🐈</span>
             </>
           ) : (
-            <LoadingSpinner size={20} />
+            <>
+              <LoadingSpinner size={20} />
+              <span>Loading...</span>
+            </>
           )}
         </div>
       </button>
 
       <button
         onClick={() => {
-          if (!isCowOpened) setIsCowOpened(!isCowOpened);
+          if (!canvasMountState.isCowOpened)
+            setCanvasMountState({
+              ...canvasMountState,
+              isCowOpened: !canvasMountState.isCowOpened,
+            });
         }}
+        type="button"
       >
         <div
-          className={`${theme.rounded.utilityCardBorder} flex items-center justify-center gap-1 bg-zinc-500 px-2 py-1 text-xs`}
+          className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
         >
           <span>add my shoe!</span>
-          <Image
-            src={caticon}
-            className="h-5 w-5 rounded-full"
-            alt="caticon"
-            width={56}
-            height={56}
-          />
+          &nbsp;
+          <span>👟</span>
         </div>
       </button>
     </div>
@@ -263,8 +289,20 @@ const Scene = () => {
   );
 };
 
+interface ICanvasMountState {
+  isCowOpened: boolean;
+  isMainCanvasMounted: boolean;
+}
+
 const Sandbox: NextPage = () => {
-  const [isCowOpened, setIsCowOpened] = useState<boolean>(false);
+  // const [isCowOpened, setIsCowOpened] = useState<boolean>(false);
+  // const [isMainCanvasMounted, setIsMainCanvasMounted] = useState<boolean>(true);
+
+  const [canvasMountState, setCanvasMountState] = useState<ICanvasMountState>({
+    isCowOpened: false,
+    isMainCanvasMounted: true,
+  });
+
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
   // Start fetching data
@@ -287,15 +325,21 @@ const Sandbox: NextPage = () => {
         {isSignedIn && (
           <div className="fixed right-2 z-10 mt-2">
             <div className="flex justify-center">
-              {!isCowOpened ? (
-                <CowControlButton isCowOpened setIsCowOpened />
-              ) : (
-                <CreateObjectWizard />
-              )}
+              <CowControlButton canvasMountState setCanvasMountState />
+              {canvasMountState.isCowOpened && <CreateObjectWizard />}
             </div>
           </div>
         )}
-        {!isCowOpened && (
+        {canvasMountState.isCowOpened ||
+        !canvasMountState.isMainCanvasMounted ? (
+          <div
+            className={`flex items-center justify-center rounded-2xl px-2 py-1`}
+          >
+            <span>dismounted canvas for u</span>
+            &nbsp;
+            <span>🔌</span>
+          </div>
+        ) : (
           <Canvas>
             <Physics
               broadphase="SAP"

@@ -16,6 +16,7 @@ import user01 from "./user01.svg";
 import user02 from "./user02.svg";
 import user03 from "./user03.svg";
 import editwrite from "./editwrite.svg";
+import closemodal from "./closemodal.svg";
 
 import backend from "./backend.png";
 import creator from "./creator.png";
@@ -67,6 +68,7 @@ export {
   user02,
   user03,
   editwrite,
+  closemodal,
   backend,
   creator,
   mobile,
