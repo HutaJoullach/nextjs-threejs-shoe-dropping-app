@@ -237,9 +237,6 @@ const CreateObjectWizard = () => {
   const [input, setInput] = useState<string>("");
   const ctx = api.useContext();
 
-  // here
-  // const [shoeColor, setShoeColor] = useState("");
-
   const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
     onSuccess: () => {
       setInput("");

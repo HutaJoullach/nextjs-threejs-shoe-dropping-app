@@ -1,8 +1,4 @@
 import {
-  mobile,
-  backend,
-  creator,
-  web,
   javascript,
   typescript,
   html,
@@ -15,13 +11,6 @@ import {
   git,
   figma,
   docker,
-  meta,
-  starbucks,
-  tesla,
-  shopify,
-  carrent,
-  jobit,
-  tripguide,
   threejs,
 } from "../assets";
 
@@ -43,19 +32,19 @@ export const navLinks = [
 const services = [
   {
     title: "React Frontend Developer",
-    icon: web,
+    icon: typescript,
   },
   {
     title: "Backend Developer",
-    icon: backend,
+    icon: typescript,
   },
   {
     title: "React Native Developer",
-    icon: mobile,
+    icon: typescript,
   },
   {
     title: "Content Creator",
-    icon: creator,
+    icon: typescript,
   },
 ];
 
@@ -98,7 +87,7 @@ const experiences = [
   {
     title: "React.js Developer",
     company_name: "",
-    icon: starbucks,
+    icon: typescript,
     iconBg: "#383E56",
     date: "March 2020 - April 2021",
     points: ["", "", "", ""],
@@ -106,7 +95,7 @@ const experiences = [
   {
     title: "React Native Developer",
     company_name: "",
-    icon: tesla,
+    icon: typescript,
     iconBg: "#E6DEDD",
     date: "Jan 2021 - Feb 2022",
     points: ["", "", "", ""],
@@ -114,7 +103,7 @@ const experiences = [
   {
     title: "Web Developer",
     company_name: "",
-    icon: shopify,
+    icon: typescript,
     iconBg: "#383E56",
     date: "Jan 2022 - Jan 2023",
     points: ["", "", "", ""],
@@ -122,7 +111,7 @@ const experiences = [
   {
     title: "Full stack Developer",
     company_name: "",
-    icon: meta,
+    icon: typescript,
     iconBg: "#E6DEDD",
     date: "Jan 2023 - Present",
     points: ["", "", "", ""],
@@ -135,21 +124,21 @@ const testimonials = [
     name: "",
     designation: "",
     company: "",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
+    image: "",
   },
   {
     testimonial: "",
     name: "",
     designation: "",
     company: "",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
+    image: "",
   },
   {
     testimonial: "",
     name: "",
     designation: "",
     company: "",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
+    image: "",
   },
 ];
 
@@ -160,18 +149,18 @@ const projects = [
     tags: [
       {
         name: "react",
-        color: "blue-text-gradient",
+        color: "",
       },
       {
         name: "mongodb",
-        color: "green-text-gradient",
+        color: "",
       },
       {
         name: "tailwind",
-        color: "pink-text-gradient",
+        color: "",
       },
     ],
-    image: carrent,
+    image: typescript,
     source_code_link: "https://github.com/",
   },
   {
@@ -180,18 +169,18 @@ const projects = [
     tags: [
       {
         name: "react",
-        color: "blue-text-gradient",
+        color: "",
       },
       {
         name: "restapi",
-        color: "green-text-gradient",
+        color: "",
       },
       {
         name: "scss",
-        color: "pink-text-gradient",
+        color: "",
       },
     ],
-    image: jobit,
+    image: typescript,
     source_code_link: "https://github.com/",
   },
   {
@@ -200,18 +189,18 @@ const projects = [
     tags: [
       {
         name: "nextjs",
-        color: "blue-text-gradient",
+        color: "",
       },
       {
         name: "supabase",
-        color: "green-text-gradient",
+        color: "",
       },
       {
         name: "css",
-        color: "pink-text-gradient",
+        color: "",
       },
     ],
-    image: tripguide,
+    image: typescript,
     source_code_link: "https://github.com/",
   },
 ];
