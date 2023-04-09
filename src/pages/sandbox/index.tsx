@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useReducer, useState } from "react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -45,6 +45,8 @@ dayjs.extend(relativeTime);
 
 // <CowControlButton canvasMountState setCanvasMountState />
 
+// import { Dispatch, SetStateAction } from "react";
+
 type CowControlButtonProps = {
   canvasMountState: ICanvasMountState;
   setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
@@ -54,7 +56,14 @@ const CowControlButton = ({
   canvasMountState,
   setCanvasMountState,
 }: CowControlButtonProps) => {
-  const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
+  const {
+    data,
+    isLoading: objectsLoading,
+    refetch,
+    isFetched,
+  } = api.objects.getAll.useQuery();
+
+  // console.log(`here!!! ${canvasMountState.isMainCanvasMounted}`);
 
   return (
     <div
@@ -87,21 +96,45 @@ const CowControlButton = ({
         height={56}
       />
 
-      <button onClick={() => null} type="button">
+      <button
+        onClick={() => {
+          // if (canvasMountState.isMainCanvasMounted)
+          //   setCanvasMountState({
+          //     ...canvasMountState,
+          //     isMainCanvasMounted: !canvasMountState.isMainCanvasMounted,
+          //   });
+          setCanvasMountState({
+            ...canvasMountState,
+            isMainCanvasMounted: !canvasMountState.isMainCanvasMounted,
+          });
+        }}
+        type="button"
+      >
         <div
           className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
         >
-          <>
-            <span>got laggy comp?</span>
-            &nbsp;
-            <span>💻</span>
-          </>
+          {canvasMountState.isMainCanvasMounted ? (
+            <>
+              <span>got laggy comp?</span>
+              &nbsp;
+              <span>💻</span>
+            </>
+          ) : (
+            <>
+              <span>get me some shoes</span>
+              &nbsp;
+              <span>🐈‍⬛</span>
+            </>
+          )}
         </div>
       </button>
 
       <button
         onClick={() => {
-          if (!objectsLoading) api.objects.getAll.useQuery();
+          // if (!objectsLoading) api.objects.getAll.useQuery();
+          if (!objectsLoading) refetch;
+          window.location.reload();
+          // console.log(`here!!!${isFetched}`);
         }}
         type="button"
         disabled={objectsLoading}
@@ -233,7 +266,18 @@ const CreateObjectWizard = () => {
 // };
 
 const RenderStoredObjects = () => {
-  const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
+  const {
+    data,
+    isLoading: objectsLoading,
+    refetch,
+    fetchStatus,
+    isFetchedAfterMount,
+    isPreviousData,
+    isStale,
+  } = api.objects.getAll.useQuery();
+
+  // const [, updateState] = React.useState();
+  // const forceUpdate = React.useCallback(() => updateState({}), []);
 
   if (!data) return null;
 
@@ -266,7 +310,7 @@ const RenderStoredObjects = () => {
 };
 
 const Scene = () => {
-  // const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
+  const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
   return (
     <Suspense fallback={null}>
@@ -325,7 +369,11 @@ const Sandbox: NextPage = () => {
         {isSignedIn && (
           <div className="fixed right-2 z-10 mt-2">
             <div className="flex justify-center">
-              <CowControlButton canvasMountState setCanvasMountState />
+              {/* <CowControlButton canvasMountState setCanvasMountState /> */}
+              <CowControlButton
+                canvasMountState={canvasMountState}
+                setCanvasMountState={setCanvasMountState}
+              />
               {canvasMountState.isCowOpened && <CreateObjectWizard />}
             </div>
           </div>
@@ -333,11 +381,15 @@ const Sandbox: NextPage = () => {
         {canvasMountState.isCowOpened ||
         !canvasMountState.isMainCanvasMounted ? (
           <div
-            className={`flex items-center justify-center rounded-2xl px-2 py-1`}
+            className={`${theme.h.content} flex items-center justify-center`}
           >
-            <span>dismounted canvas for u</span>
-            &nbsp;
-            <span>🔌</span>
+            <div
+              className={`flex items-center justify-center rounded-2xl px-2 py-1`}
+            >
+              <span>dismounted canvas for u</span>
+              &nbsp;
+              <span>🔌</span>
+            </div>
           </div>
         ) : (
           <Canvas>
