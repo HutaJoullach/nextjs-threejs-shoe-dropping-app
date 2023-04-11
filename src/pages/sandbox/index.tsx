@@ -37,10 +37,7 @@ import {
 } from "../../assets";
 
 import { useAtom } from "jotai";
-import {
-  isDataRefetchedAtom,
-  objectDataToMutateAtom,
-} from "../../states/object-data";
+import { isDataRefetchedAtom } from "../../states/object-data";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -79,7 +76,7 @@ const CowControlButton = ({
           <span className="block sm:inline">got a shoe for me?</span>
           <button
             onClick={() => {
-              // store this in local storage instead
+              // store this in local storage with jotai instead
               if (showMessage) setShowMessage(false);
             }}
           >
@@ -188,11 +185,21 @@ const CowControlButton = ({
 type MutateObjectButtonProps = {
   canvasMountState: ICanvasMountState;
   setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
+  objectDataToMutate: IObjectDataToMutate;
+  setObjectDataToMutate: React.Dispatch<
+    React.SetStateAction<IObjectDataToMutate>
+  >;
+  isMutateObjectBtnClicked: boolean;
+  setIsMutateObjectBtnClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const MutateObjectButton = ({
   canvasMountState,
   setCanvasMountState,
+  objectDataToMutate,
+  setObjectDataToMutate,
+  isMutateObjectBtnClicked,
+  setIsMutateObjectBtnClicked,
 }: MutateObjectButtonProps) => {
   return (
     <div
@@ -221,7 +228,17 @@ const MutateObjectButton = ({
           </div>
         </button>
 
-        <button onClick={() => {}}>
+        <button
+          onClick={() => {
+            if (!isMutateObjectBtnClicked) setIsMutateObjectBtnClicked(true);
+
+            if (canvasMountState.isCowOpened)
+              setCanvasMountState({
+                ...canvasMountState,
+                isCowOpened: !canvasMountState.isCowOpened,
+              });
+          }}
+        >
           <div
             className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
           >
@@ -235,12 +252,22 @@ const MutateObjectButton = ({
   );
 };
 
-const CreateObjectWizard = () => {
-  const { user } = useUser();
+type CreateObjectWizardProps = {
+  objectDataToMutate: IObjectDataToMutate;
+  setObjectDataToMutate: React.Dispatch<
+    React.SetStateAction<IObjectDataToMutate>
+  >;
+  isMutateObjectBtnClicked: boolean;
+  setIsMutateObjectBtnClicked: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-  const [objectDataToMutate, setObjectDataToMutate] = useAtom(
-    objectDataToMutateAtom
-  );
+const CreateObjectWizard = ({
+  objectDataToMutate,
+  setObjectDataToMutate,
+  isMutateObjectBtnClicked,
+  setIsMutateObjectBtnClicked,
+}: CreateObjectWizardProps) => {
+  const { user } = useUser();
 
   const [input, setInput] = useState<string>("");
   const ctx = api.useContext();
@@ -275,6 +302,72 @@ const CreateObjectWizard = () => {
   // for testing, delete later
   // let obj = {};
 
+  // useEffect(() => {
+  //   for (let [key, value] of Object.entries(obj)) {
+  //     setObjectDataToMutate({
+  //       ...objectDataToMutate,
+  //       [key]: value,
+  //     });
+  //   }
+  //   // console.log(`hey!!!${objectDataToMutate.laces}`);
+  // }, [obj]);
+
+  const mutateObjectData = () => {
+    let obj = {};
+
+    for (let [key, value] of Object.entries(materials)) {
+      console.log(`hey ${[key]}`);
+      console.log(`hey ${[materials.band.color.getHex]}`);
+
+      obj = { ...obj, [key]: materials.band.color.getHex };
+      console.log(obj);
+
+      // setObjectDataToMutate({
+      //   ...objectDataToMutate,
+      //   [key]: materials.band.color.getHex,
+      // });
+
+      // setObjectDataToMutate({
+      //   ...objectDataToMutate,
+      //   // [key]: materials[key].color.getHex,
+      //   [key]: materials[key].color.getHex,
+      // });
+    }
+  };
+
+  useEffect(() => {
+    if (isMutateObjectBtnClicked) {
+      mutateObjectData();
+      setIsMutateObjectBtnClicked(false);
+    }
+  }, [isMutateObjectBtnClicked]);
+
+  // useEffect(() => {
+  //   for (let [key, value] of Object.entries(materials)) {
+  //     console.log(`yo${[key]}`);
+  //     console.log(`yo${[materials.band.color.getHex]}`);
+
+  //     setObjectDataToMutate({
+  //       ...objectDataToMutate,
+  //       [key]: materials.band.color.getHex,
+  //     });
+
+  //     setObjectDataToMutate({
+  //       ...objectDataToMutate,
+  //       // [key]: materials[key].color.getHex,
+  //       [key]: materials[key].color.getHex,
+  //     });
+  //   }
+  //   console.log(`hey!!!${objectDataToMutate.band}`);
+  //   console.log(`hey!!!${objectDataToMutate.caps}`);
+  //   console.log(`hey!!!${objectDataToMutate.inner}`);
+  //   console.log(`hey!!!${objectDataToMutate.laces}`);
+  //   console.log(`hey!!!${objectDataToMutate.mesh}`);
+  //   console.log(`hey!!!${objectDataToMutate.patch}`);
+  //   console.log(`hey!!!${objectDataToMutate.sole}`);
+  //   console.log(`hey!!!${objectDataToMutate.stripes}`);
+  // }, [materials]);
+
   useControls("Shoe", () => {
     console.log("creating color pickers");
 
@@ -302,6 +395,19 @@ const CreateObjectWizard = () => {
               materials[m].color = new Color(v);
               // console.log(v);
               // console.log(m);
+              materials[m].color.getHex = v;
+
+              // setObjectDataToMutate({
+              //   ...objectDataToMutate,
+              //   [m]: v,
+              // });
+
+              // console.log(objectDataToMutate);
+
+              // setCanvasMountState({
+              //   ...canvasMountState,
+              //   isMainCanvasMounted: !canvasMountState.isMainCanvasMounted,
+              // });
 
               // obj = { ...obj, [m]: v };
               // console.log(obj);
@@ -311,6 +417,9 @@ const CreateObjectWizard = () => {
       {}
     );
   });
+
+  // console.log(materials);
+  // console.log(materials.band.color.getHex);
 
   return (
     // <div
@@ -471,14 +580,14 @@ interface ICanvasMountState {
 }
 
 interface IObjectDataToMutate {
-  laces: string;
-  mesh: string;
-  caps: string;
-  inner: string;
-  sole: string;
-  stripes: string;
-  band: string;
-  patch: string;
+  laces?: string;
+  mesh?: string;
+  caps?: string;
+  inner?: string;
+  sole?: string;
+  stripes?: string;
+  band?: string;
+  patch?: string;
 }
 
 const Sandbox: NextPage = () => {
@@ -488,7 +597,19 @@ const Sandbox: NextPage = () => {
   });
 
   const [objectDataToMutate, setObjectDataToMutate] =
-    useState<IObjectDataToMutate | null>(null);
+    useState<IObjectDataToMutate>({
+      laces: "",
+      mesh: "",
+      caps: "",
+      inner: "",
+      sole: "",
+      stripes: "",
+      band: "",
+      patch: "",
+    });
+
+  const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] =
+    useState<boolean>(false);
 
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
@@ -524,13 +645,20 @@ const Sandbox: NextPage = () => {
           <div className={`flex h-full w-full items-center justify-center`}>
             <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
               <Environment preset="forest" />
-              <CreateObjectWizard />
+              <CreateObjectWizard
+                objectDataToMutate={objectDataToMutate}
+                setObjectDataToMutate={setObjectDataToMutate}
+              />
               <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
               <OrbitControls autoRotate />
             </Canvas>
             <MutateObjectButton
               canvasMountState={canvasMountState}
               setCanvasMountState={setCanvasMountState}
+              objectDataToMutate={objectDataToMutate}
+              setObjectDataToMutate={setObjectDataToMutate}
+              isMutateObjectBtnClicked={isMutateObjectBtnClicked}
+              setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
             />
           </div>
         )}
