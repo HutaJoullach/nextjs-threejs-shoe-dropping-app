@@ -23,5 +23,3 @@ export const isDataRefetchedAtom = atom<boolean>(false);
 //   band: "",
 //   patch: "",
 // });
-
-export const objectDataToMutateAtom = atom({ laces: "" });

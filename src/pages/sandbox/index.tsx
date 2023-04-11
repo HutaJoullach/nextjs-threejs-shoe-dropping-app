@@ -37,10 +37,7 @@ import {
 } from "../../assets";
 
 import { useAtom } from "jotai";
-import {
-  isDataRefetchedAtom,
-  objectDataToMutateAtom,
-} from "../../states/object-data";
+import { isDataRefetchedAtom } from "../../states/object-data";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -292,10 +289,6 @@ const CreateObjectWizard = ({
     },
   });
 
-  const [objectDataToMutate, setObjectDataToMutate] = useAtom(
-    objectDataToMutateAtom
-  );
-
   // console.log(user);
   if (!user) return null;
 
@@ -369,23 +362,20 @@ const CreateObjectWizard = ({
     for (let [key, value] of Object.entries(materials)) {
       // console.log(`yo${[key]}`);
       // console.log(`yo${[materials.band.color.getHex]}`);
-
       // setObjectDataToMutate({
       //   ...objectDataToMutate,
       //   [key]: materials.band.color.getHex,
       // });
-
       // setObjectDataToMutate({
       //   ...objectDataToMutate,
       //   // [key]: materials[key].color.getHex,
       //   [key]: materials[key].color.getHex,
       // });
-
-      if (key === "laces") {
-        setObjectDataToMutate({
-          laces: materials[key].color.getHex,
-        });
-      }
+      // if (key === "laces") {
+      //   setObjectDataToMutate({
+      //     laces: materials[key].color.getHex,
+      //   });
+      // }
     }
     // console.log(`hey!!!${objectDataToMutate.band}`);
     // console.log(`hey!!!${objectDataToMutate.caps}`);
