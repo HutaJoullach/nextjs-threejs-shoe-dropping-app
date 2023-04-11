@@ -37,7 +37,10 @@ import {
 } from "../../assets";
 
 import { useAtom } from "jotai";
-import { isDataRefetchedAtom } from "../../states/object-data";
+import {
+  isDataRefetchedAtom,
+  objectDataToMutateAtom,
+} from "../../states/object-data";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -232,6 +235,8 @@ const MutateObjectButton = ({
           onClick={() => {
             if (!isMutateObjectBtnClicked) setIsMutateObjectBtnClicked(true);
 
+            // console.log(`yo ${isMutateObjectBtnClicked}`);
+
             if (canvasMountState.isCowOpened)
               setCanvasMountState({
                 ...canvasMountState,
@@ -262,8 +267,8 @@ type CreateObjectWizardProps = {
 };
 
 const CreateObjectWizard = ({
-  objectDataToMutate,
-  setObjectDataToMutate,
+  // objectDataToMutate,
+  // setObjectDataToMutate,
   isMutateObjectBtnClicked,
   setIsMutateObjectBtnClicked,
 }: CreateObjectWizardProps) => {
@@ -287,6 +292,10 @@ const CreateObjectWizard = ({
     },
   });
 
+  const [objectDataToMutate, setObjectDataToMutate] = useAtom(
+    objectDataToMutateAtom
+  );
+
   // console.log(user);
   if (!user) return null;
 
@@ -303,6 +312,14 @@ const CreateObjectWizard = ({
   // let obj = {};
 
   // useEffect(() => {
+  //   setObjectDataToMutate(obj);
+  //   console.log(obj);
+  //   console.log(objectDataToMutate);
+
+  //   // console.log(`hey!!!${objectDataToMutate.laces}`);
+  // }, [obj]);
+
+  // useEffect(() => {
   //   for (let [key, value] of Object.entries(obj)) {
   //     setObjectDataToMutate({
   //       ...objectDataToMutate,
@@ -315,11 +332,13 @@ const CreateObjectWizard = ({
   const mutateObjectData = () => {
     let obj = {};
 
+    console.log("hey");
+
     for (let [key, value] of Object.entries(materials)) {
       console.log(`hey ${[key]}`);
-      console.log(`hey ${[materials.band.color.getHex]}`);
+      console.log(`hey ${[materials.key.color.getHex]}`);
 
-      obj = { ...obj, [key]: materials.band.color.getHex };
+      obj = { ...obj, [key]: materials.key.color.getHex };
       console.log(obj);
 
       // setObjectDataToMutate({
@@ -335,38 +354,48 @@ const CreateObjectWizard = ({
     }
   };
 
-  useEffect(() => {
-    if (isMutateObjectBtnClicked) {
-      mutateObjectData();
-      setIsMutateObjectBtnClicked(false);
-    }
-  }, [isMutateObjectBtnClicked]);
+  // console.log(`yo ${isMutateObjectBtnClicked}`);
 
   // useEffect(() => {
-  //   for (let [key, value] of Object.entries(materials)) {
-  //     console.log(`yo${[key]}`);
-  //     console.log(`yo${[materials.band.color.getHex]}`);
-
-  //     setObjectDataToMutate({
-  //       ...objectDataToMutate,
-  //       [key]: materials.band.color.getHex,
-  //     });
-
-  //     setObjectDataToMutate({
-  //       ...objectDataToMutate,
-  //       // [key]: materials[key].color.getHex,
-  //       [key]: materials[key].color.getHex,
-  //     });
+  //   console.log("hey");
+  //   if (isMutateObjectBtnClicked) {
+  //     mutateObjectData();
+  //     setIsMutateObjectBtnClicked(false);
   //   }
-  //   console.log(`hey!!!${objectDataToMutate.band}`);
-  //   console.log(`hey!!!${objectDataToMutate.caps}`);
-  //   console.log(`hey!!!${objectDataToMutate.inner}`);
-  //   console.log(`hey!!!${objectDataToMutate.laces}`);
-  //   console.log(`hey!!!${objectDataToMutate.mesh}`);
-  //   console.log(`hey!!!${objectDataToMutate.patch}`);
-  //   console.log(`hey!!!${objectDataToMutate.sole}`);
-  //   console.log(`hey!!!${objectDataToMutate.stripes}`);
-  // }, [materials]);
+  // }, [isMutateObjectBtnClicked]);
+
+  let obj = {};
+  useEffect(() => {
+    for (let [key, value] of Object.entries(materials)) {
+      // console.log(`yo${[key]}`);
+      // console.log(`yo${[materials.band.color.getHex]}`);
+
+      // setObjectDataToMutate({
+      //   ...objectDataToMutate,
+      //   [key]: materials.band.color.getHex,
+      // });
+
+      // setObjectDataToMutate({
+      //   ...objectDataToMutate,
+      //   // [key]: materials[key].color.getHex,
+      //   [key]: materials[key].color.getHex,
+      // });
+
+      if (key === "laces") {
+        setObjectDataToMutate({
+          laces: materials[key].color.getHex,
+        });
+      }
+    }
+    // console.log(`hey!!!${objectDataToMutate.band}`);
+    // console.log(`hey!!!${objectDataToMutate.caps}`);
+    // console.log(`hey!!!${objectDataToMutate.inner}`);
+    console.log(`hey!!!${objectDataToMutate.laces}`);
+    // console.log(`hey!!!${objectDataToMutate.mesh}`);
+    // console.log(`hey!!!${objectDataToMutate.patch}`);
+    // console.log(`hey!!!${objectDataToMutate.sole}`);
+    // console.log(`hey!!!${objectDataToMutate.stripes}`);
+  }, [obj]);
 
   useControls("Shoe", () => {
     console.log("creating color pickers");
@@ -648,6 +677,8 @@ const Sandbox: NextPage = () => {
               <CreateObjectWizard
                 objectDataToMutate={objectDataToMutate}
                 setObjectDataToMutate={setObjectDataToMutate}
+                isMutateObjectBtnClicked={isMutateObjectBtnClicked}
+                setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
               />
               <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
               <OrbitControls autoRotate />
