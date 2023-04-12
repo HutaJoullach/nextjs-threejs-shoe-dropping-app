@@ -41,3 +41,6 @@ export const meshDataToMutateAtom = atom("");
 export const patchDataToMutateAtom = atom("");
 export const soleDataToMutateAtom = atom("");
 export const stripesDataToMutateAtom = atom("");
+
+export const isCowOpenedAtom = atom<boolean>(false);
+export const isMainCanvasMountedAtom = atom<boolean>(true);
