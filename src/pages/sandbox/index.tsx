@@ -501,8 +501,18 @@ CreateObjectWizardProps) => {
       //   });
       // }
       // const objectDataValuePair = { [key]: materials[key].color.getHex };
-      const objectDataValue = materials[key]?.color?.r;
+      const objectDataValue = materials[key]?.color.getHex;
       console.log(objectDataValue);
+
+      // const rValue = materials[key]?.color?.r;
+      // const gValue = materials[key]?.color?.g;
+      // const bValue = materials[key]?.color?.b;
+
+      // console.log(rValue * 100, gValue * 100, bValue * 100);
+
+      // rgbHex(rValue, gValue, bValue);
+      // console.log(rgbHex(rValue * 100, gValue * 100, bValue * 100));
+
       // console.log(materials);
       // if (
       //   materials[key]?.color?.b &&
@@ -515,9 +525,9 @@ CreateObjectWizardProps) => {
       //   console.log(objectDataValue);
       //   setBandDataToMutate(materials[key]?.color?.getHex(`srgb-linear`));
       // }
-      // if (key === "band") {
-      //   setBandDataToMutate(materials[key]?.color?.getHex);
-      // }
+      if (key === "band") {
+        setBandDataToMutate(materials[key]?.color?.getHex);
+      }
       // if (key === "band") {
       //   setBandDataToMutate(objectDataValue);
       // } else if (key === "caps") {
@@ -617,6 +627,7 @@ CreateObjectWizardProps) => {
               // console.log(v);
               // console.log(m);
               materials[m].color.getHex = v;
+              // materials[m].color.getHex = v?.toString;
 
               // console.log(materials);
 
