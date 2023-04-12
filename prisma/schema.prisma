@@ -15,7 +15,15 @@ model Object {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
 
-    objectType String @db.VarChar(255)
+    // objectType String @db.VarChar(255)
+    bandData String @db.VarChar(255)
+    capsData String @db.VarChar(255)
+    innerData String @db.VarChar(255)
+    lacesData String @db.VarChar(255)
+    meshData String @db.VarChar(255)
+    patchData String @db.VarChar(255)
+    soleData String @db.VarChar(255)
+    stripesData String @db.VarChar(255)
     authorId String
 
     @@index([authorId])

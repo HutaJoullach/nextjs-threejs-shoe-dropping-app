@@ -107,8 +107,18 @@ export const objectsRouter = createTRPCRouter({
 
   create: privateProcedure
     .input(
+      // z.object({
+      //   objectType: z.string().min(1).max(280),
+      // })
       z.object({
-        objectType: z.string().min(1).max(280),
+        bandData: z.string().min(1).max(280),
+        capsData: z.string().min(1).max(280),
+        innerData: z.string().min(1).max(280),
+        lacesData: z.string().min(1).max(280),
+        meshData: z.string().min(1).max(280),
+        patchData: z.string().min(1).max(280),
+        soleData: z.string().min(1).max(280),
+        stripesData: z.string().min(1).max(280),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -120,7 +130,15 @@ export const objectsRouter = createTRPCRouter({
       const object = await ctx.prisma.object.create({
         data: {
           authorId,
-          objectType: input.objectType,
+          // objectType: input.objectType,
+          bandData: input.bandData,
+          capsData: input.capsData,
+          innerData: input.innerData,
+          lacesData: input.lacesData,
+          meshData: input.meshData,
+          patchData: input.patchData,
+          soleData: input.soleData,
+          stripesData: input.stripesData,
         },
       });
 

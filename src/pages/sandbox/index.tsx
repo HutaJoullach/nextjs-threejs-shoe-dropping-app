@@ -27,6 +27,7 @@ import {
   ContactShadows,
   useGLTF,
 } from "@react-three/drei";
+import rgbHex from "rgb-hex";
 
 import {
   caticon,
@@ -224,6 +225,26 @@ const MutateObjectButton = ({}: // canvasMountState,
 // isMutateObjectBtnClicked,
 // setIsMutateObjectBtnClicked,
 MutateObjectButtonProps) => {
+  const { user } = useUser();
+
+  // const [input, setInput] = useState<string>("");
+  const ctx = api.useContext();
+
+  const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
+    onSuccess: () => {
+      // setInput("");
+      void ctx.objects.getAll.invalidate();
+    },
+    onError: (e) => {
+      const errorMessage = e.data?.zodError?.fieldErrors.objectType;
+      if (errorMessage && errorMessage[0]) {
+        toast.error(errorMessage[0]);
+      } else {
+        toast.error("Failed to post! Please try again later.");
+      }
+    },
+  });
+
   const [bandDataToMutate] = useAtom(bandDataToMutateAtom);
   const [capsDataToMutate] = useAtom(capsDataToMutateAtom);
   const [innerDataToMutate] = useAtom(innerDataToMutateAtom);
@@ -240,6 +261,8 @@ MutateObjectButtonProps) => {
 
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
+
+  if (!user) return null;
 
   return (
     <div
@@ -271,9 +294,29 @@ MutateObjectButtonProps) => {
 
         <button
           onClick={() => {
-            console.log("hey");
-
             // if (!isMutateObjectBtnClicked) setIsMutateObjectBtnClicked(true);
+
+            if (
+              bandDataToMutate !== "" &&
+              capsDataToMutate !== "" &&
+              innerDataToMutate !== "" &&
+              lacesDataToMutate !== "" &&
+              meshDataToMutate !== "" &&
+              patchDataToMutate !== "" &&
+              soleDataToMutate !== "" &&
+              stripesDataToMutate !== ""
+            ) {
+              mutate({
+                bandData: bandDataToMutate,
+                capsData: capsDataToMutate,
+                innerData: innerDataToMutate,
+                lacesData: lacesDataToMutate,
+                meshData: meshDataToMutate,
+                patchData: patchDataToMutate,
+                soleData: soleDataToMutate,
+                stripesData: stripesDataToMutate,
+              });
+            }
 
             console.log(`band ${bandDataToMutate}`);
             console.log(`caps ${capsDataToMutate}`);
@@ -327,23 +370,23 @@ const CreateObjectWizard = ({}: // canvasMountState,
 CreateObjectWizardProps) => {
   const { user } = useUser();
 
-  const [input, setInput] = useState<string>("");
-  const ctx = api.useContext();
+  // const [input, setInput] = useState<string>("");
+  // const ctx = api.useContext();
 
-  const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
-    onSuccess: () => {
-      setInput("");
-      void ctx.objects.getAll.invalidate();
-    },
-    onError: (e) => {
-      const errorMessage = e.data?.zodError?.fieldErrors.objectType;
-      if (errorMessage && errorMessage[0]) {
-        toast.error(errorMessage[0]);
-      } else {
-        toast.error("Failed to post! Please try again later.");
-      }
-    },
-  });
+  // const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
+  //   onSuccess: () => {
+  //     setInput("");
+  //     void ctx.objects.getAll.invalidate();
+  //   },
+  //   onError: (e) => {
+  //     const errorMessage = e.data?.zodError?.fieldErrors.objectType;
+  //     if (errorMessage && errorMessage[0]) {
+  //       toast.error(errorMessage[0]);
+  //     } else {
+  //       toast.error("Failed to post! Please try again later.");
+  //     }
+  //   },
+  // });
 
   const [bandDataToMutate, setBandDataToMutate] = useAtom(bandDataToMutateAtom);
   const [capsDataToMutate, setCapsDataToMutate] = useAtom(capsDataToMutateAtom);
@@ -457,29 +500,41 @@ CreateObjectWizardProps) => {
       //     laces: materials[key].color.getHex,
       //   });
       // }
-
       // const objectDataValuePair = { [key]: materials[key].color.getHex };
-
-      const objectDataValue = materials[key].color.getHex;
-
-      if (key === "band") {
-        setBandDataToMutate(objectDataValue);
-      } else if (key === "caps") {
-        setCapsDataToMutate(objectDataValue);
-      } else if (key === "inner") {
-        setInnerDataToMutate(objectDataValue);
-      } else if (key === "laces") {
-        setLacesDataToMutate(objectDataValue);
-      } else if (key === "mesh") {
-        setMeshDataToMutate(objectDataValue);
-      } else if (key === "patch") {
-        setPatchDataToMutate(objectDataValue);
-      } else if (key === "sole") {
-        setSoleDataToMutate(objectDataValue);
-      } else if (key === "stripes") {
-        setStripesDataToMutate(objectDataValue);
-      }
-
+      const objectDataValue = materials[key]?.color?.r;
+      console.log(objectDataValue);
+      // console.log(materials);
+      // if (
+      //   materials[key]?.color?.b &&
+      //   materials[key]?.color?.g &&
+      //   materials[key]?.color?.r &&
+      //   materials[key]?.color?.getHex &&
+      //   key === "band"
+      // ) {
+      //   const objectDataValue = materials[key]?.color?.getHex(`srgb-linear`);
+      //   console.log(objectDataValue);
+      //   setBandDataToMutate(materials[key]?.color?.getHex(`srgb-linear`));
+      // }
+      // if (key === "band") {
+      //   setBandDataToMutate(materials[key]?.color?.getHex);
+      // }
+      // if (key === "band") {
+      //   setBandDataToMutate(objectDataValue);
+      // } else if (key === "caps") {
+      //   setCapsDataToMutate(objectDataValue);
+      // } else if (key === "inner") {
+      //   setInnerDataToMutate(objectDataValue);
+      // } else if (key === "laces") {
+      //   setLacesDataToMutate(objectDataValue);
+      // } else if (key === "mesh") {
+      //   setMeshDataToMutate(objectDataValue);
+      // } else if (key === "patch") {
+      //   setPatchDataToMutate(objectDataValue);
+      // } else if (key === "sole") {
+      //   setSoleDataToMutate(objectDataValue);
+      // } else if (key === "stripes") {
+      //   setStripesDataToMutate(objectDataValue);
+      // }
       // console.log(`band ${bandDataToMutate}`);
       // console.log(`caps ${capsDataToMutate}`);
       // console.log(`inner ${innerDataToMutate}`);
@@ -562,6 +617,28 @@ CreateObjectWizardProps) => {
               // console.log(v);
               // console.log(m);
               materials[m].color.getHex = v;
+
+              // console.log(materials);
+
+              // if (m === "band") {
+              //   setBandDataToMutate(materials[m].color.getHex);
+              // } else if (m === "caps") {
+              //   setCapsDataToMutate(materials[m].color.getHex);
+              // } else if (m === "inner") {
+              //   setInnerDataToMutate(materials[m].color.getHex);
+              // } else if (m === "laces") {
+              //   setLacesDataToMutate(materials[m].color.getHex);
+              // } else if (m === "mesh") {
+              //   setMeshDataToMutate(materials[m].color.getHex);
+              // } else if (m === "patch") {
+              //   setPatchDataToMutate(materials[m].color.getHex);
+              // } else if (m === "sole") {
+              //   setSoleDataToMutate(materials[m].color.getHex);
+              // } else if (m === "stripes") {
+              //   setStripesDataToMutate(materials[m].color.getHex);
+              // }
+
+              // console.log(bandDataToMutate);
 
               // setObjectDataToMutate({
               //   ...objectDataToMutate,
