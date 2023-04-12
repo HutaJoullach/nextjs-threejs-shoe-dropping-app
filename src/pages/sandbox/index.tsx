@@ -50,6 +50,7 @@ import {
   stripesDataToMutateAtom,
   isCowOpenedAtom,
   isMainCanvasMountedAtom,
+  isMutateObjectBtnClickedAtom,
 } from "../../states/object-data";
 import { useHydrateAtoms } from "jotai/utils";
 
@@ -259,6 +260,10 @@ MutateObjectButtonProps) => {
     isMainCanvasMountedAtom
   );
 
+  const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
+    isMutateObjectBtnClickedAtom
+  );
+
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
 
@@ -276,7 +281,14 @@ MutateObjectButtonProps) => {
             //     ...canvasMountState,
             //     isCowOpened: !canvasMountState.isCowOpened,
             //   });
-            if (isCowOpened) setIsCowOpened(!isCowOpened);
+            if (!isMutateObjectBtnClicked)
+              setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
+            setTimeout(function () {
+              if (isCowOpened) setIsCowOpened(!isCowOpened);
+              // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
+            }, 2000);
+            // if (isCowOpened) setIsCowOpened(!isCowOpened);
+            // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
           }}
         >
           <div
@@ -410,6 +422,11 @@ CreateObjectWizardProps) => {
     isMainCanvasMountedAtom
   );
 
+  useHydrateAtoms([[isMutateObjectBtnClickedAtom, false] as const]);
+  const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
+    isMutateObjectBtnClickedAtom
+  );
+
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
 
@@ -481,78 +498,123 @@ CreateObjectWizardProps) => {
   //   }
   // }, [isMutateObjectBtnClicked]);
 
-  let obj = {};
-  useEffect(() => {
+  // useEffect(() => {
+  //   setTimeout(function () {
+  //     for (let [key, value] of Object.entries(materials)) {
+  //       console.log(materials[key].color.getHex);
+
+  //       console.log(materials[key].color.getHex);
+  //     }
+  //   }, 50);
+  // }, []);
+
+  const updateObjectData = () => {
     for (let [key, value] of Object.entries(materials)) {
-      // console.log(`yo${[key]}`);
-      // console.log(`yo${[materials.band.color.getHex]}`);
-      // setObjectDataToMutate({
-      //   ...objectDataToMutate,
-      //   [key]: materials.band.color.getHex,
-      // });
-      // setObjectDataToMutate({
-      //   ...objectDataToMutate,
-      //   // [key]: materials[key].color.getHex,
-      //   [key]: materials[key].color.getHex,
-      // });
-      // if (key === "laces") {
-      //   setObjectDataToMutate({
-      //     laces: materials[key].color.getHex,
-      //   });
-      // }
-      // const objectDataValuePair = { [key]: materials[key].color.getHex };
-      // const objectDataValue = materials[key]?.color.getHex;
-      // console.log(objectDataValue);
-      // const rValue = materials[key]?.color?.r;
-      // const gValue = materials[key]?.color?.g;
-      // const bValue = materials[key]?.color?.b;
-      // console.log(rValue * 100, gValue * 100, bValue * 100);
-      // rgbHex(rValue, gValue, bValue);
-      // console.log(rgbHex(rValue * 100, gValue * 100, bValue * 100));
-      // console.log(materials);
-      if (
-        materials[key]?.color?.b &&
-        materials[key]?.color?.g &&
-        materials[key]?.color?.r &&
-        materials[key]?.color?.getHex &&
-        materials[key]?.color?.colorHex &&
-        key === "band"
-      ) {
-        // const objectDataValue = materials[key]?.color?.getHex(`srgb-linear`);
-        const objectDataValue = materials[key]?.color?.colorHex;
-        console.log(objectDataValue);
-        // setBandDataToMutate(materials[key]?.color?.getHex(`srgb-linear`));
-      }
-      // if (key === "band") {
-      //   setBandDataToMutate(materials[key]?.color?.getHex);
-      // }
-      // if (key === "band") {
-      //   setBandDataToMutate(objectDataValue);
-      // } else if (key === "caps") {
-      //   setCapsDataToMutate(objectDataValue);
-      // } else if (key === "inner") {
-      //   setInnerDataToMutate(objectDataValue);
-      // } else if (key === "laces") {
-      //   setLacesDataToMutate(objectDataValue);
-      // } else if (key === "mesh") {
-      //   setMeshDataToMutate(objectDataValue);
-      // } else if (key === "patch") {
-      //   setPatchDataToMutate(objectDataValue);
-      // } else if (key === "sole") {
-      //   setSoleDataToMutate(objectDataValue);
-      // } else if (key === "stripes") {
-      //   setStripesDataToMutate(objectDataValue);
-      // }
-      // console.log(`band ${bandDataToMutate}`);
-      // console.log(`caps ${capsDataToMutate}`);
-      // console.log(`inner ${innerDataToMutate}`);
-      // console.log(`laces ${lacesDataToMutate}`);
-      // console.log(`mesh ${meshDataToMutate}`);
-      // console.log(`patch ${patchDataToMutate}`);
-      // console.log(`sole ${soleDataToMutate}`);
-      // console.log(`stripes ${stripesDataToMutate}`);
+      console.log(materials[key].color.getHex);
+
+      console.log(materials[key].color.getHex);
     }
-  }, [obj]);
+
+    let interval;
+    if (!isMutateObjectBtnClicked)
+      interval = setTimeout(updateObjectData, 1000);
+    if (isMutateObjectBtnClicked) clearInterval(interval);
+    console.log(isMutateObjectBtnClicked);
+  };
+
+  updateObjectData();
+
+  // let obj = {};
+  // useEffect(() => {
+  //   setTimeout(function () {
+  //     for (let [key, value] of Object.entries(materials)) {
+  //       console.log(materials[key].color.getHex);
+
+  //       console.log(materials[key].color.getHex);
+  //     }
+  //     obj = { ...obj, obj: 1 };
+  //   }, 50);
+
+  //   // for (let [key, value] of Object.entries(materials)) {
+  //   //   // console.log(`yo${[key]}`);
+  //   //   // console.log(`yo${[materials.band.color.getHex]}`);
+  //   //   // setObjectDataToMutate({
+  //   //   //   ...objectDataToMutate,
+  //   //   //   [key]: materials.band.color.getHex,
+  //   //   // });
+  //   //   // setObjectDataToMutate({
+  //   //   //   ...objectDataToMutate,
+  //   //   //   // [key]: materials[key].color.getHex,
+  //   //   //   [key]: materials[key].color.getHex,
+  //   //   // });
+  //   //   // if (key === "laces") {
+  //   //   //   setObjectDataToMutate({
+  //   //   //     laces: materials[key].color.getHex,
+  //   //   //   });
+  //   //   // }
+  //   //   // const objectDataValuePair = { [key]: materials[key].color.getHex };
+  //   //   // const objectDataValue = materials[key]?.color;
+  //   //   // materials[key].color = new Color(objectDataValue);
+  //   //   // materials[key].color.getHex = new Color(objectDataValue);
+  //   //   // console.log(value.color.getHex);
+
+  //   //   console.log(materials[key].color.getHex);
+
+  //   //   setIsCowOpened(!isCowOpened);
+
+  //   //   console.log(materials[key].color.getHex);
+
+  //   //   // console.log(objectDataValue);
+  //   //   // const rValue = materials[key]?.color?.r;
+  //   //   // const gValue = materials[key]?.color?.g;
+  //   //   // const bValue = materials[key]?.color?.b;
+  //   //   // console.log(rValue * 100, gValue * 100, bValue * 100);
+  //   //   // rgbHex(rValue, gValue, bValue);
+  //   //   // console.log(rgbHex(rValue * 100, gValue * 100, bValue * 100));
+  //   //   // console.log(materials);
+  //   //   // if (
+  //   //   //   materials[key]?.color?.b &&
+  //   //   //   materials[key]?.color?.g &&
+  //   //   //   materials[key]?.color?.r &&
+  //   //   //   materials[key]?.color?.getHex &&
+  //   //   //   materials[key]?.color?.colorHex &&
+  //   //   //   key === "band"
+  //   //   // ) {
+  //   //   //   const objectDataValue = materials[key]?.color?.getHex(`srgb-linear`);
+  //   //   //   const objectDataValue = materials[key]?.color?.colorHex;
+  //   //   //   console.log(objectDataValue);
+  //   //   //   setBandDataToMutate(materials[key]?.color?.getHex(`srgb-linear`));
+  //   //   // }
+  //   //   // if (key === "band") {
+  //   //   //   setBandDataToMutate(materials[key]?.color?.getHex);
+  //   //   // }
+  //   //   // if (key === "band") {
+  //   //   //   setBandDataToMutate(objectDataValue);
+  //   //   // } else if (key === "caps") {
+  //   //   //   setCapsDataToMutate(objectDataValue);
+  //   //   // } else if (key === "inner") {
+  //   //   //   setInnerDataToMutate(objectDataValue);
+  //   //   // } else if (key === "laces") {
+  //   //   //   setLacesDataToMutate(objectDataValue);
+  //   //   // } else if (key === "mesh") {
+  //   //   //   setMeshDataToMutate(objectDataValue);
+  //   //   // } else if (key === "patch") {
+  //   //   //   setPatchDataToMutate(objectDataValue);
+  //   //   // } else if (key === "sole") {
+  //   //   //   setSoleDataToMutate(objectDataValue);
+  //   //   // } else if (key === "stripes") {
+  //   //   //   setStripesDataToMutate(objectDataValue);
+  //   //   // }
+  //   //   // console.log(`band ${bandDataToMutate}`);
+  //   //   // console.log(`caps ${capsDataToMutate}`);
+  //   //   // console.log(`inner ${innerDataToMutate}`);
+  //   //   // console.log(`laces ${lacesDataToMutate}`);
+  //   //   // console.log(`mesh ${meshDataToMutate}`);
+  //   //   // console.log(`patch ${patchDataToMutate}`);
+  //   //   // console.log(`sole ${soleDataToMutate}`);
+  //   //   // console.log(`stripes ${stripesDataToMutate}`);
+  //   // }
+  // }, [obj]);
 
   // const storeObjectDataValue = () => {
   //   for (let [key, value] of Object.entries(materials)) {
@@ -624,8 +686,7 @@ CreateObjectWizardProps) => {
               materials[m].color = new Color(v);
               // console.log(v);
               // console.log(m);
-              // materials[m].color.getHex = v;
-              materials[m].color.colorHex = v;
+              materials[m].color.getHex = v;
               // materials[m].color.getHex = v?.toString;
 
               // console.log(materials);

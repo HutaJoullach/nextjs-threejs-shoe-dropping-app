@@ -44,3 +44,5 @@ export const stripesDataToMutateAtom = atom("");
 
 export const isCowOpenedAtom = atom<boolean>(false);
 export const isMainCanvasMountedAtom = atom<boolean>(true);
+
+export const isMutateObjectBtnClickedAtom = atom<boolean>(false);
