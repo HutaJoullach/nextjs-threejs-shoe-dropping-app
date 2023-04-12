@@ -37,7 +37,17 @@ import {
 } from "../../assets";
 
 import { useAtom } from "jotai";
-import { isDataRefetchedAtom } from "../../states/object-data";
+import {
+  isDataRefetchedAtom,
+  bandDataToMutateAtom,
+  capsDataToMutateAtom,
+  innerDataToMutateAtom,
+  lacesDataToMutateAtom,
+  meshDataToMutateAtom,
+  patchDataToMutateAtom,
+  soleDataToMutateAtom,
+  stripesDataToMutateAtom,
+} from "../../states/object-data";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -289,6 +299,23 @@ const CreateObjectWizard = ({
     },
   });
 
+  const [bandDataToMutate, setBandDataToMutate] = useAtom(bandDataToMutateAtom);
+  const [capsDataToMutate, setCapsDataToMutate] = useAtom(capsDataToMutateAtom);
+  const [innerDataToMutate, setInnerDataToMutate] = useAtom(
+    innerDataToMutateAtom
+  );
+  const [lacesDataToMutate, setLacesDataToMutate] = useAtom(
+    lacesDataToMutateAtom
+  );
+  const [meshDataToMutate, setMeshDataToMutate] = useAtom(meshDataToMutateAtom);
+  const [patchDataToMutate, setPatchDataToMutate] = useAtom(
+    patchDataToMutateAtom
+  );
+  const [soleDataToMutate, setSoleDataToMutate] = useAtom(soleDataToMutateAtom);
+  const [stripesDataToMutate, setStripesDataToMutate] = useAtom(
+    stripesDataToMutateAtom
+  );
+
   // console.log(user);
   if (!user) return null;
 
@@ -322,30 +349,30 @@ const CreateObjectWizard = ({
   //   // console.log(`hey!!!${objectDataToMutate.laces}`);
   // }, [obj]);
 
-  const mutateObjectData = () => {
-    let obj = {};
+  // const mutateObjectData = () => {
+  //   let obj = {};
 
-    console.log("hey");
+  //   console.log("hey");
 
-    for (let [key, value] of Object.entries(materials)) {
-      console.log(`hey ${[key]}`);
-      console.log(`hey ${[materials.key.color.getHex]}`);
+  //   for (let [key, value] of Object.entries(materials)) {
+  //     console.log(`hey ${[key]}`);
+  //     console.log(`hey ${[materials.key.color.getHex]}`);
 
-      obj = { ...obj, [key]: materials.key.color.getHex };
-      console.log(obj);
+  //     obj = { ...obj, [key]: materials.key.color.getHex };
+  //     console.log(obj);
 
-      // setObjectDataToMutate({
-      //   ...objectDataToMutate,
-      //   [key]: materials.band.color.getHex,
-      // });
+  //     setObjectDataToMutate({
+  //       ...objectDataToMutate,
+  //       [key]: materials.band.color.getHex,
+  //     });
 
-      // setObjectDataToMutate({
-      //   ...objectDataToMutate,
-      //   // [key]: materials[key].color.getHex,
-      //   [key]: materials[key].color.getHex,
-      // });
-    }
-  };
+  //     setObjectDataToMutate({
+  //       ...objectDataToMutate,
+  //       // [key]: materials[key].color.getHex,
+  //       [key]: materials[key].color.getHex,
+  //     });
+  //   }
+  // };
 
   // console.log(`yo ${isMutateObjectBtnClicked}`);
 
@@ -376,15 +403,29 @@ const CreateObjectWizard = ({
       //     laces: materials[key].color.getHex,
       //   });
       // }
+
+      // const objectDataValuePair = { [key]: materials[key].color.getHex };
+
+      const objectDataValue = materials[key].color.getHex;
+
+      if (key === "band") {
+        setBandDataToMutate(objectDataValue);
+      } else if (key === "caps") {
+        setCapsDataToMutate(objectDataValue);
+      } else if (key === "inner") {
+        setInnerDataToMutate(objectDataValue);
+      } else if (key === "laces") {
+        setLacesDataToMutate(objectDataValue);
+      } else if (key === "mesh") {
+        setMeshDataToMutate(objectDataValue);
+      } else if (key === "patch") {
+        setPatchDataToMutate(objectDataValue);
+      } else if (key === "sole") {
+        setSoleDataToMutate(objectDataValue);
+      } else if (key === "stripes") {
+        setStripesDataToMutate(objectDataValue);
+      }
     }
-    // console.log(`hey!!!${objectDataToMutate.band}`);
-    // console.log(`hey!!!${objectDataToMutate.caps}`);
-    // console.log(`hey!!!${objectDataToMutate.inner}`);
-    console.log(`hey!!!${objectDataToMutate.laces}`);
-    // console.log(`hey!!!${objectDataToMutate.mesh}`);
-    // console.log(`hey!!!${objectDataToMutate.patch}`);
-    // console.log(`hey!!!${objectDataToMutate.sole}`);
-    // console.log(`hey!!!${objectDataToMutate.stripes}`);
   }, [obj]);
 
   useControls("Shoe", () => {
