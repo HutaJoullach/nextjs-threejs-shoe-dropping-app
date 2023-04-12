@@ -501,33 +501,31 @@ CreateObjectWizardProps) => {
       //   });
       // }
       // const objectDataValuePair = { [key]: materials[key].color.getHex };
-      const objectDataValue = materials[key]?.color.getHex;
-      console.log(objectDataValue);
-
+      // const objectDataValue = materials[key]?.color.getHex;
+      // console.log(objectDataValue);
       // const rValue = materials[key]?.color?.r;
       // const gValue = materials[key]?.color?.g;
       // const bValue = materials[key]?.color?.b;
-
       // console.log(rValue * 100, gValue * 100, bValue * 100);
-
       // rgbHex(rValue, gValue, bValue);
       // console.log(rgbHex(rValue * 100, gValue * 100, bValue * 100));
-
       // console.log(materials);
-      // if (
-      //   materials[key]?.color?.b &&
-      //   materials[key]?.color?.g &&
-      //   materials[key]?.color?.r &&
-      //   materials[key]?.color?.getHex &&
-      //   key === "band"
-      // ) {
-      //   const objectDataValue = materials[key]?.color?.getHex(`srgb-linear`);
-      //   console.log(objectDataValue);
-      //   setBandDataToMutate(materials[key]?.color?.getHex(`srgb-linear`));
-      // }
-      if (key === "band") {
-        setBandDataToMutate(materials[key]?.color?.getHex);
+      if (
+        materials[key]?.color?.b &&
+        materials[key]?.color?.g &&
+        materials[key]?.color?.r &&
+        materials[key]?.color?.getHex &&
+        materials[key]?.color?.colorHex &&
+        key === "band"
+      ) {
+        // const objectDataValue = materials[key]?.color?.getHex(`srgb-linear`);
+        const objectDataValue = materials[key]?.color?.colorHex;
+        console.log(objectDataValue);
+        // setBandDataToMutate(materials[key]?.color?.getHex(`srgb-linear`));
       }
+      // if (key === "band") {
+      //   setBandDataToMutate(materials[key]?.color?.getHex);
+      // }
       // if (key === "band") {
       //   setBandDataToMutate(objectDataValue);
       // } else if (key === "caps") {
@@ -626,7 +624,8 @@ CreateObjectWizardProps) => {
               materials[m].color = new Color(v);
               // console.log(v);
               // console.log(m);
-              materials[m].color.getHex = v;
+              // materials[m].color.getHex = v;
+              materials[m].color.colorHex = v;
               // materials[m].color.getHex = v?.toString;
 
               // console.log(materials);
