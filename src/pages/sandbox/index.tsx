@@ -370,27 +370,6 @@ CreateObjectWizardProps) => {
     document.body.style.cursor = hovered ? "pointer" : "auto";
   }, [hovered]);
 
-  // for testing, delete later
-  // let obj = {};
-
-  // useEffect(() => {
-  //   setObjectDataToMutate(obj);
-  //   console.log(obj);
-  //   console.log(objectDataToMutate);
-
-  //   // console.log(`hey!!!${objectDataToMutate.laces}`);
-  // }, [obj]);
-
-  // useEffect(() => {
-  //   for (let [key, value] of Object.entries(obj)) {
-  //     setObjectDataToMutate({
-  //       ...objectDataToMutate,
-  //       [key]: value,
-  //     });
-  //   }
-  //   // console.log(`hey!!!${objectDataToMutate.laces}`);
-  // }, [obj]);
-
   // const mutateObjectData = () => {
   //   let obj = {};
 
