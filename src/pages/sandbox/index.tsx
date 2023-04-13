@@ -370,19 +370,6 @@ CreateObjectWizardProps) => {
     document.body.style.cursor = hovered ? "pointer" : "auto";
   }, [hovered]);
 
-  // useEffect(() => {
-  //   setTimeout(function () {
-  //     for (let [key, value] of Object.entries(materials)) {
-  //       console.log(materials[key].color.getHex);
-
-  //       console.log(materials[key].color.getHex);
-  //     }
-  //   }, 50);
-  // }, []);
-
-  // const interval = setInterval(updateObjectData, 2000);
-  // console.log(interval);
-
   // let mutateBtnClicked = false;
   // var cnt = 0;
   // var obj = setInterval(updateObjectData, 1000);
