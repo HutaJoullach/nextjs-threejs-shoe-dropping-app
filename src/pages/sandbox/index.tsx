@@ -245,19 +245,6 @@ MutateObjectButtonProps) => {
       <div className="flex items-center justify-center gap-2">
         <button
           onClick={() => {
-            // if (canvasMountState.isCowOpened)
-            //   setCanvasMountState({
-            //     ...canvasMountState,
-            //     isCowOpened: !canvasMountState.isCowOpened,
-            //   });
-            // if (isCowOpened) setIsCowOpened(!isCowOpened);
-            // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
-            // if (!isMutateObjectBtnClicked)
-            //   setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
-            // setTimeout(function () {
-            //   if (isCowOpened) setIsCowOpened(!isCowOpened);
-            //   // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
-            // }, 3000);
             if (isCowOpened) setIsCowOpened(!isCowOpened);
           }}
         >
@@ -276,8 +263,6 @@ MutateObjectButtonProps) => {
 
         <button
           onClick={() => {
-            // if (!isMutateObjectBtnClicked) setIsMutateObjectBtnClicked(true);
-
             if (!isMutateObjectBtnClicked)
               setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
             setTimeout(function () {
@@ -313,7 +298,7 @@ MutateObjectButtonProps) => {
                 console.log(`sole ${soleDataToMutate}`);
                 console.log(`stripes ${stripesDataToMutate}`);
               }
-            }, 3000);
+            }, 2500);
 
             // if (canvasMountState.isCowOpened)
             //   setCanvasMountState({
