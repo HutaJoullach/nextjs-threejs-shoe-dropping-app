@@ -409,17 +409,6 @@ CreateObjectWizardProps) => {
     return () => clearInterval(interval);
   }, [isMutateObjectBtnClicked]);
 
-  // let obj = {};
-  // useEffect(() => {
-  //   setTimeout(function () {
-  //     for (let [key, value] of Object.entries(materials)) {
-  //       console.log(materials[key].color.getHex);
-
-  //       console.log(materials[key].color.getHex);
-  //     }
-  //     obj = { ...obj, obj: 1 };
-  //   }, 50);
-
   //   // for (let [key, value] of Object.entries(materials)) {
   //   //   // console.log(`yo${[key]}`);
   //   //   // console.log(`yo${[materials.band.color.getHex]}`);
