@@ -351,11 +351,6 @@ CreateObjectWizardProps) => {
     stripesDataToMutateAtom
   );
 
-  // const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
-  const [isMainCanvasMounted, setIsMainCanvasMounted] = useAtom(
-    isMainCanvasMountedAtom
-  );
-
   useHydrateAtoms([[isMutateObjectBtnClickedAtom, false] as const]);
   const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
     isMutateObjectBtnClickedAtom
@@ -364,7 +359,6 @@ CreateObjectWizardProps) => {
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
 
-  // console.log(user);
   if (!user) return null;
 
   const [hovered, setHovered] = useState(false);
