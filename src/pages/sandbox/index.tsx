@@ -370,12 +370,6 @@ CreateObjectWizardProps) => {
     document.body.style.cursor = hovered ? "pointer" : "auto";
   }, [hovered]);
 
-  // let mutateBtnClicked = false;
-  // var cnt = 0;
-  // var obj = setInterval(updateObjectData, 1000);
-
-  // let mutateBtnClicked = false;
-
   function updateObjectData() {
     for (let [key, value] of Object.entries(materials)) {
       // console.log(materials[key].color.getHex);
@@ -397,25 +391,15 @@ CreateObjectWizardProps) => {
       } else if (key === "stripes") {
         setStripesDataToMutate(materials[key].color.getHex);
       }
-      console.log(`band ${bandDataToMutate}`);
-      console.log(`caps ${capsDataToMutate}`);
-      console.log(`inner ${innerDataToMutate}`);
-      console.log(`laces ${lacesDataToMutate}`);
-      console.log(`mesh ${meshDataToMutate}`);
-      console.log(`patch ${patchDataToMutate}`);
-      console.log(`sole ${soleDataToMutate}`);
-      console.log(`stripes ${stripesDataToMutate}`);
+      // console.log(`band ${bandDataToMutate}`);
+      // console.log(`caps ${capsDataToMutate}`);
+      // console.log(`inner ${innerDataToMutate}`);
+      // console.log(`laces ${lacesDataToMutate}`);
+      // console.log(`mesh ${meshDataToMutate}`);
+      // console.log(`patch ${patchDataToMutate}`);
+      // console.log(`sole ${soleDataToMutate}`);
+      // console.log(`stripes ${stripesDataToMutate}`);
     }
-    // const interval = setTimeout(updateObjectData, 1000);
-
-    // let mutateBtnClicked = false;
-    // if (isMutateObjectBtnClicked) mutateBtnClicked = true;
-
-    // console.log(`check here ${mutateBtnClicked}`);
-
-    // if (isMutateObjectBtnClicked) mutateBtnClicked = true;
-
-    // console.log(`heyyyy ${mutateBtnClicked}`);
 
     // if (mutateBtnClicked == true) {
     //   clearInterval(obj);
