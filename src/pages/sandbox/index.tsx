@@ -299,14 +299,6 @@ MutateObjectButtonProps) => {
                 console.log(`stripes ${stripesDataToMutate}`);
               }
             }, 2500);
-
-            // if (canvasMountState.isCowOpened)
-            //   setCanvasMountState({
-            //     ...canvasMountState,
-            //     isCowOpened: !canvasMountState.isCowOpened,
-            //   });
-
-            // if (isCowOpened) setIsCowOpened(!isCowOpened);
           }}
         >
           <div
@@ -341,24 +333,6 @@ const CreateObjectWizard = ({}: // canvasMountState,
 // setIsMutateObjectBtnClicked,
 CreateObjectWizardProps) => {
   const { user } = useUser();
-
-  // const [input, setInput] = useState<string>("");
-  // const ctx = api.useContext();
-
-  // const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
-  //   onSuccess: () => {
-  //     setInput("");
-  //     void ctx.objects.getAll.invalidate();
-  //   },
-  //   onError: (e) => {
-  //     const errorMessage = e.data?.zodError?.fieldErrors.objectType;
-  //     if (errorMessage && errorMessage[0]) {
-  //       toast.error(errorMessage[0]);
-  //     } else {
-  //       toast.error("Failed to post! Please try again later.");
-  //     }
-  //   },
-  // });
 
   const [bandDataToMutate, setBandDataToMutate] = useAtom(bandDataToMutateAtom);
   const [capsDataToMutate, setCapsDataToMutate] = useAtom(capsDataToMutateAtom);
