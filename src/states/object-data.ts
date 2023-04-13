@@ -1,9 +1,9 @@
 import { atom } from "jotai";
 
-export const isDataRefetchedAtom = atom<boolean>(false);
 export const isCowOpenedAtom = atom<boolean>(false);
 export const isMainCanvasMountedAtom = atom<boolean>(true);
 export const isMutateObjectBtnClickedAtom = atom<boolean>(false);
+export const isDataRefetchedAtom = atom<boolean>(false);
 
 // interface objectDataToMutate {
 //   laces: string;

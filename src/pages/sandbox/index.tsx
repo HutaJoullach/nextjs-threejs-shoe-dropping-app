@@ -49,14 +49,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-type CowControlButtonProps = {
-  // canvasMountState: ICanvasMountState;
-  // setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
-};
-
-const CowControlButton = ({}: // canvasMountState,
-// setCanvasMountState,
-CowControlButtonProps) => {
+const CowControlButton = () => {
   const {
     data,
     isLoading: objectsLoading,
@@ -124,7 +117,6 @@ CowControlButtonProps) => {
         <div
           className={`${theme.rounded.utilityCardBorder} inline-flex items-center border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
         >
-          {/* {canvasMountState.isMainCanvasMounted ? ( */}
           {isMainCanvasMounted ? (
             <>
               <span>got laggy comp?</span>
@@ -186,24 +178,7 @@ CowControlButtonProps) => {
   );
 };
 
-type MutateObjectButtonProps = {
-  // canvasMountState: ICanvasMountState;
-  // setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
-  // objectDataToMutate: IObjectDataToMutate;
-  // setObjectDataToMutate: React.Dispatch<
-  //   React.SetStateAction<IObjectDataToMutate>
-  // >;
-  // isMutateObjectBtnClicked: boolean;
-  // setIsMutateObjectBtnClicked: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const MutateObjectButton = ({}: // canvasMountState,
-// setCanvasMountState,
-// objectDataToMutate,
-// setObjectDataToMutate,
-// isMutateObjectBtnClicked,
-// setIsMutateObjectBtnClicked,
-MutateObjectButtonProps) => {
+const MutateObjectButton = () => {
   const { user } = useUser();
   const ctx = api.useContext();
 
@@ -291,14 +266,14 @@ MutateObjectButtonProps) => {
                   stripesData: stripesDataToMutate,
                 });
 
-                console.log(`band ${bandDataToMutate}`);
-                console.log(`caps ${capsDataToMutate}`);
-                console.log(`inner ${innerDataToMutate}`);
-                console.log(`laces ${lacesDataToMutate}`);
-                console.log(`mesh ${meshDataToMutate}`);
-                console.log(`patch ${patchDataToMutate}`);
-                console.log(`sole ${soleDataToMutate}`);
-                console.log(`stripes ${stripesDataToMutate}`);
+                // console.log(`band ${bandDataToMutate}`);
+                // console.log(`caps ${capsDataToMutate}`);
+                // console.log(`inner ${innerDataToMutate}`);
+                // console.log(`laces ${lacesDataToMutate}`);
+                // console.log(`mesh ${meshDataToMutate}`);
+                // console.log(`patch ${patchDataToMutate}`);
+                // console.log(`sole ${soleDataToMutate}`);
+                // console.log(`stripes ${stripesDataToMutate}`);
               }
             }, 2500);
           }}
@@ -316,24 +291,7 @@ MutateObjectButtonProps) => {
   );
 };
 
-type CreateObjectWizardProps = {
-  // canvasMountState: ICanvasMountState;
-  // setCanvasMountState: React.Dispatch<React.SetStateAction<ICanvasMountState>>;
-  // objectDataToMutate: IObjectDataToMutate;
-  // setObjectDataToMutate: React.Dispatch<
-  //   React.SetStateAction<IObjectDataToMutate>
-  // >;
-  // isMutateObjectBtnClicked: boolean;
-  // setIsMutateObjectBtnClicked: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const CreateObjectWizard = ({}: // canvasMountState,
-// setCanvasMountState,
-// objectDataToMutate,
-// setObjectDataToMutate,
-// isMutateObjectBtnClicked,
-// setIsMutateObjectBtnClicked,
-CreateObjectWizardProps) => {
+const CreateObjectWizard = () => {
   const { user } = useUser();
 
   const [bandDataToMutate, setBandDataToMutate] = useAtom(bandDataToMutateAtom);
@@ -374,8 +332,6 @@ CreateObjectWizardProps) => {
 
   function updateObjectData() {
     for (let [key, value] of Object.entries(materials)) {
-      // console.log(materials[key].color.getHex);
-
       if (key === "band") {
         setBandDataToMutate(materials[key].color.getHex);
       } else if (key === "caps") {
@@ -527,47 +483,11 @@ const Scene = () => {
   );
 };
 
-// interface ICanvasMountState {
-//   isCowOpened: boolean;
-//   isMainCanvasMounted: boolean;
-// }
-
-// interface IObjectDataToMutate {
-//   laces?: string;
-//   mesh?: string;
-//   caps?: string;
-//   inner?: string;
-//   sole?: string;
-//   stripes?: string;
-//   band?: string;
-//   patch?: string;
-// }
-
 const Sandbox: NextPage = () => {
-  // const [canvasMountState, setCanvasMountState] = useState<ICanvasMountState>({
-  //   isCowOpened: false,
-  //   isMainCanvasMounted: true,
-  // });
-
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
   const [isMainCanvasMounted, setIsMainCanvasMounted] = useAtom(
     isMainCanvasMountedAtom
   );
-
-  // const [objectDataToMutate, setObjectDataToMutate] =
-  //   useState<IObjectDataToMutate>({
-  //     laces: "",
-  //     mesh: "",
-  //     caps: "",
-  //     inner: "",
-  //     sole: "",
-  //     stripes: "",
-  //     band: "",
-  //     patch: "",
-  //   });
-
-  // const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] =
-  //   useState<boolean>(false);
 
   useHydrateAtoms([[isMutateObjectBtnClickedAtom, false] as const]);
   const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
@@ -575,9 +495,6 @@ const Sandbox: NextPage = () => {
   );
 
   const { isLoaded: userLoaded, isSignedIn } = useUser();
-
-  // Start fetching data
-  // api.objects.getAll.useQuery();
 
   const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
@@ -593,49 +510,26 @@ const Sandbox: NextPage = () => {
         <title>Sandbox</title>
       </Head>
       <PageLayout>
-        {/* {isSignedIn && !canvasMountState.isCowOpened && ( */}
         {isSignedIn && !isCowOpened && (
           <div className="fixed right-2 z-10 mt-2">
             <div className="flex justify-center">
-              <CowControlButton
-              // canvasMountState={canvasMountState}
-              // setCanvasMountState={setCanvasMountState}
-              />
+              <CowControlButton />
             </div>
           </div>
         )}
-
-        {/* {isSignedIn && canvasMountState.isCowOpened && ( */}
         {isSignedIn && isCowOpened && (
           <div className={`flex h-full w-full items-center justify-center`}>
             <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
               <Environment preset="forest" />
-              <CreateObjectWizard
-              // canvasMountState={canvasMountState}
-              // setCanvasMountState={setCanvasMountState}
-              // objectDataToMutate={objectDataToMutate}
-              // setObjectDataToMutate={setObjectDataToMutate}
-              // isMutateObjectBtnClicked={isMutateObjectBtnClicked}
-              // setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
-              />
+              <CreateObjectWizard />
               <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
               <OrbitControls autoRotate />
             </Canvas>
-            <MutateObjectButton
-            // canvasMountState={canvasMountState}
-            // setCanvasMountState={setCanvasMountState}
-            // objectDataToMutate={objectDataToMutate}
-            // setObjectDataToMutate={setObjectDataToMutate}
-            // isMutateObjectBtnClicked={isMutateObjectBtnClicked}
-            // setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
-            />
+            <MutateObjectButton />
           </div>
         )}
 
-        {/* {canvasMountState.isCowOpened || */}
-        {isCowOpened ||
-        // !canvasMountState.isMainCanvasMounted ? (
-        !isMainCanvasMounted ? (
+        {isCowOpened || !isMainCanvasMounted ? (
           <div
             className={`${theme.h.content} flex items-center justify-center`}
           >
