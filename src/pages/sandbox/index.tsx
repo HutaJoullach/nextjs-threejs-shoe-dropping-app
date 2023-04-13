@@ -370,41 +370,6 @@ CreateObjectWizardProps) => {
     document.body.style.cursor = hovered ? "pointer" : "auto";
   }, [hovered]);
 
-  // const mutateObjectData = () => {
-  //   let obj = {};
-
-  //   console.log("hey");
-
-  //   for (let [key, value] of Object.entries(materials)) {
-  //     console.log(`hey ${[key]}`);
-  //     console.log(`hey ${[materials.key.color.getHex]}`);
-
-  //     obj = { ...obj, [key]: materials.key.color.getHex };
-  //     console.log(obj);
-
-  //     setObjectDataToMutate({
-  //       ...objectDataToMutate,
-  //       [key]: materials.band.color.getHex,
-  //     });
-
-  //     setObjectDataToMutate({
-  //       ...objectDataToMutate,
-  //       // [key]: materials[key].color.getHex,
-  //       [key]: materials[key].color.getHex,
-  //     });
-  //   }
-  // };
-
-  // console.log(`yo ${isMutateObjectBtnClicked}`);
-
-  // useEffect(() => {
-  //   console.log("hey");
-  //   if (isMutateObjectBtnClicked) {
-  //     mutateObjectData();
-  //     setIsMutateObjectBtnClicked(false);
-  //   }
-  // }, [isMutateObjectBtnClicked]);
-
   // useEffect(() => {
   //   setTimeout(function () {
   //     for (let [key, value] of Object.entries(materials)) {
