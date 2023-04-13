@@ -409,41 +409,6 @@ CreateObjectWizardProps) => {
     return () => clearInterval(interval);
   }, [isMutateObjectBtnClicked]);
 
-  // const storeObjectDataValue = () => {
-  //   for (let [key, value] of Object.entries(materials)) {
-  //     const objectDataValue = materials[key].color.getHex;
-
-  //     if (key === "band") {
-  //       setBandDataToMutate(objectDataValue);
-  //     } else if (key === "caps") {
-  //       setCapsDataToMutate(objectDataValue);
-  //     } else if (key === "inner") {
-  //       setInnerDataToMutate(objectDataValue);
-  //     } else if (key === "laces") {
-  //       setLacesDataToMutate(objectDataValue);
-  //     } else if (key === "mesh") {
-  //       setMeshDataToMutate(objectDataValue);
-  //     } else if (key === "patch") {
-  //       setPatchDataToMutate(objectDataValue);
-  //     } else if (key === "sole") {
-  //       setSoleDataToMutate(objectDataValue);
-  //     } else if (key === "stripes") {
-  //       setStripesDataToMutate(objectDataValue);
-  //     }
-
-  //     // console.log(`band ${bandDataToMutate}`);
-  //     // console.log(`caps ${capsDataToMutate}`);
-  //     // console.log(`inner ${innerDataToMutate}`);
-  //     // console.log(`laces ${lacesDataToMutate}`);
-  //     // console.log(`mesh ${meshDataToMutate}`);
-  //     // console.log(`patch ${patchDataToMutate}`);
-  //     // console.log(`sole ${soleDataToMutate}`);
-  //     // console.log(`stripes ${stripesDataToMutate}`);
-  //   }
-  //   // if (!isCowOpened) clearInterval(interval);
-  //   console.log(`heyyyyyy ${isCowOpened}`);
-  // };
-
   // let interval: NodeJS.Timer;
   // if (isCowOpened) {
   //   interval = setInterval(storeObjectDataValue, 3000);
