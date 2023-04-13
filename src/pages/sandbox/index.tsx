@@ -1041,36 +1041,10 @@ const Sandbox: NextPage = () => {
 
         {/* {isSignedIn && canvasMountState.isCowOpened && ( */}
         {isSignedIn && isCowOpened && (
-          <>
-            {/* <button
-              onClick={() => {
-                console.log(`here!! ${isMutateObjectBtnClicked}`);
-
-                // if (!isMutateObjectBtnClicked)
-                //   setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
-                // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
-                setIsMutateObjectBtnClicked(true);
-                // setIsMutateObjectBtnClicked(true);
-                // console.log(`here!! ${isMutateObjectBtnClicked}`);
-              }}
-            >
-              button
-            </button> */}
-            <div className={`flex h-full w-full items-center justify-center`}>
-              <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
-                <Environment preset="forest" />
-                <CreateObjectWizard
-                // canvasMountState={canvasMountState}
-                // setCanvasMountState={setCanvasMountState}
-                // objectDataToMutate={objectDataToMutate}
-                // setObjectDataToMutate={setObjectDataToMutate}
-                // isMutateObjectBtnClicked={isMutateObjectBtnClicked}
-                // setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
-                />
-                <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
-                <OrbitControls autoRotate />
-              </Canvas>
-              <MutateObjectButton
+          <div className={`flex h-full w-full items-center justify-center`}>
+            <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
+              <Environment preset="forest" />
+              <CreateObjectWizard
               // canvasMountState={canvasMountState}
               // setCanvasMountState={setCanvasMountState}
               // objectDataToMutate={objectDataToMutate}
@@ -1078,8 +1052,18 @@ const Sandbox: NextPage = () => {
               // isMutateObjectBtnClicked={isMutateObjectBtnClicked}
               // setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
               />
-            </div>
-          </>
+              <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
+              <OrbitControls autoRotate />
+            </Canvas>
+            <MutateObjectButton
+            // canvasMountState={canvasMountState}
+            // setCanvasMountState={setCanvasMountState}
+            // objectDataToMutate={objectDataToMutate}
+            // setObjectDataToMutate={setObjectDataToMutate}
+            // isMutateObjectBtnClicked={isMutateObjectBtnClicked}
+            // setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
+            />
+          </div>
         )}
 
         {/* {canvasMountState.isCowOpened || */}
