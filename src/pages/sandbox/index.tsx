@@ -522,7 +522,6 @@ CreateObjectWizardProps) => {
   function updateObjectData() {
     for (let [key, value] of Object.entries(materials)) {
       // console.log(materials[key].color.getHex);
-      console.log(materials[key].color.getHex);
 
       if (key === "band") {
         setBandDataToMutate(materials[key].color.getHex);
@@ -550,12 +549,7 @@ CreateObjectWizardProps) => {
       console.log(`sole ${soleDataToMutate}`);
       console.log(`stripes ${stripesDataToMutate}`);
     }
-    // console.log("yo");
     // const interval = setTimeout(updateObjectData, 1000);
-
-    // cnt++;
-    // console.log(cnt);
-    console.log(`here ${isMutateObjectBtnClicked}`);
 
     // let mutateBtnClicked = false;
     // if (isMutateObjectBtnClicked) mutateBtnClicked = true;
@@ -767,47 +761,9 @@ CreateObjectWizardProps) => {
               ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
             onChange: (v: any) => {
               materials[m].color = new Color(v);
+              materials[m].color.getHex = v;
               // console.log(v);
               // console.log(m);
-              materials[m].color.getHex = v;
-              // materials[m].color.getHex = v?.toString;
-
-              // console.log(materials);
-
-              // if (m === "band") {
-              //   setBandDataToMutate(materials[m].color.getHex);
-              // } else if (m === "caps") {
-              //   setCapsDataToMutate(materials[m].color.getHex);
-              // } else if (m === "inner") {
-              //   setInnerDataToMutate(materials[m].color.getHex);
-              // } else if (m === "laces") {
-              //   setLacesDataToMutate(materials[m].color.getHex);
-              // } else if (m === "mesh") {
-              //   setMeshDataToMutate(materials[m].color.getHex);
-              // } else if (m === "patch") {
-              //   setPatchDataToMutate(materials[m].color.getHex);
-              // } else if (m === "sole") {
-              //   setSoleDataToMutate(materials[m].color.getHex);
-              // } else if (m === "stripes") {
-              //   setStripesDataToMutate(materials[m].color.getHex);
-              // }
-
-              // console.log(bandDataToMutate);
-
-              // setObjectDataToMutate({
-              //   ...objectDataToMutate,
-              //   [m]: v,
-              // });
-
-              // console.log(objectDataToMutate);
-
-              // setCanvasMountState({
-              //   ...canvasMountState,
-              //   isMainCanvasMounted: !canvasMountState.isMainCanvasMounted,
-              // });
-
-              // obj = { ...obj, [m]: v };
-              // console.log(obj);
             },
           },
         }),
