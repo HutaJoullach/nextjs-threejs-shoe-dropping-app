@@ -409,8 +409,6 @@ CreateObjectWizardProps) => {
     return () => clearInterval(interval);
   }, [isMutateObjectBtnClicked]);
 
-  // updateObjectData();
-
   // let obj = {};
   // useEffect(() => {
   //   setTimeout(function () {
