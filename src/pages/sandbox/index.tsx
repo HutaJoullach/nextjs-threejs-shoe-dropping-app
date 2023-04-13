@@ -65,10 +65,12 @@ CowControlButtonProps) => {
   } = api.objects.getAll.useQuery();
 
   const [showMessage, setShowMessage] = useState<boolean>(true);
-  const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
   const [isMainCanvasMounted, setIsMainCanvasMounted] = useAtom(
     isMainCanvasMountedAtom
   );
+
+  useHydrateAtoms([[isDataRefetchedAtom, false] as const]);
+  const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
 
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
@@ -402,20 +404,14 @@ CreateObjectWizardProps) => {
     }
   }
 
+  // setInterval and clearInterval everytime isMutateObjectBtnClicked
+  // state changes before unmount CreateObjectWizard component.
   useEffect(() => {
     const interval = setInterval(() => {
       updateObjectData();
     }, 2000);
     return () => clearInterval(interval);
   }, [isMutateObjectBtnClicked]);
-
-  // let interval: NodeJS.Timer;
-  // if (isCowOpened) {
-  //   interval = setInterval(storeObjectDataValue, 3000);
-  // }
-
-  // let handleStoreObjectDataValue = setInterval(storeObjectDataValue, 3000);
-  // clearInterval(handleStoreObjectDataValue);
 
   useControls("Shoe", () => {
     console.log("creating color pickers");
@@ -473,14 +469,6 @@ CreateObjectWizardProps) => {
   );
 };
 
-// type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
-// const ObjectContainer = (props: { object: ObjectWithUser }) => {};
-
-// type ObjectWithUser = RouterOutputs["objects"]["getAll"][number];
-// const ObjectContainer = (props: ObjectWithUser) => {
-//   const {object, author} = props;
-// };
-
 const RenderStoredObjects = () => {
   const {
     data,
@@ -492,15 +480,17 @@ const RenderStoredObjects = () => {
     isStale,
   } = api.objects.getAll.useQuery();
 
+  useHydrateAtoms([[isDataRefetchedAtom, false] as const]);
   const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
 
-  const [, updateState] = React.useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
+  // const [, updateState] = React.useState();
+  // const forceUpdate = React.useCallback(() => updateState({}), []);
 
   if (!data) return null;
 
   if (isDataRefetched) {
-    forceUpdate();
+    refetch;
+    // forceUpdate();
     setIsDataRefetched(false);
   }
 
