@@ -50,7 +50,7 @@ import {
   stripesDataToMutateAtom,
   isCowOpenedAtom,
   isMainCanvasMountedAtom,
-  isMutateObjectBtnClickedAtom,
+  // isMutateObjectBtnClickedAtom,
 } from "../../states/object-data";
 import { useHydrateAtoms } from "jotai/utils";
 
@@ -260,9 +260,9 @@ MutateObjectButtonProps) => {
     isMainCanvasMountedAtom
   );
 
-  const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
-    isMutateObjectBtnClickedAtom
-  );
+  // const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
+  //   isMutateObjectBtnClickedAtom
+  // );
 
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
@@ -281,8 +281,8 @@ MutateObjectButtonProps) => {
             //     ...canvasMountState,
             //     isCowOpened: !canvasMountState.isCowOpened,
             //   });
-            if (!isMutateObjectBtnClicked)
-              setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
+            // if (!isMutateObjectBtnClicked)
+            //   setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
             setTimeout(function () {
               if (isCowOpened) setIsCowOpened(!isCowOpened);
               // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
@@ -369,17 +369,18 @@ type CreateObjectWizardProps = {
   // setObjectDataToMutate: React.Dispatch<
   //   React.SetStateAction<IObjectDataToMutate>
   // >;
-  // isMutateObjectBtnClicked: boolean;
-  // setIsMutateObjectBtnClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  isMutateObjectBtnClicked: boolean;
+  setIsMutateObjectBtnClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CreateObjectWizard = ({}: // canvasMountState,
-// setCanvasMountState,
-// objectDataToMutate,
-// setObjectDataToMutate,
-// isMutateObjectBtnClicked,
-// setIsMutateObjectBtnClicked,
-CreateObjectWizardProps) => {
+const CreateObjectWizard = ({
+  // canvasMountState,
+  // setCanvasMountState,
+  // objectDataToMutate,
+  // setObjectDataToMutate,
+  isMutateObjectBtnClicked,
+  setIsMutateObjectBtnClicked,
+}: CreateObjectWizardProps) => {
   const { user } = useUser();
 
   // const [input, setInput] = useState<string>("");
@@ -422,10 +423,10 @@ CreateObjectWizardProps) => {
     isMainCanvasMountedAtom
   );
 
-  useHydrateAtoms([[isMutateObjectBtnClickedAtom, false] as const]);
-  const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
-    isMutateObjectBtnClickedAtom
-  );
+  // useHydrateAtoms([[isMutateObjectBtnClickedAtom, false] as const]);
+  // const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
+  //   isMutateObjectBtnClickedAtom
+  // );
 
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
@@ -508,21 +509,57 @@ CreateObjectWizardProps) => {
   //   }, 50);
   // }, []);
 
-  const updateObjectData = () => {
+  // const interval = setInterval(updateObjectData, 2000);
+  // console.log(interval);
+
+  // let mutateBtnClicked = false;
+  // var cnt = 0;
+  // var obj = setInterval(updateObjectData, 1000);
+
+  function updateObjectData() {
     for (let [key, value] of Object.entries(materials)) {
-      console.log(materials[key].color.getHex);
-
-      console.log(materials[key].color.getHex);
+      // console.log(materials[key].color.getHex);
+      // console.log(materials[key].color.getHex);
+      // console.log("hey");
     }
+    // console.log("yo");
+    // const interval = setTimeout(updateObjectData, 1000);
 
-    let interval;
-    if (!isMutateObjectBtnClicked)
-      interval = setTimeout(updateObjectData, 1000);
-    if (isMutateObjectBtnClicked) clearInterval(interval);
-    console.log(isMutateObjectBtnClicked);
-  };
+    // cnt++;
+    // console.log(cnt);
+    console.log(`here ${isMutateObjectBtnClicked}`);
 
-  updateObjectData();
+    // if (isMutateObjectBtnClicked) mutateBtnClicked = true;
+
+    // console.log(`heyyyy ${mutateBtnClicked}`);
+
+    // if (mutateBtnClicked === true) {
+    //   clearInterval(obj);
+    //   console.log(`check here ${mutateBtnClicked}`);
+    //   console.log(`here ${isMutateObjectBtnClicked}`);
+    // }
+
+    // if (cnt === 6) {
+    //   clearInterval(obj);
+    // }
+
+    // if (isMutateObjectBtnClicked) {
+    //   clearInterval(interval);
+    //   console.log("yooooo");
+
+    //   // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
+    //   console.log(isMutateObjectBtnClicked);
+    // }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateObjectData();
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [isMutateObjectBtnClicked]);
+
+  // updateObjectData();
 
   // let obj = {};
   // useEffect(() => {
@@ -927,8 +964,8 @@ const Sandbox: NextPage = () => {
   //     patch: "",
   //   });
 
-  // const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] =
-  //   useState<boolean>(false);
+  const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] =
+    useState<boolean>(false);
 
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
@@ -963,28 +1000,44 @@ const Sandbox: NextPage = () => {
 
         {/* {isSignedIn && canvasMountState.isCowOpened && ( */}
         {isSignedIn && isCowOpened && (
-          <div className={`flex h-full w-full items-center justify-center`}>
-            <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
-              <Environment preset="forest" />
-              <CreateObjectWizard
-              // canvasMountState={canvasMountState}
-              // setCanvasMountState={setCanvasMountState}
-              // objectDataToMutate={objectDataToMutate}
-              // setObjectDataToMutate={setObjectDataToMutate}
-              // isMutateObjectBtnClicked={isMutateObjectBtnClicked}
-              // setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
-              />
-              <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
-              <OrbitControls autoRotate />
-            </Canvas>
-            <MutateObjectButton
+          <div className="bg-red-200">
+            <button
+              onClick={() => {
+                console.log(`here!! ${isMutateObjectBtnClicked}`);
+
+                // if (!isMutateObjectBtnClicked)
+                //   setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
+                // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
+                // setIsMutateObjectBtnClicked(true);
+                setIsMutateObjectBtnClicked(true);
+                console.log(`here!! ${isMutateObjectBtnClicked}`);
+              }}
+            >
+              button
+            </button>
+            <div className={`flex h-full w-full items-center justify-center`}>
+              <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
+                <Environment preset="forest" />
+                <CreateObjectWizard
+                  // canvasMountState={canvasMountState}
+                  // setCanvasMountState={setCanvasMountState}
+                  // objectDataToMutate={objectDataToMutate}
+                  // setObjectDataToMutate={setObjectDataToMutate}
+                  isMutateObjectBtnClicked={isMutateObjectBtnClicked}
+                  setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
+                />
+                <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
+                <OrbitControls autoRotate />
+              </Canvas>
+              {/* <MutateObjectButton
             // canvasMountState={canvasMountState}
             // setCanvasMountState={setCanvasMountState}
             // objectDataToMutate={objectDataToMutate}
             // setObjectDataToMutate={setObjectDataToMutate}
             // isMutateObjectBtnClicked={isMutateObjectBtnClicked}
             // setIsMutateObjectBtnClicked={setIsMutateObjectBtnClicked}
-            />
+            /> */}
+            </div>
           </div>
         )}
 
