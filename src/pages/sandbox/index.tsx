@@ -933,28 +933,6 @@ const RenderStoredObjects = () => {
       {data.map((objectData) => (
         <ObjectContainer {...objectData} key={objectData.object.id} />
       ))}
-      {/* {data.map((objectData) => (
-        <ObjectContainer {...objectData} key={objectData.object.id} />
-      ))} */}
-      {/* {[
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-      ].map((objectData) => (
-        <ObjectContainer {...objectData} key={objectData.object.id} />
-      ))} */}
     </>
   );
 };
