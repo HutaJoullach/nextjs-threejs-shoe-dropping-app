@@ -168,12 +168,6 @@ CowControlButtonProps) => {
 
       <button
         onClick={() => {
-          // if (!canvasMountState.isCowOpened)
-          //   setCanvasMountState({
-          //     ...canvasMountState,
-          //     isCowOpened: !canvasMountState.isCowOpened,
-          //   });
-
           if (!isCowOpened) setIsCowOpened(!isCowOpened);
         }}
         type="button"
@@ -209,13 +203,10 @@ const MutateObjectButton = ({}: // canvasMountState,
 // setIsMutateObjectBtnClicked,
 MutateObjectButtonProps) => {
   const { user } = useUser();
-
-  // const [input, setInput] = useState<string>("");
   const ctx = api.useContext();
 
   const { mutate, isLoading: isPosting } = api.objects.create.useMutation({
     onSuccess: () => {
-      // setInput("");
       void ctx.objects.getAll.invalidate();
     },
     onError: (e) => {
@@ -236,15 +227,6 @@ MutateObjectButtonProps) => {
   const [patchDataToMutate] = useAtom(patchDataToMutateAtom);
   const [soleDataToMutate] = useAtom(soleDataToMutateAtom);
   const [stripesDataToMutate] = useAtom(stripesDataToMutateAtom);
-
-  // const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
-  const [isMainCanvasMounted, setIsMainCanvasMounted] = useAtom(
-    isMainCanvasMountedAtom
-  );
-
-  // const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
-  //   isMutateObjectBtnClickedAtom
-  // );
 
   useHydrateAtoms([[isMutateObjectBtnClickedAtom, false] as const]);
   const [isMutateObjectBtnClicked, setIsMutateObjectBtnClicked] = useAtom(
