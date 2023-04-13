@@ -141,10 +141,8 @@ CowControlButtonProps) => {
 
       <button
         onClick={() => {
-          // if (!objectsLoading) api.objects.getAll.useQuery();
           if (!objectsLoading) refetch;
           if (isFetched) setIsDataRefetched(true);
-
           // window.location.reload();
         }}
         type="button"
