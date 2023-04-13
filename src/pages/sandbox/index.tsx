@@ -11,9 +11,9 @@ import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { PageLayout } from "~/components/layout";
 import { ObjectContainer } from "~/components/object-container";
 import { toast } from "react-hot-toast";
-import { editwrite } from "../../assets";
 import Ground from "~/components/canvas/ground";
 import Car from "~/components/canvas/car";
+import { caticon, arrowleftmdplain } from "../../assets";
 
 import { useUser } from "@clerk/nextjs";
 import { Canvas } from "@react-three/fiber";
@@ -27,15 +27,6 @@ import {
   ContactShadows,
   useGLTF,
 } from "@react-three/drei";
-import rgbHex from "rgb-hex";
-
-import {
-  caticon,
-  closemodal,
-  arrowleft,
-  arrowleftmd,
-  arrowleftmdplain,
-} from "../../assets";
 
 import { useAtom } from "jotai";
 import {
