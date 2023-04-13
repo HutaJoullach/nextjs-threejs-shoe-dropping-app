@@ -10,7 +10,6 @@ import theme from "../../styles/styles";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { PageLayout } from "~/components/layout";
 import { ObjectContainer } from "~/components/object-container";
-import { toast } from "react-hot-toast";
 import Ground from "~/components/canvas/ground";
 import Car from "~/components/canvas/car";
 import { caticon, arrowleftmdplain } from "../../assets";
@@ -19,6 +18,7 @@ import { useUser } from "@clerk/nextjs";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/cannon";
 import { useControls } from "leva";
+import { toast } from "react-hot-toast";
 import { Color } from "three";
 import {
   Environment,
@@ -64,11 +64,8 @@ CowControlButtonProps) => {
     isFetched,
   } = api.objects.getAll.useQuery();
 
-  const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
-
   const [showMessage, setShowMessage] = useState<boolean>(true);
-
-  // const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
+  const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
   const [isMainCanvasMounted, setIsMainCanvasMounted] = useAtom(
     isMainCanvasMountedAtom
   );
@@ -118,10 +115,6 @@ CowControlButtonProps) => {
 
       <button
         onClick={() => {
-          // setCanvasMountState({
-          //   ...canvasMountState,
-          //   isMainCanvasMounted: !canvasMountState.isMainCanvasMounted,
-          // });
           setIsMainCanvasMounted(!isMainCanvasMounted);
         }}
         type="button"
@@ -751,7 +744,6 @@ CreateObjectWizardProps) => {
     // })
     // return colorPickers
 
-    // using reduce
     return Object.keys(materials).reduce(
       (acc, m) =>
         Object.assign(acc, {
@@ -771,58 +763,7 @@ CreateObjectWizardProps) => {
     );
   });
 
-  // console.log(materials);
-  // console.log(materials.band.color.getHex);
-
   return (
-    // <div
-    //   className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex w-full gap-3 p-1`}
-    // >
-    //   <Image
-    //     src={user.profileImageUrl}
-    //     alt="Profile image"
-    //     className="h-6 w-6 rounded-full"
-    //     width={56}
-    //     height={56}
-    //   />
-    //   <input
-    //     placeholder="Type some text"
-    //     className="grow bg-transparent outline-none"
-    //     type="text"
-    //     value={input}
-    //     onChange={(e) => setInput(e.target.value)}
-    //     onKeyDown={(e) => {
-    //       if (e.key === "Enter") {
-    //         e.preventDefault();
-    //         if (input !== "") {
-    //           mutate({ objectType: input });
-    //         }
-    //       }
-    //     }}
-    //     disabled={isPosting}
-    //   />
-    //   {!isPosting && (
-    //     <button
-    //       onClick={() => {
-    //         if (input !== "") mutate({ objectType: input });
-    //       }}
-    //     >
-    //       <Image
-    //         src={editwrite}
-    //         className="h-5 w-5 rounded-full"
-    //         alt="editwrite"
-    //         width={56}
-    //         height={56}
-    //       />
-    //     </button>
-    //   )}
-    //   {!!isPosting && (
-    //     <div className="flex items-center justify-center">
-    //       <LoadingSpinner size={20} />
-    //     </div>
-    //   )}
-    // </div>
-
     <group
       dispose={null}
       onPointerOver={() => setHovered(true)}
@@ -1036,10 +977,8 @@ const Sandbox: NextPage = () => {
               size={100}
               tolerance={0.001}
               iterations={5}
-              // broadphase={"Naive"}
               step={1 / 60}
               shouldInvalidate={true}
-              // children
               allowSleep={false}
               axisIndex={0}
               defaultContactMaterial={1e6}
