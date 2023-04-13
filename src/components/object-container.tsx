@@ -48,6 +48,15 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     },
   });
 
+  console.log(`${object.lacesData}`);
+  console.log(`${object.meshData}`);
+  console.log(`${object.capsData}`);
+  console.log(`${object.innerData}`);
+  console.log(`${object.soleData}`);
+  console.log(`${object.stripesData}`);
+  console.log(`${object.bandData}`);
+  console.log(`${object.patchData}`);
+
   // const [hovered, setHovered] = useState(false);
   // const { nodes, materials } = useGLTF(
   //   "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
@@ -164,42 +173,66 @@ export const ObjectContainer = (props: ObjectWithUser) => {
       <mesh
         geometry={nodes.shoe.geometry}
         material={materials.laces}
-        material-color={fallbackColor.shoe.laces}
+        // material-color={
+        //   object.lacesData ? object.lacesData : fallbackColor.shoe.laces
+        // }
+        material-color={object.lacesData}
       />
       <mesh
         geometry={nodes.shoe_1.geometry}
         material={materials.mesh}
-        material-color={fallbackColor.shoe.mesh}
+        // material-color={
+        //   object.meshData ? object.meshData : fallbackColor.shoe.mesh
+        // }
+        material-color={object.meshData}
       />
       <mesh
         geometry={nodes.shoe_2.geometry}
         material={materials.caps}
-        material-color={fallbackColor.shoe.caps}
+        // material-color={
+        //   object.capsData ? object.capsData : fallbackColor.shoe.caps
+        // }
+        material-color={object.capsData}
       />
       <mesh
         geometry={nodes.shoe_3.geometry}
         material={materials.inner}
-        material-color={fallbackColor.shoe.inner}
+        // material-color={
+        //   object.innerData ? object.innerData : fallbackColor.shoe.inner
+        // }
+        material-color={object.innerData}
       />
       <mesh
         geometry={nodes.shoe_4.geometry}
         material={materials.sole}
-        material-color={fallbackColor.shoe.sole}
+        // material-color={
+        //   object.soleData ? object.soleData : fallbackColor.shoe.sole
+        // }
+        material-color={object.soleData}
       />
       <mesh
         geometry={nodes.shoe_5.geometry}
         material={materials.stripes}
-        material-color={fallbackColor.shoe.stripes}
+        // material-color={
+        //   object.stripesData ? object.stripesData : fallbackColor.shoe.stripes
+        // }
+        material-color={object.stripesData}
       />
       <mesh
         geometry={nodes.shoe_6.geometry}
         material={materials.band}
-        material-color={fallbackColor.shoe.band}
+        // material-color={
+        //   object.bandData ? object.bandData : fallbackColor.shoe.band
+        // }
+        material-color={object.bandData}
       />
       <mesh
         geometry={nodes.shoe_7.geometry}
         material={materials.patch}
-        material-color={fallbackColor.shoe.patch}
+        // material-color={
+        //   object.patchData ? object.patchData : fallbackColor.shoe.patch
+        // }
+        material-color={object.patchData}
       />
 
       {/* <ColliderBox

@@ -82,7 +82,7 @@ export const objectsRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const objects = await ctx.prisma.object.findMany({
       take: 100,
-      orderBy: [{ createdAt: "desc" }],
+      orderBy: [{ createdAt: "asc" }],
     });
     return addUserDataToObjects(objects);
   }),
