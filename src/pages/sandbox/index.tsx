@@ -400,38 +400,7 @@ CreateObjectWizardProps) => {
       // console.log(`sole ${soleDataToMutate}`);
       // console.log(`stripes ${stripesDataToMutate}`);
     }
-
-    // if (mutateBtnClicked == true) {
-    //   clearInterval(obj);
-    //   console.log(`check here ${mutateBtnClicked}`);
-    //   console.log(`here ${isMutateObjectBtnClicked}`);
-    // }
-
-    // if (mutateBtnClicked == true) {
-    //   console.log("clear");
-
-    //   clearInterval(obj);
-    // }
-
-    // if (cnt === 6) {
-    //   clearInterval(obj);
-    // }
-
-    // if (isMutateObjectBtnClicked) {
-    //   clearInterval(interval);
-    //   console.log("yooooo");
-
-    //   // setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
-    //   console.log(isMutateObjectBtnClicked);
-    // }
   }
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     updateObjectData();
-  //   }, 2000);
-  //   return () => clearInterval(interval);
-  // }, [mutateBtnClicked]);
 
   useEffect(() => {
     const interval = setInterval(() => {
