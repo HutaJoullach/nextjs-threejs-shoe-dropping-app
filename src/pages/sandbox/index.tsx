@@ -137,7 +137,7 @@ const CowControlButton = () => {
         onClick={() => {
           if (!objectsLoading) refetch;
           if (isFetched) setIsDataRefetched(true);
-          // window.location.reload();
+          window.location.reload();
         }}
         type="button"
         disabled={objectsLoading}
