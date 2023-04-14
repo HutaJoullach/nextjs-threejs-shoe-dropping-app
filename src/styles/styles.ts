@@ -23,15 +23,15 @@ const theme = {
     content: "mt-[48px]",
   },
   rounded: {
-    cardBorder: "",
+    // cardBorder: "",
     utilityCardBorder: "rounded-md",
-    navbarBorderBottom: "",
+    // navbarBorderBottom: "",
   },
   font: {
     color: {
       primary: "text-slate-100",
       keyword: "text-red-200",
-      fieldInputPlaceholderTextColor: "",
+      // fieldInputPlaceholderTextColor: "",
       navbarForeground: "text-white",
       sidebarForeground: "text-white",
     },
@@ -48,12 +48,12 @@ const theme = {
   },
   bg: {
     primary: "bg-stone-950",
-    fieldInputBackground: "",
-    cardBackground: "",
+    // fieldInputBackground: "",
+    // cardBackground: "",
     utilityCardBackground: "bg-zinc-700",
     navbarBackground: "bg-red-200",
-    sidebarBackground: "",
-    headerBarBackground: "",
+    // sidebarBackground: "",
+    // headerBarBackground: "",
   },
   btn: {
     rounded: {

@@ -6,7 +6,7 @@ import Link from "next/link";
 import theme from "../styles/styles";
 import { PageLayout } from "~/components/layout";
 import Navbar from "~/components/navbar";
-import { CatCanvas, DogCanvas } from "~/components/canvas";
+import { DogCanvas } from "~/components/canvas";
 import { api } from "~/utils/api";
 
 import { motion } from "framer-motion";
@@ -41,8 +41,6 @@ const Home: NextPage = () => {
             </p>
           </div>
         </div>
-
-        {/* <CatCanvas /> */}
         <DogCanvas />
       </div>
     );
