@@ -130,30 +130,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   );
 
   return (
-    // <div key={object.id} className="flex gap-2 p-2">
-    //   <span>{object.objectType}</span>
-    //   <ObjectWrapper objectType={object.objectType} />
-    //   <div
-    //     className={`${theme.rounded.utilityCardBorder} ${theme.bg.utilityCardBackground} flex h-[44px] items-center gap-1 p-1`}
-    //   >
-    //     <Image
-    //       src={author.profileImageUrl}
-    //       className="h-7 w-7 rounded-full"
-    //       alt={`@${author.username}'s profile pic`}
-    //       width={56}
-    //       height={56}
-    //     />
-    //     <div className="flex flex-col text-xs font-bold text-slate-300">
-    //       <Link href={`/sandbox/@${author.username}`}>
-    //         <span>{`@${author.username}`}</span>
-    //       </Link>
-    //       <span className="flex justify-center font-thin">{`${dayjs(
-    //         object.createdAt
-    //       ).fromNow()}`}</span>
-    //     </div>
-    //   </div>
-    // </div>
-
     <group
       ref={shoeBody}
       dispose={null}
