@@ -439,14 +439,14 @@ const RenderStoredObjects = () => {
   useHydrateAtoms([[isDataRefetchedAtom, false] as const]);
   const [isDataRefetched, setIsDataRefetched] = useAtom(isDataRefetchedAtom);
 
-  // const [, updateState] = React.useState();
-  // const forceUpdate = React.useCallback(() => updateState({}), []);
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   if (!data) return null;
 
   if (isDataRefetched) {
     refetch;
-    // forceUpdate();
+    forceUpdate();
     setIsDataRefetched(false);
   }
 
