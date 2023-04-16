@@ -5,18 +5,15 @@ type useWheelsProps = {
   width: number;
   height: number;
   front: number;
-  // radius: number;
   wheelRadius: number;
 };
 
-// const useWheels = ({ width, height, front, radius }: useWheelsProps) => {
 const useWheels = ({
   width,
   height,
   front,
   wheelRadius: radius,
 }: useWheelsProps) => {
-  // const useWheels = (width, height, front, radius) => {
   const wheels = [useRef(null), useRef(null), useRef(null), useRef(null)];
 
   const wheelInfo = {

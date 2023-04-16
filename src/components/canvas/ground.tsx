@@ -48,7 +48,6 @@ const Ground = () => {
   }, [gridMap]);
 
   useEffect(() => {
-    // if (!meshRef.current) return;
     if (!meshRef.current || !meshRef2.current) return;
 
     var uvs = meshRef.current.geometry.attributes.uv.array;
@@ -82,10 +81,8 @@ const Ground = () => {
       >
         <circleGeometry args={[6.12, 50]} />
         <MeshReflectorMaterial
-          // aoMap={aoMap}
           alphaMap={alphaMap}
           transparent={true}
-          // color={[0.5, 0.5, 0.5]}
           color={[0.002, 0.002, 0.002]}
           envMapIntensity={0.35}
           metalness={0.05}

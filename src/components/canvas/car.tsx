@@ -18,16 +18,6 @@ const Car = ({ thirdPerson }: any) => {
       : `http://localhost:3000/models/car.glb`
   ).scene;
 
-  // const car = useGLTF("./models/mercedes_s_class.glb");
-  // let car = useGLTF("./models/mercedes_s_class.glb");
-
-  // let result = useLoader(
-  //   GLTFLoader,
-  //   "http://localhost:3000/models/mercedes_s_class.glb"
-  // ).scene;
-
-  // console.log(`here!!! ${result}`);
-
   const position = [-1.5, 0.5, 3];
   const width = 0.15;
   const height = 0.07;
@@ -46,7 +36,6 @@ const Car = ({ thirdPerson }: any) => {
   );
 
   const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
-  // const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
@@ -58,7 +47,6 @@ const Car = ({ thirdPerson }: any) => {
   );
 
   useControls({ vehicleApi, chassisApi });
-  // useControls(vehicleApi, chassisApi);
 
   useFrame((state) => {
     if (!thirdPerson) return;
@@ -96,7 +84,6 @@ const Car = ({ thirdPerson }: any) => {
       <group ref={chassisBody} name="chassisBody">
         <primitive
           object={result}
-          // object={car.scene}
           rotation-y={Math.PI}
           position={[0, -0.06, 0]}
         />
@@ -108,7 +95,6 @@ const Car = ({ thirdPerson }: any) => {
           castShadow
           shadow-mapSize={1024}
         />
-        {/* <pointLight intensity={0.4} /> */}
         <pointLight intensity={0.2} />
         <ambientLight />
       </group>

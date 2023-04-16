@@ -465,16 +465,13 @@ const Scene = () => {
   return (
     <Suspense fallback={null}>
       <Environment
-        // files={
-        //   process.env.PUBLIC_URL
-        //     ? `${process.env.PUBLIC_URL}/textures/envmap.hdr`
-        //     : `http://localhost:3000/textures/envmap.hdr`
-        // }
-        files="http://localhost:3000/textures/vignaioli.hdr"
+        files={
+          process.env.PUBLIC_URL
+            ? `${process.env.PUBLIC_URL}/textures/vignaioli.hdr`
+            : `http://localhost:3000/textures/vignaioli.hdr`
+        }
         background={"only"}
       />
-
-      {/* <PerspectiveCamera makeDefault position={[-6, 3.9, 6.21]} fov={40} /> */}
       <PerspectiveCamera makeDefault position={[-1, 1.9, 6.21]} fov={40} />
       <OrbitControls target={[-2.64, -0.71, 0.03]} />
 
