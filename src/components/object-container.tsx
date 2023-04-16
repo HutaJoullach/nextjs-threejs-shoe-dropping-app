@@ -49,62 +49,14 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     },
   });
 
-  console.log(`${object.lacesData}`);
-  console.log(`${object.meshData}`);
-  console.log(`${object.capsData}`);
-  console.log(`${object.innerData}`);
-  console.log(`${object.soleData}`);
-  console.log(`${object.stripesData}`);
-  console.log(`${object.bandData}`);
-  console.log(`${object.patchData}`);
-
-  // const [hovered, setHovered] = useState(false);
-  // const { nodes, materials } = useGLTF(
-  //   "https://cdn.jsdelivr.net/gh/Sean-Bradley/React-Three-Fiber-Boilerplate@gltfjsx/public/models/shoe-draco.glb"
-  // );
-
-  // let shoe = useLoader(
-  //   GLTFLoader,
-  //   process.env.PUBLIC_URL
-  //     ? `${process.env.PUBLIC_URL}/models/shoe-draco.glb`
-  //     : `http://localhost:3000/models/shoe-draco.glb`
-  // ).scene;
-
-  // useEffect(() => {
-  //   document.body.style.cursor = hovered ? 'pointer' : 'auto'
-  // }, [hovered])
-
-  // useControls("Shoe", () => {
-  //   console.log("creating color pickers");
-
-  //   // using forEach
-  //   // const colorPickers = {}
-  //   // Object.keys(materials).forEach((m) => {
-  //   //   colorPickers[m] = {
-  //   //     value: '#' + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, '0'),
-  //   //     onChange: (v) => {
-  //   //       materials[m].color = new Color(v)
-  //   //     }
-  //   //   }
-  //   // })
-  //   // return colorPickers
-
-  //   // using reduce
-  //   return Object.keys(materials).reduce(
-  //     (acc, m) =>
-  //       Object.assign(acc, {
-  //         [m]: {
-  //           value:
-  //             "#" +
-  //             ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
-  //           onChange: (v) => {
-  //             materials[m].color = new Color(v);
-  //           },
-  //         },
-  //       }),
-  //     {}
-  //   );
-  // });
+  // console.log(`${object.lacesData}`);
+  // console.log(`${object.meshData}`);
+  // console.log(`${object.capsData}`);
+  // console.log(`${object.innerData}`);
+  // console.log(`${object.soleData}`);
+  // console.log(`${object.stripesData}`);
+  // console.log(`${object.bandData}`);
+  // console.log(`${object.patchData}`);
 
   const { nodes, materials, scene } = useGLTF(
     "http://localhost:3000/models/shoe-draco.glb"
