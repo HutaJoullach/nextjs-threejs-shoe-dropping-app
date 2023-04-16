@@ -108,7 +108,9 @@ const Car = ({ thirdPerson }: any) => {
           castShadow
           shadow-mapSize={1024}
         />
-        <pointLight intensity={0.4} />
+        {/* <pointLight intensity={0.4} /> */}
+        <pointLight intensity={0.2} />
+        <ambientLight />
       </group>
 
       {/* <mesh ref={chassisBody}>

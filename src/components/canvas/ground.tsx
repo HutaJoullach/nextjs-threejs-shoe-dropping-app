@@ -85,7 +85,8 @@ const Ground = () => {
           // aoMap={aoMap}
           alphaMap={alphaMap}
           transparent={true}
-          color={[0.5, 0.5, 0.5]}
+          // color={[0.5, 0.5, 0.5]}
+          color={[0.002, 0.002, 0.002]}
           envMapIntensity={0.35}
           metalness={0.05}
           roughness={0.4}
