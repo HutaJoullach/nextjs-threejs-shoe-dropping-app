@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState, useEffect } from "react";
+import { Suspense, useRef, useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,6 +22,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { gltfLoader } from "./canvas/loaders";
 import ColliderBox from "./canvas/collider-box";
 import { useBox, useSphere } from "@react-three/cannon";
+import * as THREE from "three";
 
 // type ObjectWrapperProps = {
 //   objectType: string;
@@ -105,7 +106,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   //   );
   // });
 
-  const { nodes, materials } = useGLTF(
+  const { nodes, materials, scene } = useGLTF(
     "http://localhost:3000/models/shoe-draco.glb"
   );
 
@@ -129,6 +130,54 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     useRef(null)
   );
 
+  const lacesMaterial = useMemo(() => {
+    const material = materials.laces.clone();
+    material.color = new THREE.Color(object.lacesData);
+    return material;
+  }, [object.lacesData]);
+
+  const meshMaterial = useMemo(() => {
+    const material = materials.mesh.clone();
+    material.color = new THREE.Color(object.meshData);
+    return material;
+  }, [object.meshData]);
+
+  const capsMaterial = useMemo(() => {
+    const material = materials.caps.clone();
+    material.color = new THREE.Color(object.capsData);
+    return material;
+  }, [object.capsData]);
+
+  const innerMaterial = useMemo(() => {
+    const material = materials.inner.clone();
+    material.color = new THREE.Color(object.innerData);
+    return material;
+  }, [object.innerData]);
+
+  const soleMaterial = useMemo(() => {
+    const material = materials.sole.clone();
+    material.color = new THREE.Color(object.soleData);
+    return material;
+  }, [object.soleData]);
+
+  const stripesMaterial = useMemo(() => {
+    const material = materials.stripes.clone();
+    material.color = new THREE.Color(object.stripesData);
+    return material;
+  }, [object.stripesData]);
+
+  const bandMaterial = useMemo(() => {
+    const material = materials.band.clone();
+    material.color = new THREE.Color(object.bandData);
+    return material;
+  }, [object.bandData]);
+
+  const patchMaterial = useMemo(() => {
+    const material = materials.patch.clone();
+    material.color = new THREE.Color(object.patchData);
+    return material;
+  }, [object.patchData]);
+
   return (
     <group
       ref={shoeBody}
@@ -145,59 +194,67 @@ export const ObjectContainer = (props: ObjectWithUser) => {
       <ambientLight intensity={0.008} />
       <mesh
         geometry={nodes.shoe.geometry}
-        material={materials.laces}
-        material-color={
-          object.lacesData ? object.lacesData : fallbackColor.shoe.laces
-        }
+        // material={materials.laces}
+        // material-color={
+        //   object.lacesData ? object.lacesData : fallbackColor.shoe.laces
+        // }
+        material={lacesMaterial}
       />
       <mesh
         geometry={nodes.shoe_1.geometry}
-        material={materials.mesh}
-        material-color={
-          object.meshData ? object.meshData : fallbackColor.shoe.mesh
-        }
+        // material={materials.mesh}
+        // material-color={
+        //   object.meshData ? object.meshData : fallbackColor.shoe.mesh
+        // }
+        material={meshMaterial}
       />
       <mesh
         geometry={nodes.shoe_2.geometry}
-        material={materials.caps}
-        material-color={
-          object.capsData ? object.capsData : fallbackColor.shoe.caps
-        }
+        // material={materials.caps}
+        // material-color={
+        //   object.capsData ? object.capsData : fallbackColor.shoe.caps
+        // }
+        material={capsMaterial}
       />
       <mesh
         geometry={nodes.shoe_3.geometry}
-        material={materials.inner}
-        material-color={
-          object.innerData ? object.innerData : fallbackColor.shoe.inner
-        }
+        // material={materials.inner}
+        // material-color={
+        //   object.innerData ? object.innerData : fallbackColor.shoe.inner
+        // }
+        material={innerMaterial}
       />
       <mesh
         geometry={nodes.shoe_4.geometry}
-        material={materials.sole}
-        material-color={
-          object.soleData ? object.soleData : fallbackColor.shoe.sole
-        }
+        // material={materials.sole}
+        // material-color={
+        //   object.soleData ? object.soleData : fallbackColor.shoe.sole
+        // }
+        material={soleMaterial}
       />
       <mesh
         geometry={nodes.shoe_5.geometry}
-        material={materials.stripes}
-        material-color={
-          object.stripesData ? object.stripesData : fallbackColor.shoe.stripes
-        }
+        // material={materials.stripes}
+        // material-color={
+        //   object.stripesData ? object.stripesData : fallbackColor.shoe.stripes
+        // }
+        material={stripesMaterial}
       />
       <mesh
         geometry={nodes.shoe_6.geometry}
-        material={materials.band}
-        material-color={
-          object.bandData ? object.bandData : fallbackColor.shoe.band
-        }
+        // material={materials.band}
+        // material-color={
+        //   object.bandData ? object.bandData : fallbackColor.shoe.band
+        // }
+        material={bandMaterial}
       />
       <mesh
         geometry={nodes.shoe_7.geometry}
-        material={materials.patch}
-        material-color={
-          object.patchData ? object.patchData : fallbackColor.shoe.patch
-        }
+        // material={materials.patch}
+        // material-color={
+        //   object.patchData ? object.patchData : fallbackColor.shoe.patch
+        // }
+        material={patchMaterial}
       />
 
       {/* <ColliderBox
