@@ -7,6 +7,7 @@ import { PageLayout } from "~/components/layout";
 import { api } from "~/utils/api";
 
 import { motion } from "framer-motion";
+import DogCanvas from "~/components/canvas/dog";
 
 const Home: NextPage = () => {
   const user = useUser();
@@ -38,7 +39,7 @@ const Home: NextPage = () => {
             </p>
           </div>
         </div>
-        {/* <DogCanvas /> */}
+        <DogCanvas />
       </div>
     );
   };

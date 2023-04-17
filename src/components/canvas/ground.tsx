@@ -23,12 +23,12 @@ const Ground = () => {
       : `http://localhost:3000/textures/grid.png`
   );
 
-  const aoMap = useLoader(
-    TextureLoader,
-    process.env.PUBLIC_URL
-      ? `${process.env.PUBLIC_URL}/textures/ground-ao.png`
-      : `http://localhost:3000/textures/ground-ao.png`
-  );
+  // const aoMap = useLoader(
+  //   TextureLoader,
+  //   process.env.PUBLIC_URL
+  //     ? `${process.env.PUBLIC_URL}/textures/ground-ao.png`
+  //     : `http://localhost:3000/textures/ground-ao.png`
+  // );
 
   const alphaMap = useLoader(
     TextureLoader,

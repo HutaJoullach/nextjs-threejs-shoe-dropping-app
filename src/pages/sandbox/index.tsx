@@ -424,7 +424,7 @@ const CreateObjectWizard = () => {
   );
 };
 
-const RenderStoredObjects = () => {
+export const RenderStoredObjects = () => {
   const {
     data,
     isLoading: objectsLoading,

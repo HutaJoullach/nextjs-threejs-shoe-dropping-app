@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "./canvas-loader";
+import { fbxLoader } from "./loaders";
 
 type DogProps = {
   isMobile?: boolean | undefined;
