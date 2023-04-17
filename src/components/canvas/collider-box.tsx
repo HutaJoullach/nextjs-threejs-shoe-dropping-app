@@ -12,9 +12,7 @@ const ColliderBox = ({ position, scale }: ColliderBoxProps) => {
   useBox(() => ({
     args: scale,
     position,
-    // type: "Static",
     type: "Dynamic",
-    // type: "Kinematic",
   }));
 
   if (!debug) return null;
@@ -24,12 +22,6 @@ const ColliderBox = ({ position, scale }: ColliderBoxProps) => {
       <boxGeometry args={scale} />
       <meshBasicMaterial transparent={true} opacity={0.25} />
     </mesh>
-    // debug && (
-    //   <mesh position={position}>
-    //     <boxGeometry args={scale} />
-    //     <meshBasicMaterial transparent={true} opacity={0.25} />
-    //   </mesh>
-    // )
   );
 };
 

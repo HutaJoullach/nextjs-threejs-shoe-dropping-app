@@ -3,12 +3,11 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import { useBox, useRaycastVehicle } from "@react-three/cannon";
 import { Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import useControls from "../canvas/vehicle-controls";
 import useWheels from "../canvas/vehicle-wheels";
 import WheelDebug from "../canvas/wheel-debug";
-
-import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 const Car = ({ thirdPerson }: any) => {
   let result = useLoader(

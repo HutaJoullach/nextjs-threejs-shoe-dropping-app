@@ -41,7 +41,7 @@ const Home: NextPage = () => {
             </p>
           </div>
         </div>
-        <DogCanvas />
+        {/* <DogCanvas /> */}
       </div>
     );
   };

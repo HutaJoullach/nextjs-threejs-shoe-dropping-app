@@ -1,60 +1,29 @@
-import {
-  SignInButton,
-  SignOutButton,
-  useUser,
-  RedirectToSignIn,
-  UserButton,
-} from "@clerk/nextjs";
-import React, { useEffect, useState } from "react";
+import { useUser, RedirectToSignIn, UserButton } from "@clerk/nextjs";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import theme from "../styles/styles";
-// import { navLinks } from "../constants";
 import {
   catlogo,
-  arrowleft,
   arrowleftmd,
-  arrowleftsm,
-  githubblack,
   githubwhite,
   paperplane,
   sandbucket,
   menualt,
   arrowcircleright,
-  nextarrowright,
-  user01,
   user02,
-  user03,
-  menu,
-  close,
 } from "../assets";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  // const [scrolled, setScrolled] = useState(false);
 
   const { route } = useRouter();
   const pathname = route.replace("/", "");
   console.log(pathname);
 
   const { user, isLoaded: userLoaded, isSignedIn } = useUser();
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollTop = window.scrollY;
-  //     if (scrollTop > 100) {
-  //       setScrolled(true);
-  //     } else {
-  //       setScrolled(false);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
 
   type SigninStateControlButtonProps = {
     isMobileSigninButton?: boolean | undefined;
@@ -123,8 +92,6 @@ const Navbar = () => {
     );
   };
 
-  // console.log(`here!!! ${user?.username}`);
-
   type NavbarListProps = {
     isMobileSigninButton?: boolean | undefined;
     listClassName?: string | null | undefined;
@@ -140,8 +107,6 @@ const Navbar = () => {
   }: NavbarListProps) => {
     const defaultListClassName =
       "hidden list-none flex-row items-center gap-10 sm:flex";
-
-    console.log(listClassName);
 
     return (
       <ul

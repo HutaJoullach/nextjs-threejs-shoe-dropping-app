@@ -29,10 +29,3 @@ const promisify = ({ loader, onProgress }: any) => {
 };
 
 export const fbxLoader = promisify(new FBXLoader());
-
-// import statement, usecase below
-// import { fbxLoader } from './loaders'
-
-// fbxLoader.load('cat.fbx').then(model => {
-//   console.log(model)
-// })
