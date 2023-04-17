@@ -1,11 +1,10 @@
-import React, { Suspense, useEffect, useReducer, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
 import { api } from "~/utils/api";
-import type { RouterOutputs } from "~/utils/api";
 import theme from "../../styles/styles";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { PageLayout } from "~/components/layout";

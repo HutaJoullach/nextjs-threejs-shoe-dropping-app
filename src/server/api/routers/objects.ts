@@ -107,9 +107,6 @@ export const objectsRouter = createTRPCRouter({
 
   create: privateProcedure
     .input(
-      // z.object({
-      //   objectType: z.string().min(1).max(280),
-      // })
       z.object({
         bandData: z.string().min(1).max(280),
         capsData: z.string().min(1).max(280),
@@ -130,7 +127,6 @@ export const objectsRouter = createTRPCRouter({
       const object = await ctx.prisma.object.create({
         data: {
           authorId,
-          // objectType: input.objectType,
           bandData: input.bandData,
           capsData: input.capsData,
           innerData: input.innerData,

@@ -1,17 +1,12 @@
 import {
-  javascript,
   typescript,
-  html,
-  css,
   reactjs,
   redux,
   tailwind,
   nodejs,
   mongodb,
   git,
-  figma,
   docker,
-  threejs,
 } from "../assets";
 
 export const navLinks = [

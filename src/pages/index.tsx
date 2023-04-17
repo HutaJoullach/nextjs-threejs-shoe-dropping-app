@@ -1,12 +1,9 @@
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
 
 import theme from "../styles/styles";
 import { PageLayout } from "~/components/layout";
-import Navbar from "~/components/navbar";
-import { DogCanvas } from "~/components/canvas";
 import { api } from "~/utils/api";
 
 import { motion } from "framer-motion";

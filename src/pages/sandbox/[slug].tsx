@@ -5,7 +5,7 @@ import { api } from "~/utils/api";
 
 import { PageLayout } from "~/components/layout";
 import { LoadingPage } from "~/components/loading";
-import { CanvasContainer } from "~/components/object-container";
+import { ObjectContainer } from "~/components/object-container";
 import { generateSSGHelper } from "~/server/helpers/ssg-helper";
 
 const ProfileBoard = (props: { userId: string }) => {
@@ -20,7 +20,7 @@ const ProfileBoard = (props: { userId: string }) => {
   return (
     <div className="flex flex-col">
       {data.map((objectData) => (
-        <CanvasContainer {...objectData} key={objectData.object.id} />
+        <ObjectContainer {...objectData} key={objectData.object.id} />
       ))}
     </div>
   );

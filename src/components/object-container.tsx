@@ -1,27 +1,10 @@
-import { Suspense, useRef, useState, useEffect, useMemo } from "react";
-import Image from "next/image";
+import { Suspense, useRef, useState, useMemo } from "react";
 import Link from "next/link";
-
 import type { RouterOutputs } from "~/utils/api";
-import theme from "../styles/styles";
-import { DogCanvas } from "~/components/canvas";
 
-import {
-  ContactShadows,
-  Environment,
-  OrbitControls,
-  Preload,
-  useGLTF,
-} from "@react-three/drei";
-import { useControls } from "leva";
-import { Color } from "three";
-import { HexColorPicker } from "react-colorful";
-import { useFrame, useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
-import { gltfLoader } from "./canvas/loaders";
+import { useGLTF } from "@react-three/drei";
 import ColliderBox from "./canvas/collider-box";
-import { useBox, useSphere } from "@react-three/cannon";
+import { useBox } from "@react-three/cannon";
 import * as THREE from "three";
 
 // type ObjectWrapperProps = {
@@ -131,18 +114,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   }, [object.patchData]);
 
   return (
-    <group
-      ref={shoeBody}
-      dispose={null}
-      scale={0.06}
-      // position={[0, 0.02, 0]}
-      // onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
-      // onPointerOut={(e) => e.intersections.length === 0 && set(null)}
-      // onPointerMissed={() => (state.current = null)}
-      // onPointerDown={(e) => (
-      //   e.stopPropagation(), (state.current = e.object.material.name)
-      // )}
-    >
+    <group ref={shoeBody} dispose={null} scale={0.06}>
       <ambientLight intensity={0.008} />
       <mesh
         geometry={nodes.shoe.geometry}

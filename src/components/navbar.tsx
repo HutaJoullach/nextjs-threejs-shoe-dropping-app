@@ -21,7 +21,6 @@ const Navbar = () => {
 
   const { route } = useRouter();
   const pathname = route.replace("/", "");
-  console.log(pathname);
 
   const { user, isLoaded: userLoaded, isSignedIn } = useUser();
 
