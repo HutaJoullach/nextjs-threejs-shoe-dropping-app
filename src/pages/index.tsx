@@ -7,17 +7,10 @@ import { PageLayout } from "~/components/layout";
 import { api } from "~/utils/api";
 
 import { motion } from "framer-motion";
-// import DogCanvas from "~/components/canvas/dog";
 import StagCanvas from "~/components/canvas/stag";
 
 const Home: NextPage = () => {
   const user = useUser();
-
-  // const { data, isLoading } = api.objects.getAll.useQuery();
-
-  // if (isLoading) return <div>Loading...</div>;
-
-  // if (!data) return <div>Something went wrong</div>;
 
   const Jumbotron = () => {
     return (
@@ -47,10 +40,21 @@ const Home: NextPage = () => {
     );
   };
 
+  const Footer = () => {
+    return (
+      <div className={`${theme.bg.navbarBackground}`} w-full>
+        <div className="flex items-center justify-center py-2 text-white">
+          <span>©2023 @hutajoullach</span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <PageLayout>
         <Jumbotron />
+        <Footer />
       </PageLayout>
     </>
   );
