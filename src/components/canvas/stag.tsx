@@ -1,9 +1,8 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
 import CanvasLoader from "./canvas-loader";
-import { fbxLoader } from "./loaders";
 
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   OrbitControls,
   Preload,
@@ -26,12 +25,177 @@ const Stag = ({ isMobile }: StagProps) => {
     scene
   );
 
+  const currentAction = useRef(null);
+  const nextAction = useRef(null);
+
   useEffect(() => {
-    actions?.Attack_Kick?.play();
+    currentAction.current = actions["Idle"];
+    currentAction.current.play();
   }, []);
 
+  // useFrame((state, delta) => {
+  //   mixer.update(delta);
+  //   if (
+  //     currentAction.current &&
+  //     currentAction.current.isFinished !== undefined &&
+  //     currentAction.current.isFinished()
+  //   ) {
+  //     currentAction.current.stop();
+  //     nextAction.current.play();
+  //     currentAction.current = nextAction.current;
+  //     nextAction.current = null;
+  //     console.log("current action");
+  //     console.log(nextAction.current);
+  //   }
+  // });
+
+  useFrame((state, delta) => {
+    mixer.update(delta);
+  });
+
+  // useEffect(() => {
+  //   if (
+  //     currentAction.current &&
+  //     currentAction.current.isFinished !== undefined &&
+  //     currentAction.current.isFinished()
+  //   ) {
+  //     currentAction.current.stop();
+  //     if (nextAction.current) {
+  //       nextAction.current.play();
+  //       currentAction.current = nextAction.current;
+  //       nextAction.current = null;
+  //     } else {
+  //       currentAction.current.play();
+  //     }
+  //   }
+  // }, [currentAction.current]);
+
+  useEffect(() => {
+    // if (currentAction.current && !currentAction.current.loop) {
+    if (currentAction.current) {
+      console.log("loop");
+
+      // if (currentAction.current.time === currentAction.current._clip.duration) {
+      //   currentAction.current.stop();
+      //   console.log("time");
+
+      //   if (nextAction.current) {
+      //     nextAction.current.play();
+      //     currentAction.current = nextAction.current;
+      //     nextAction.current = null;
+      //   } else {
+      //     currentAction.current.play();
+      //   }
+      // }
+      if (nextAction.current) {
+        console.log("hey");
+        console.log(nextAction.current);
+
+        nextAction.current.play();
+        currentAction.current = nextAction.current;
+        nextAction.current = null;
+      } else {
+        currentAction.current.play();
+      }
+    }
+  }, [currentAction.current, nextAction.current]);
+
+  // useEffect(() => {
+  //   if (
+  //     currentAction.current &&
+  //     currentAction.current.loop === THREE.LoopOnce &&
+  //     currentAction.current.time === currentAction.current._clip.duration
+  //   ) {
+  //     currentAction.current.stop();
+  //     if (nextAction.current) {
+  //       nextAction.current.play();
+  //       currentAction.current = nextAction.current;
+  //       nextAction.current = null;
+  //     } else {
+  //       currentAction.current.play();
+  //     }
+  //   }
+  // }, [currentAction.current]);
+
+  // const handleGallopPress = () => {
+  //   if (currentAction.current !== actions["Gallop"]) {
+  //     nextAction.current = actions["Gallop"];
+  //     console.log("handleGallopPress called!!!");
+  //     console.log(nextAction.current);
+  //   }
+  // };
+
+  const handleGallopPress = () => {
+    if (currentAction.current !== actions["Gallop"]) {
+      currentAction.current.stop();
+      nextAction.current = actions["Gallop"];
+      nextAction.current.play();
+    }
+  };
+
+  const handleAttackKickPress = () => {
+    if (currentAction.current !== actions["Attack_Kick"]) {
+      currentAction.current.stop();
+      nextAction.current = actions["Attack_Kick"];
+      nextAction.current.play();
+    }
+  };
+
+  // const [isStagMounted, setIsStagMounted] = useState(true);
+
+  // let interval: NodeJS.Timer;
+  // useEffect(() => {
+  //   if (isStagMounted) {
+  //     interval = setInterval(() => {
+  //       // setSeconds((seconds) => seconds + 1);
+  //       actions?.Idle?.play();
+  //     }, 1000);
+  //   } else if (!isStagMounted) {
+  //     clearInterval(interval);
+  //   }
+  //   return () => clearInterval(interval);
+  // }, [isStagMounted]);
+
+  interface IControls {
+    w?: boolean | undefined;
+    s?: boolean | undefined;
+    a?: boolean | undefined;
+    d?: boolean | undefined;
+  }
+
+  let [controls, setControls] = useState<IControls>({});
+  useEffect(() => {
+    const keyDownPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      setControls((controls) => ({ [e.key.toLowerCase()]: true }));
+    };
+    window.addEventListener("keydown", keyDownPressHandler);
+    return () => {
+      window.removeEventListener("keydown", keyDownPressHandler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (controls.w) {
+      handleGallopPress();
+      // console.log(animations);
+      // console.log(currentAction);
+      // console.log(nextAction);
+    } else if (controls.s) {
+      handleAttackKickPress();
+      // actions?.Attack_Kick?.play();
+    } else if (controls.a) {
+      // actions?.Eating?.play();
+    } else if (controls.d) {
+      // actions?.Walk?.play();
+    } else {
+      // actions?.Idle?.play();
+    }
+    console.log(controls);
+  }, [controls]);
+
   return (
-    <mesh onClick={() => actions?.Attack_Kick?.play()}>
+    // <mesh onKeyDown={handleKeyDown} tabIndex={0}>
+    <mesh>
       <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
         position={[-20, 50, 10]}
@@ -77,37 +241,10 @@ const StagCanvas = () => {
     };
   }, []);
 
-  // animate
-  // const mixers = [];
-  // const mixer = new THREE.AnimationMixer(stagClone);
-  // const clip = THREE.AnimationClip.findByName(clips, "Idle_2");
-  // const action = mixer.clipAction(clip);
-  // action.play();
-  // mixers.push(mixer);
-
-  // const clock = new THREE.Clock();
-  // function animate(time) {
-  //   highlightMesh.material.opacity = 1 + Math.sin(time / 120);
-  //   // objects.forEach(function(object) {
-  //   //     object.rotation.x = time / 1000;
-  //   //     object.rotation.z = time / 1000;
-  //   //     object.position.y = 0.5 + 0.5 * Math.abs(Math.sin(time / 1000));
-  //   // });
-  //   // if(mixer)
-  //   //     mixer.update(clock.getDelta());
-  //   const delta = clock.getDelta();
-  //   mixers.forEach(function (mixer) {
-  //     mixer.update(delta);
-  //   });
-  //   renderer.render(scene, camera);
-  // }
-
-  // renderer.setAnimationLoop(animate);
-  // animate
-
   return (
     <Canvas
-      frameloop="demand"
+      // frameloop="demand"
+      frameloop="always"
       shadows
       dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
