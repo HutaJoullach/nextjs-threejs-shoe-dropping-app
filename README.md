@@ -6,7 +6,7 @@ Simple three.js app to drop a shoe with your choise of mesh color. Login using y
 
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 42 30 PM" src="https://user-images.githubusercontent.com/60039508/232783385-d1033489-e42d-4e92-aa19-1602e4e9b8e6.png">
 
-## How do run the app?
+## How to run the app?
 
 - run `npm install`
 - Signup and create an account for PlanetScale, Clerk, and Upstash if you don't have.
