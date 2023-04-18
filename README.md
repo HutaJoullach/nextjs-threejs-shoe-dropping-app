@@ -31,7 +31,11 @@ This code still contains type errors since project in ongoing, so if you fixed a
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 46 51 PM" src="https://user-images.githubusercontent.com/60039508/232784157-f4a5fca5-0d24-499d-860a-7e289a010045.png">
 
 Car physics functions used in this project were from following repo.
+
 R3F-in-practice: https://github.com/Domenicobrz/R3F-in-practice
+
 gltf file for the stag was from 3d content creator Quaternius.
+
 Website: https://quaternius.com/index.html
+
 Thanks for amazing inspiration and cool assets.
