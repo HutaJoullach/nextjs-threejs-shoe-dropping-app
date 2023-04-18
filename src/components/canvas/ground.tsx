@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useLoader } from "@react-three/fiber";
 import { MeshReflectorMaterial } from "@react-three/drei";
 import { usePlane } from "@react-three/cannon";
-import { BufferAttribute } from "three";
+import { BufferAttribute, Mesh } from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 import ColliderBox from "./collider-box";
@@ -37,9 +37,8 @@ const Ground = () => {
       : `http://localhost:3000/textures/alpha-map.png`
   );
 
-  // fix type error for mesh ref!!
-  const meshRef = useRef<any>(null);
-  const meshRef2 = useRef<any>(null);
+  const meshRef = useRef<Mesh>(null);
+  const meshRef2 = useRef<Mesh>(null);
 
   useEffect(() => {
     if (!gridMap) return;
@@ -50,10 +49,11 @@ const Ground = () => {
   useEffect(() => {
     if (!meshRef.current || !meshRef2.current) return;
 
-    var uvs = meshRef.current.geometry.attributes.uv.array;
+    var uvs = (meshRef.current.geometry.attributes.uv as BufferAttribute).array;
     meshRef.current.geometry.setAttribute("uv2", new BufferAttribute(uvs, 2));
 
-    var uvs2 = meshRef2.current.geometry.attributes.uv.array;
+    var uvs2 = (meshRef2.current.geometry.attributes.uv as BufferAttribute)
+      .array;
     meshRef2.current.geometry.setAttribute("uv2", new BufferAttribute(uvs2, 2));
   }, [meshRef.current]);
 
@@ -98,7 +98,7 @@ const Ground = () => {
           minDepthThreshold={0.9} // Lower edge for the depthTexture interpolation (default = 0)
           maxDepthThreshold={1} // Upper edge for the depthTexture interpolation (default = 0)
           depthToBlurRatioBias={0.25} // Adds a bias factor to the depthTexture before calculating the blur amount [bl
-          debug={0}
+          // debug={0}
           reflectorOffset={0.02} // Offsets the virtual camera that projects the reflection. Useful when the reflective
         ></MeshReflectorMaterial>
       </mesh>
