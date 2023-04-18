@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { useBox, useRaycastVehicle } from "@react-three/cannon";
-import { Quaternion, Vector3 } from "three";
+import { Group, Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -21,13 +21,13 @@ const Car = ({ thirdPerson }: any) => {
       : `http://localhost:3000/models/car.glb`
   ).scene;
 
-  const position = [-1.5, 0.5, 3];
+  const position: [number, number, number] = [-1.5, 0.5, 3];
   const width = 0.15;
   const height = 0.07;
   const front = 0.15;
   const wheelRadius = 0.05;
 
-  const chassisBodyArgs = [width, height, front * 2];
+  const chassisBodyArgs: [number, number, number] = [width, height, front * 2];
   const [chassisBody, chassisApi] = useBox(
     () => ({
       allowSleep: false,
@@ -35,7 +35,7 @@ const Car = ({ thirdPerson }: any) => {
       mass: 150,
       position,
     }),
-    useRef(null)
+    useRef<Group>(null)
   );
 
   const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
@@ -46,7 +46,7 @@ const Car = ({ thirdPerson }: any) => {
       wheelInfos,
       wheels,
     }),
-    useRef(null)
+    useRef<Group>(null)
   );
 
   useControls({ vehicleApi, chassisApi });
@@ -55,10 +55,14 @@ const Car = ({ thirdPerson }: any) => {
     if (!thirdPerson) return;
 
     let position = new Vector3(0, 0, 0);
-    position.setFromMatrixPosition(chassisBody.current.matrixWorld);
+    if (chassisBody.current?.matrixWorld) {
+      position.setFromMatrixPosition(chassisBody.current?.matrixWorld);
+    }
 
     let quaternion = new Quaternion(0, 0, 0, 0);
-    quaternion.setFromRotationMatrix(chassisBody.current.matrixWorld);
+    if (chassisBody.current?.matrixWorld) {
+      quaternion.setFromRotationMatrix(chassisBody.current?.matrixWorld);
+    }
 
     let wDir = new Vector3(0, 0, 1);
     wDir.applyQuaternion(quaternion);
@@ -79,7 +83,7 @@ const Car = ({ thirdPerson }: any) => {
     let mesh = result;
     mesh.scale.set(0.0012, 0.0012, 0.0012);
 
-    mesh.children[0].position.set(-365, -18, -67);
+    mesh.children[0]?.position.set(-365, -18, -67);
   }, [result]);
 
   return (
@@ -107,10 +111,14 @@ const Car = ({ thirdPerson }: any) => {
         <boxGeometry args={chassisBodyArgs} />
       </mesh> */}
 
-      <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
-      <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
-      <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
-      <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
+      {wheels && (
+        <>
+          <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
+          <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
+          <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
+          <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
+        </>
+      )}
     </group>
   );
 };
