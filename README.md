@@ -1,5 +1,7 @@
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 39 56 PM" src="https://user-images.githubusercontent.com/60039508/232783099-30a485b5-f079-456c-b794-e092e102f196.png">
 
+<img width="1280" alt="Screen Shot 2023-04-18 at 9 42 30 PM" src="https://user-images.githubusercontent.com/60039508/232783385-d1033489-e42d-4e92-aa19-1602e4e9b8e6.png">
+
 ![nextjs-threejs-portfolio1-min](https://user-images.githubusercontent.com/60039508/232768923-a3185c75-0176-4b94-a33f-c139f37a30fe.gif)
 
 ![nextjs-threejs-portfolio2](https://user-images.githubusercontent.com/60039508/232777466-32d9fe05-3ac4-484e-9324-e3f937a28a89.gif)
