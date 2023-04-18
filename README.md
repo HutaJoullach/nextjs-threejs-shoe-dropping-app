@@ -24,7 +24,7 @@ Simple three.js app to drop a shoe with your choise of mesh color. Login using y
 - Edit, delete shoe functionality.
 - Email modal, func to navbar.
 
-This code still contains type errors since project in ongoing, so if you fixed any issues on the code, please send me a pull request :-)
+This code still contains type errors since project in ongoing, so if you fixed any issues in the code, please send me a pull request :-)
 
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 46 12 PM" src="https://user-images.githubusercontent.com/60039508/232783945-a0df655e-4f54-433b-8c5c-393946f7003e.png">
 
