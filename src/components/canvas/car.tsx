@@ -10,6 +10,10 @@ import useWheels from "../canvas/vehicle-wheels";
 import WheelDebug from "../canvas/wheel-debug";
 
 const Car = ({ thirdPerson }: any) => {
+  // car physics functions are from this following repo.
+  // R3F-in-practice: https://github.com/Domenicobrz/R3F-in-practice
+  // many thanks to the detailed video of this code.
+
   let result = useLoader(
     GLTFLoader,
     process.env.PUBLIC_URL

@@ -461,6 +461,23 @@ export const RenderStoredObjects = () => {
 const Scene = () => {
   const { data, isLoading: objectsLoading } = api.objects.getAll.useQuery();
 
+  const [thirdPerson, setThirdPerson] = useState(false);
+  const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
+
+  useEffect(() => {
+    function keydownHandler(e) {
+      if (e.key == "k") {
+        // random is necessary to trigger a state change
+        if (thirdPerson)
+          setCameraPosition([-6, 3.9, 6.21 + Math.random() * 0.01]);
+        setThirdPerson(!thirdPerson);
+      }
+    }
+
+    window.addEventListener("keydown", keydownHandler);
+    return () => window.removeEventListener("keydown", keydownHandler);
+  }, [thirdPerson]);
+
   return (
     <Suspense fallback={null}>
       <Environment
@@ -472,11 +489,13 @@ const Scene = () => {
         background={"only"}
       />
       <PerspectiveCamera makeDefault position={[-1, 1.9, 6.21]} fov={40} />
-      <OrbitControls target={[-2.64, -0.71, 0.03]} />
+      {/* <OrbitControls target={[-2.64, -0.71, 0.03]} /> */}
+      {!thirdPerson && <OrbitControls target={[-2.64, -0.71, 0.03]} />}
 
       <Ground />
       <RenderStoredObjects />
-      <Car />
+      {/* <Car /> */}
+      <Car thirdPerson={thirdPerson} />
     </Suspense>
   );
 };
