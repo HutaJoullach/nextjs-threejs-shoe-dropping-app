@@ -3,109 +3,36 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import CanvasLoader from "./canvas-loader";
 
 import { Canvas, useFrame } from "@react-three/fiber";
+import { AnimationAction } from "three";
 import {
   OrbitControls,
   Preload,
   useAnimations,
   useGLTF,
 } from "@react-three/drei";
-import * as THREE from "three";
 
 type StagProps = {
   isMobile?: boolean | undefined;
 };
 
 const Stag = ({ isMobile }: StagProps) => {
-  // const stag = useGLTF("./models/Stag.gltf");
-  // const { animations } = stag;
-  // const { actions } = useAnimations(animations);
   const { scene, animations } = useGLTF("./models/Stag.gltf");
   const { ref, mixer, names, actions, clips } = useAnimations(
     animations,
     scene
   );
 
-  const currentAction = useRef(null);
-  const nextAction = useRef(null);
+  const currentAction = useRef<AnimationAction | null | undefined>(null);
+  const nextAction = useRef<AnimationAction | null | undefined>(null);
 
   useEffect(() => {
     currentAction.current = actions["Idle"];
-    currentAction.current.play();
+    currentAction.current?.play();
   }, []);
-
-  // useFrame((state, delta) => {
-  //   mixer.update(delta);
-  //   if (
-  //     currentAction.current &&
-  //     currentAction.current.isFinished !== undefined &&
-  //     currentAction.current.isFinished()
-  //   ) {
-  //     currentAction.current.stop();
-  //     nextAction.current.play();
-  //     currentAction.current = nextAction.current;
-  //     nextAction.current = null;
-  //     console.log("current action");
-  //     console.log(nextAction.current);
-  //   }
-  // });
 
   useFrame((state, delta) => {
     mixer.update(delta);
   });
-
-  // useEffect(() => {
-  //   if (
-  //     currentAction.current &&
-  //     currentAction.current.isFinished !== undefined &&
-  //     currentAction.current.isFinished()
-  //   ) {
-  //     currentAction.current.stop();
-  //     if (nextAction.current) {
-  //       nextAction.current.play();
-  //       currentAction.current = nextAction.current;
-  //       nextAction.current = null;
-  //     } else {
-  //       currentAction.current.play();
-  //     }
-  //   }
-  // }, [currentAction.current]);
-
-  // useEffect(() => {
-  //   if (currentAction.current) {
-  //     if (nextAction.current) {
-  //       nextAction.current.play();
-  //       currentAction.current = nextAction.current;
-  //       nextAction.current = null;
-  //     } else {
-  //       currentAction.current.play();
-  //     }
-  //   }
-  // }, [currentAction.current, nextAction.current]);
-
-  // useEffect(() => {
-  //   if (
-  //     currentAction.current &&
-  //     currentAction.current.loop === THREE.LoopOnce &&
-  //     currentAction.current.time === currentAction.current._clip.duration
-  //   ) {
-  //     currentAction.current.stop();
-  //     if (nextAction.current) {
-  //       nextAction.current.play();
-  //       currentAction.current = nextAction.current;
-  //       nextAction.current = null;
-  //     } else {
-  //       currentAction.current.play();
-  //     }
-  //   }
-  // }, [currentAction.current]);
-
-  // const handleGallopPress = () => {
-  //   if (currentAction.current !== actions["Gallop"]) {
-  //     nextAction.current = actions["Gallop"];
-  //     console.log("handleGallopPress called!!!");
-  //     console.log(nextAction.current);
-  //   }
-  // };
 
   type updateActionRefProps = {
     actionType: string;
@@ -113,13 +40,13 @@ const Stag = ({ isMobile }: StagProps) => {
 
   const updateActionRef = ({ actionType }: updateActionRefProps) => {
     if (currentAction.current !== actions[`${actionType}`]) {
-      currentAction.current.stop();
+      currentAction.current?.stop();
       nextAction.current = actions[`${actionType}`];
-      nextAction.current.play();
+      nextAction.current?.play();
       currentAction.current = nextAction.current;
       nextAction.current = null;
     } else {
-      currentAction.current.play();
+      currentAction.current?.play();
     }
   };
 
@@ -129,16 +56,6 @@ const Stag = ({ isMobile }: StagProps) => {
 
   const handleAttackKickPress = () => {
     updateActionRef({ actionType: "Attack_Kick" });
-
-    // if (currentAction.current !== actions["Attack_Kick"]) {
-    //   currentAction.current.stop();
-    //   nextAction.current = actions["Attack_Kick"];
-    //   nextAction.current.play();
-    //   currentAction.current = nextAction.current;
-    //   nextAction.current = null;
-    // } else {
-    //   currentAction.current.play();
-    // }
   };
 
   const handleEatingPress = () => {
@@ -153,21 +70,6 @@ const Stag = ({ isMobile }: StagProps) => {
     updateActionRef({ actionType: "Idle" });
   };
 
-  // const [isStagMounted, setIsStagMounted] = useState(true);
-
-  // let interval: NodeJS.Timer;
-  // useEffect(() => {
-  //   if (isStagMounted) {
-  //     interval = setInterval(() => {
-  //       // setSeconds((seconds) => seconds + 1);
-  //       actions?.Idle?.play();
-  //     }, 1000);
-  //   } else if (!isStagMounted) {
-  //     clearInterval(interval);
-  //   }
-  //   return () => clearInterval(interval);
-  // }, [isStagMounted]);
-
   interface IControls {
     w?: boolean | undefined;
     s?: boolean | undefined;
@@ -177,7 +79,7 @@ const Stag = ({ isMobile }: StagProps) => {
 
   let [controls, setControls] = useState<IControls>({});
   useEffect(() => {
-    const keyDownPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const keyDownPressHandler = (e: KeyboardEvent) => {
       setControls((controls) => ({ [e.key.toLowerCase()]: true }));
     };
     window.addEventListener("keydown", keyDownPressHandler);
@@ -213,7 +115,6 @@ const Stag = ({ isMobile }: StagProps) => {
       />
       <pointLight intensity={1} />
       <primitive
-        // object={stag.scene}
         object={scene}
         scale={isMobile ? 0.7 : 0.75}
         position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
@@ -234,7 +135,7 @@ const StagCanvas = () => {
     setIsMobile(mediaQuery.matches);
 
     // Define a callback function to handle changes to the media query
-    const handleMediaQueryChange = (event) => {
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
       setIsMobile(event.matches);
     };
 
@@ -249,7 +150,6 @@ const StagCanvas = () => {
 
   return (
     <Canvas
-      // frameloop="demand"
       frameloop="always"
       shadows
       dpr={[1, 2]}
