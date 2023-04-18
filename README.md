@@ -26,8 +26,6 @@ Simple three.js app to drop a shoe with your choise of mesh color. Login using y
 
 This code still contains type errors since project in ongoing, so if you fixed any issues on the code, please send me a pull request :-)
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 46 12 PM" src="https://user-images.githubusercontent.com/60039508/232783945-a0df655e-4f54-433b-8c5c-393946f7003e.png">
 
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 46 51 PM" src="https://user-images.githubusercontent.com/60039508/232784157-f4a5fca5-0d24-499d-860a-7e289a010045.png">
