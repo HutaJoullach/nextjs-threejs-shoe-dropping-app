@@ -1,6 +1,6 @@
 #  Next.js, Three.js, shoe dropping app
 
-Simple three.js app to drop a shoe with your choise of mesh color. Login using your Github account and add your shoe.
+Simple three.js app to drop a shoe with your choice of mesh color. Login using your Github account and add your shoe.
 
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 39 56 PM" src="https://user-images.githubusercontent.com/60039508/232783099-30a485b5-f079-456c-b794-e092e102f196.png">
 
