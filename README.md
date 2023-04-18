@@ -6,6 +6,14 @@ Simple three.js app to drop a shoe with your choise of mesh color. Login using y
 
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 42 30 PM" src="https://user-images.githubusercontent.com/60039508/232783385-d1033489-e42d-4e92-aa19-1602e4e9b8e6.png">
 
+## How do run the app?
+
+- run `npm install`
+- Signup and create an account for PlanetScale, Clerk, and Upstash if you don't have.
+- Create .env file and add "DATABASE_URL" for PlanetScale, "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY" and "CLERK_SECRET_KEY" for Clerk, "UPSTASH_REDIS_REST_URL" and "UPSTASH_REDIS_REST_TOKEN" for Upstash.
+- run `npx prisma studio` to connect to Prisma db.
+- run `npm run dev` for the frontend.
+
 ![nextjs-threejs-portfolio1-min](https://user-images.githubusercontent.com/60039508/232768923-a3185c75-0176-4b94-a33f-c139f37a30fe.gif)
 
 ![nextjs-threejs-portfolio2](https://user-images.githubusercontent.com/60039508/232777466-32d9fe05-3ac4-484e-9324-e3f937a28a89.gif)
@@ -13,18 +21,6 @@ Simple three.js app to drop a shoe with your choise of mesh color. Login using y
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 46 12 PM" src="https://user-images.githubusercontent.com/60039508/232783945-a0df655e-4f54-433b-8c5c-393946f7003e.png">
 
 <img width="1280" alt="Screen Shot 2023-04-18 at 9 46 51 PM" src="https://user-images.githubusercontent.com/60039508/232784157-f4a5fca5-0d24-499d-860a-7e289a010045.png">
-
-## What's next? How do I make an app with this?
-
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
 
 ## Learn More
 
