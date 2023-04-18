@@ -70,35 +70,17 @@ const Stag = ({ isMobile }: StagProps) => {
   //   }
   // }, [currentAction.current]);
 
-  useEffect(() => {
-    // if (currentAction.current && !currentAction.current.loop) {
-    if (currentAction.current) {
-      console.log("loop");
-
-      // if (currentAction.current.time === currentAction.current._clip.duration) {
-      //   currentAction.current.stop();
-      //   console.log("time");
-
-      //   if (nextAction.current) {
-      //     nextAction.current.play();
-      //     currentAction.current = nextAction.current;
-      //     nextAction.current = null;
-      //   } else {
-      //     currentAction.current.play();
-      //   }
-      // }
-      if (nextAction.current) {
-        console.log("hey");
-        console.log(nextAction.current);
-
-        nextAction.current.play();
-        currentAction.current = nextAction.current;
-        nextAction.current = null;
-      } else {
-        currentAction.current.play();
-      }
-    }
-  }, [currentAction.current, nextAction.current]);
+  // useEffect(() => {
+  //   if (currentAction.current) {
+  //     if (nextAction.current) {
+  //       nextAction.current.play();
+  //       currentAction.current = nextAction.current;
+  //       nextAction.current = null;
+  //     } else {
+  //       currentAction.current.play();
+  //     }
+  //   }
+  // }, [currentAction.current, nextAction.current]);
 
   // useEffect(() => {
   //   if (
@@ -125,20 +107,50 @@ const Stag = ({ isMobile }: StagProps) => {
   //   }
   // };
 
-  const handleGallopPress = () => {
-    if (currentAction.current !== actions["Gallop"]) {
+  type updateActionRefProps = {
+    actionType: string;
+  };
+
+  const updateActionRef = ({ actionType }: updateActionRefProps) => {
+    if (currentAction.current !== actions[`${actionType}`]) {
       currentAction.current.stop();
-      nextAction.current = actions["Gallop"];
+      nextAction.current = actions[`${actionType}`];
       nextAction.current.play();
+      currentAction.current = nextAction.current;
+      nextAction.current = null;
+    } else {
+      currentAction.current.play();
     }
   };
 
+  const handleGallopPress = () => {
+    updateActionRef({ actionType: "Gallop" });
+  };
+
   const handleAttackKickPress = () => {
-    if (currentAction.current !== actions["Attack_Kick"]) {
-      currentAction.current.stop();
-      nextAction.current = actions["Attack_Kick"];
-      nextAction.current.play();
-    }
+    updateActionRef({ actionType: "Attack_Kick" });
+
+    // if (currentAction.current !== actions["Attack_Kick"]) {
+    //   currentAction.current.stop();
+    //   nextAction.current = actions["Attack_Kick"];
+    //   nextAction.current.play();
+    //   currentAction.current = nextAction.current;
+    //   nextAction.current = null;
+    // } else {
+    //   currentAction.current.play();
+    // }
+  };
+
+  const handleEatingPress = () => {
+    updateActionRef({ actionType: "Eating" });
+  };
+
+  const handleWalkPress = () => {
+    updateActionRef({ actionType: "Walk" });
+  };
+
+  const handleIdlePress = () => {
+    updateActionRef({ actionType: "Idle" });
   };
 
   // const [isStagMounted, setIsStagMounted] = useState(true);
@@ -177,24 +189,18 @@ const Stag = ({ isMobile }: StagProps) => {
   useEffect(() => {
     if (controls.w) {
       handleGallopPress();
-      // console.log(animations);
-      // console.log(currentAction);
-      // console.log(nextAction);
     } else if (controls.s) {
       handleAttackKickPress();
-      // actions?.Attack_Kick?.play();
     } else if (controls.a) {
-      // actions?.Eating?.play();
+      handleEatingPress();
     } else if (controls.d) {
-      // actions?.Walk?.play();
+      handleWalkPress();
     } else {
-      // actions?.Idle?.play();
+      handleIdlePress();
     }
-    console.log(controls);
   }, [controls]);
 
   return (
-    // <mesh onKeyDown={handleKeyDown} tabIndex={0}>
     <mesh>
       <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
