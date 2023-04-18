@@ -9,7 +9,9 @@ import {
   Preload,
   useAnimations,
   useGLTF,
+  Text,
 } from "@react-three/drei";
+import * as THREE from "three";
 
 type StagProps = {
   isMobile?: boolean | undefined;
@@ -119,11 +121,9 @@ const Stag = ({ isMobile }: StagProps) => {
       <pointLight intensity={1} />
       <primitive
         object={scene}
-        // scale={isMobile ? 0.7 : 0.75}
-        scale={isMobile ? 1.3 : 1.2}
-        // position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
-        position={isMobile ? [0, -4, -0.2] : [0, -2.65, -1.5]}
-        rotation={[-0.01, 0.65, -0.1]}
+        scale={isMobile ? 1.1 : 1.2}
+        position={isMobile ? [0, -4, -1] : [0, -2.65, -1.5]}
+        rotation={[-0.01, 1.9, -0.1]}
       />
     </mesh>
   );
@@ -167,6 +167,56 @@ const StagCanvas = () => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
+        <Text
+          color="white"
+          anchorX="right"
+          anchorY="top-baseline"
+          fontSize={isMobile ? 0.24 : 0.5}
+          position={[-1, 2, 1.3]}
+          rotation={[-0.01, 1.9, -0.1]}
+        >
+          wanna see my cool trick?
+        </Text>
+        <Text
+          color="#fc8181"
+          anchorX="right"
+          anchorY="middle"
+          fontSize={isMobile ? 0.24 : 0.5}
+          position={[-1.5, 1, 1.9]}
+          rotation={[-0.01, 1.9, -0.1]}
+        >
+          press 'w' to gallop
+        </Text>
+        <Text
+          color="white"
+          anchorX="right"
+          anchorY="middle"
+          fontSize={isMobile ? 0.24 : 0.5}
+          position={[-1.4, 0, 1.7]}
+          rotation={[-0.01, 1.9, -0.1]}
+        >
+          press 's' to kick
+        </Text>
+        <Text
+          color="#fc8181"
+          anchorX="right"
+          anchorY="middle"
+          fontSize={isMobile ? 0.24 : 0.5}
+          position={[-0.8, -1, 1.3]}
+          rotation={[-0.01, 1.9, -0.1]}
+        >
+          press 'a' to eat
+        </Text>
+        <Text
+          color="white"
+          anchorX="right"
+          anchorY="middle"
+          fontSize={isMobile ? 0.24 : 0.5}
+          position={[0, -2, 1.5]}
+          rotation={[-0.01, 1.9, -0.1]}
+        >
+          press 'd' to walk
+        </Text>
         <Stag isMobile={isMobile} />
       </Suspense>
 
