@@ -1,3 +1,5 @@
+![nextjs-threejs-portfolio1-min](https://user-images.githubusercontent.com/60039508/232768923-a3185c75-0176-4b94-a33f-c139f37a30fe.gif)
+
 # Create T3 App
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
