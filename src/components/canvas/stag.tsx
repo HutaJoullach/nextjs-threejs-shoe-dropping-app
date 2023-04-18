@@ -16,6 +16,9 @@ type StagProps = {
 };
 
 const Stag = ({ isMobile }: StagProps) => {
+  // gltf file from Quaternius. Twitter account: https://twitter.com/quaternius
+  // The link for website: https://quaternius.com/index.html
+  // Thanks for the cool free assets :-)
   const { scene, animations } = useGLTF("./models/Stag.gltf");
   const { ref, mixer, names, actions, clips } = useAnimations(
     animations,
@@ -106,7 +109,7 @@ const Stag = ({ isMobile }: StagProps) => {
     <mesh>
       <hemisphereLight intensity={0.15} groundColor="black" />
       <spotLight
-        position={[-20, 50, 10]}
+        position={[30, 50, 10]}
         angle={0.12}
         penumbra={1}
         intensity={1}
@@ -116,9 +119,11 @@ const Stag = ({ isMobile }: StagProps) => {
       <pointLight intensity={1} />
       <primitive
         object={scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
-        rotation={[-0.01, -0.2, -0.1]}
+        // scale={isMobile ? 0.7 : 0.75}
+        scale={isMobile ? 1.3 : 1.2}
+        // position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
+        position={isMobile ? [0, -4, -0.2] : [0, -2.65, -1.5]}
+        rotation={[-0.01, 0.65, -0.1]}
       />
     </mesh>
   );

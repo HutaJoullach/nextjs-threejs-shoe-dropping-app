@@ -40,8 +40,9 @@ const Home: NextPage = () => {
             </p>
           </div>
         </div>
-        {/* <DogCanvas /> */}
-        <StagCanvas />
+        <div className="h-3/4">
+          <StagCanvas />
+        </div>
       </div>
     );
   };
