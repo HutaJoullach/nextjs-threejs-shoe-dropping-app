@@ -568,10 +568,9 @@ const Sandbox: NextPage = () => {
               shouldInvalidate={true}
               allowSleep={false}
               axisIndex={0}
-              // defaultContactMaterial={1e6}
               defaultContactMaterial={{
                 friction: 0.3,
-                restitution: 0.5,
+                restitution: 0,
                 contactEquationStiffness: 1e7,
                 contactEquationRelaxation: 3,
                 frictionEquationStiffness: 1e7,
