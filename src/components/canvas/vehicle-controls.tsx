@@ -22,11 +22,11 @@ const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
   let [controls, setControls] = useState<IControls>({});
 
   useEffect(() => {
-    const keyDownPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const keyDownPressHandler = (e: KeyboardEvent) => {
       setControls((controls) => ({ ...controls, [e.key.toLowerCase()]: true }));
     };
 
-    const keyUpPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const keyUpPressHandler = (e: KeyboardEvent) => {
       setControls((controls) => ({
         ...controls,
         [e.key.toLowerCase()]: false,

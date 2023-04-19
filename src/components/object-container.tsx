@@ -6,6 +6,7 @@ import { useGLTF } from "@react-three/drei";
 import ColliderBox from "./canvas/collider-box";
 import { useBox } from "@react-three/cannon";
 import * as THREE from "three";
+import { GLTF as GLTFStd } from "three-stdlib";
 
 // type ObjectWrapperProps = {
 //   objectType: string;
@@ -41,11 +42,16 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   // console.log(`${object.bandData}`);
   // console.log(`${object.patchData}`);
 
+  interface CustomGLTF extends GLTFStd {
+    nodes: Record<string, THREE.Object3D>;
+    materials: Record<string, THREE.Material>;
+  }
+
   const { nodes, materials, scene } = useGLTF(
     "http://localhost:3000/models/shoe-draco.glb"
-  );
+  ) as CustomGLTF;
 
-  const position = [
+  const position: [number, number, number] = [
     (0.5 - Math.random()) * 7,
     20 + (0.5 - Math.random()) * 2,
     (0.5 - Math.random()) * 7,
@@ -54,7 +60,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   const height = 0.07;
   const front = 0.15;
 
-  const shoeBodyArgs = [width, height, front * 2];
+  const shoeBodyArgs: [number, number, number] = [width, height, front * 2];
   const [shoeBody, shoeApi] = useBox(
     () => ({
       allowSleep: false,
@@ -62,7 +68,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
       mass: 1,
       position,
     }),
-    useRef(null)
+    useRef<THREE.Group>(null)
   );
 
   const lacesMaterial = useMemo(() => {
@@ -117,7 +123,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     <group ref={shoeBody} dispose={null} scale={0.06}>
       <ambientLight intensity={0.008} />
       <mesh
-        geometry={nodes.shoe.geometry}
+        geometry={nodes.shoe?.geometry}
         // material={materials.laces}
         // material-color={
         //   object.lacesData ? object.lacesData : fallbackColor.shoe.laces

@@ -409,7 +409,7 @@ const CreateObjectWizard = () => {
       onPointerOut={() => setHovered(false)}
       onClick={(e) => {
         e.stopPropagation();
-        document.getElementById("Shoe." + e.object.material.name).focus();
+        document.getElementById("Shoe." + e.object.material.name)?.focus();
       }}
     >
       <mesh geometry={nodes.shoe.geometry} material={materials.laces} />
@@ -465,7 +465,7 @@ const Scene = () => {
   const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
 
   useEffect(() => {
-    function keydownHandler(e) {
+    function keydownHandler(e: KeyboardEvent) {
       if (e.key == "k") {
         // random is necessary to trigger a state change
         if (thirdPerson)
@@ -564,11 +564,19 @@ const Sandbox: NextPage = () => {
               size={100}
               tolerance={0.001}
               iterations={5}
-              step={1 / 60}
+              // step={1 / 60}
               shouldInvalidate={true}
               allowSleep={false}
               axisIndex={0}
-              defaultContactMaterial={1e6}
+              // defaultContactMaterial={1e6}
+              defaultContactMaterial={{
+                friction: 0.3,
+                restitution: 0.5,
+                contactEquationStiffness: 1e7,
+                contactEquationRelaxation: 3,
+                frictionEquationStiffness: 1e7,
+                frictionEquationRelaxation: 3,
+              }}
             >
               <Scene />
             </Physics>
