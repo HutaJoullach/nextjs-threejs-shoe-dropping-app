@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, MutableRefObject } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { useBox, useRaycastVehicle } from "@react-three/cannon";
 import { Group, Quaternion, Vector3 } from "three";
@@ -38,19 +38,62 @@ const Car = ({ thirdPerson }: any) => {
     useRef<Group>(null)
   );
 
-  const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
+  // type WheelInfos = {
+  //   chassisConnectionPointLocal: number[];
+  //   isFrontWheel: boolean;
+  //   radius: number;
+  //   directionLocal: number[];
+  //   axleLocal: number[];
+  //   suspensionStiffness: number;
+  //   suspensionRestLength: number;
+  //   frictionSlip: number;
+  //   dampingRelaxation: number;
+  //   dampingCompression: number;
+  //   maxSuspensionForce: number;
+  //   rollInfluence: number;
+  //   maxSuspensionTravel: number;
+  //   customSlidingRotationalSpeed: number;
+  //   useCustomSlidingRotationalSpeed: boolean;
+  // }[];
 
-  // fix those errors
+  // const [wheels, wheelInfos]: MutableRefObject<null>[] | WheelInfos = useWheels(
+  //   {
+  //     width,
+  //     height,
+  //     front,
+  //     wheelRadius,
+  //   }
+  // );
+
+  const { wheels, wheelInfos }: any = useWheels({
+    width,
+    height,
+    front,
+    wheelRadius,
+  });
+
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
       chassisBody,
-      // @ts-ignore
       wheelInfos,
-      // @ts-ignore
       wheels,
     }),
     useRef<Group>(null)
   );
+
+  // const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
+
+  // fix those errors
+  // const [vehicle, vehicleApi] = useRaycastVehicle(
+  //   () => ({
+  //     chassisBody,
+  //     // @ts-ignore
+  //     wheelInfos,
+  //     // @ts-ignore
+  //     wheels,
+  //   }),
+  //   useRef<Group>(null)
+  // );
 
   useControls({ vehicleApi, chassisApi });
 

@@ -68,7 +68,7 @@ const useWheels = ({
     type: "Kinematic",
   });
 
-  // fix those errors
+  // fix those
   // @ts-ignore
   useCompoundBody(propsFunc, wheels[0]);
   // @ts-ignore
@@ -78,7 +78,12 @@ const useWheels = ({
   // @ts-ignore
   useCompoundBody(propsFunc, wheels[3]);
 
-  return [wheels, wheelInfos];
+  // return [wheels, wheelInfos];
+
+  return {
+    wheels,
+    wheelInfos,
+  };
 };
 
 export default useWheels;
