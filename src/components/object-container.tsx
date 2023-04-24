@@ -1,5 +1,4 @@
-import { Suspense, useRef, useState, useMemo } from "react";
-import Link from "next/link";
+import { useRef, useState, useMemo } from "react";
 import type { RouterOutputs } from "~/utils/api";
 
 import { useGLTF } from "@react-three/drei";
@@ -33,15 +32,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     },
   });
 
-  // console.log(`${object.lacesData}`);
-  // console.log(`${object.meshData}`);
-  // console.log(`${object.capsData}`);
-  // console.log(`${object.innerData}`);
-  // console.log(`${object.soleData}`);
-  // console.log(`${object.stripesData}`);
-  // console.log(`${object.bandData}`);
-  // console.log(`${object.patchData}`);
-
   interface CustomGLTF extends GLTFStd {
     nodes: Record<string, THREE.Object3D>;
     materials: Record<string, THREE.Material>;
@@ -71,12 +61,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     useRef<THREE.Group>(null)
   );
 
-  // const lacesMaterial = useMemo(() => {
-  //   const material = materials.laces.clone();
-  //   material.color = new THREE.Color(object.lacesData);
-  //   return material;
-  // }, [object.lacesData]);
-
   const lacesMaterial = useMemo(() => {
     const material = materials?.laces?.clone();
     // fixing type errors for color of Material, and ColorRepresentation will break the code. Ignoring the errors for now.
@@ -84,12 +68,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     material.color = new THREE.Color(object.lacesData);
     return material;
   }, [object.lacesData]);
-
-  // const meshMaterial = useMemo(() => {
-  //   const material = materials.mesh.clone();
-  //   material.color = new THREE.Color(object.meshData);
-  //   return material;
-  // }, [object.meshData]);
 
   const meshMaterial = useMemo(() => {
     const material = materials?.mesh?.clone();
@@ -99,12 +77,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     return material;
   }, [object.meshData]);
 
-  // const capsMaterial = useMemo(() => {
-  //   const material = materials.caps.clone();
-  //   material.color = new THREE.Color(object.capsData);
-  //   return material;
-  // }, [object.capsData]);
-
   const capsMaterial = useMemo(() => {
     const material = materials?.caps?.clone();
     // fixing type errors for color of Material, and ColorRepresentation will break the code. Ignoring the errors for now.
@@ -112,12 +84,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     material.color = new THREE.Color(object.capsData);
     return material;
   }, [object.capsData]);
-
-  // const innerMaterial = useMemo(() => {
-  //   const material = materials.inner.clone();
-  //   material.color = new THREE.Color(object.innerData);
-  //   return material;
-  // }, [object.innerData]);
 
   const innerMaterial = useMemo(() => {
     const material = materials?.inner?.clone();
@@ -127,12 +93,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     return material;
   }, [object.innerData]);
 
-  // const soleMaterial = useMemo(() => {
-  //   const material = materials.sole.clone();
-  //   material.color = new THREE.Color(object.soleData);
-  //   return material;
-  // }, [object.soleData]);
-
   const soleMaterial = useMemo(() => {
     const material = materials?.sole?.clone();
     // fixing type errors for color of Material, and ColorRepresentation will break the code. Ignoring the errors for now.
@@ -140,12 +100,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     material.color = new THREE.Color(object.soleData);
     return material;
   }, [object.soleData]);
-
-  // const stripesMaterial = useMemo(() => {
-  //   const material = materials.stripes.clone();
-  //   material.color = new THREE.Color(object.stripesData);
-  //   return material;
-  // }, [object.stripesData]);
 
   const stripesMaterial = useMemo(() => {
     const material = materials?.stripes?.clone();
@@ -155,12 +109,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     return material;
   }, [object.stripesData]);
 
-  // const bandMaterial = useMemo(() => {
-  //   const material = materials.band.clone();
-  //   material.color = new THREE.Color(object.bandData);
-  //   return material;
-  // }, [object.bandData]);
-
   const bandMaterial = useMemo(() => {
     const material = materials?.band?.clone();
     // fixing type errors for color of Material, and ColorRepresentation will break the code. Ignoring the errors for now.
@@ -168,12 +116,6 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     material.color = new THREE.Color(object.bandData);
     return material;
   }, [object.bandData]);
-
-  // const patchMaterial = useMemo(() => {
-  //   const material = materials.patch.clone();
-  //   material.color = new THREE.Color(object.patchData);
-  //   return material;
-  // }, [object.patchData]);
 
   const patchMaterial = useMemo(() => {
     const material = materials?.patch?.clone();
