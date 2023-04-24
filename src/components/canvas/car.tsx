@@ -72,46 +72,33 @@ const Car = ({ thirdPerson }: any) => {
     wheelRadius,
   });
 
-  // const [vehicle, vehicleApi] = useRaycastVehicle(
-  //   () => ({
-  //     chassisBody,
-  //     wheelInfos,
-  //     wheels,
-  //   }),
-  //   useRef<Group>(null)
-  // );
+  const [vehicle, vehicleApi] = useRaycastVehicle(
+    () => ({
+      chassisBody,
+      wheelInfos,
+      wheels,
+    }),
+    useRef<Group>(null)
+  );
 
-  let myVehicle;
-  let myVehicleApi;
-  if (chassisBody && wheelInfos && wheels) {
-    const [vehicle, vehicleApi] = useRaycastVehicle(
-      () => ({
-        chassisBody,
-        wheelInfos,
-        wheels,
-      }),
-      useRef<Group>(null)
-    );
-    myVehicle = vehicle;
-    myVehicleApi = vehicleApi;
-  }
-
+  // const { wheels, wheelInfos } = useWheels({
+  //   width,
+  //   height,
+  //   front,
+  //   wheelRadius,
+  // });
   // const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
 
-  // fix those errors
   // const [vehicle, vehicleApi] = useRaycastVehicle(
   //   () => ({
   //     chassisBody,
-  //     // @ts-ignore
   //     wheelInfos,
-  //     // @ts-ignore
   //     wheels,
   //   }),
   //   useRef<Group>(null)
   // );
 
-  // useControls({ vehicleApi, chassisApi });
-  useControls({ myVehicleApi, chassisApi });
+  useControls({ vehicleApi, chassisApi });
 
   useFrame((state) => {
     if (!thirdPerson) return;
@@ -149,8 +136,7 @@ const Car = ({ thirdPerson }: any) => {
   }, [result]);
 
   return (
-    // <group ref={vehicle} name="vehicle">
-    <group ref={myVehicle} name="vehicle">
+    <group ref={vehicle} name="vehicle">
       <group ref={chassisBody} name="chassisBody">
         <primitive
           object={result}

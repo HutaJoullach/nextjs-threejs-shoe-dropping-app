@@ -1,5 +1,10 @@
 import { useRef } from "react";
-import { useCompoundBody } from "@react-three/cannon";
+import {
+  useCompoundBody,
+  CompoundBodyProps,
+  CylinderProps,
+  ShapeType,
+} from "@react-three/cannon";
 
 type useWheelsProps = {
   width: number;
@@ -71,11 +76,26 @@ const useWheels = ({
     },
   ];
 
-  const propsFunc = () => ({
+  // const propsFunc = () => ({
+  //   collisionFilterGroup: 0,
+  //   mass: 1,
+  //   shapes: [
+  //     {
+  //       args: [wheelInfo.radius, wheelInfo.radius, 0.015, 16],
+  //       rotation: [0, 0, -Math.PI / 2],
+  //       type: "Cylinder",
+  //     },
+  //   ],
+  //   type: "Kinematic",
+  // });
+
+  const propsFunc = (index: number): CompoundBodyProps => ({
     collisionFilterGroup: 0,
     mass: 1,
     shapes: [
       {
+        // args does not exist on ShapeType.
+        // @ts-ignore
         args: [wheelInfo.radius, wheelInfo.radius, 0.015, 16],
         rotation: [0, 0, -Math.PI / 2],
         type: "Cylinder",
@@ -84,14 +104,9 @@ const useWheels = ({
     type: "Kinematic",
   });
 
-  // fix those
-  // @ts-ignore
   useCompoundBody(propsFunc, wheels[0]);
-  // @ts-ignore
   useCompoundBody(propsFunc, wheels[1]);
-  // @ts-ignore
   useCompoundBody(propsFunc, wheels[2]);
-  // @ts-ignore
   useCompoundBody(propsFunc, wheels[3]);
 
   // return [wheels, wheelInfos];
