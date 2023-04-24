@@ -40,10 +40,13 @@ const Car = ({ thirdPerson }: any) => {
 
   const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
 
+  // fix those errors
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
       chassisBody,
+      // @ts-ignore
       wheelInfos,
+      // @ts-ignore
       wheels,
     }),
     useRef<Group>(null)

@@ -71,51 +71,115 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     useRef<THREE.Group>(null)
   );
 
+  // const lacesMaterial = useMemo(() => {
+  //   const material = materials.laces.clone();
+  //   material.color = new THREE.Color(object.lacesData);
+  //   return material;
+  // }, [object.lacesData]);
+
   const lacesMaterial = useMemo(() => {
-    const material = materials.laces.clone();
-    material.color = new THREE.Color(object.lacesData);
+    const material = materials?.laces?.clone();
+    if (material instanceof THREE.MeshBasicMaterial) {
+      material.color = new THREE.Color(`#${object.lacesData}`);
+    }
     return material;
   }, [object.lacesData]);
 
+  // const meshMaterial = useMemo(() => {
+  //   const material = materials.mesh.clone();
+  //   material.color = new THREE.Color(object.meshData);
+  //   return material;
+  // }, [object.meshData]);
+
   const meshMaterial = useMemo(() => {
-    const material = materials.mesh.clone();
-    material.color = new THREE.Color(object.meshData);
+    const material = materials?.mesh?.clone();
+    if (material instanceof THREE.MeshBasicMaterial) {
+      material.color = new THREE.Color(`#${object.meshData}`);
+    }
     return material;
   }, [object.meshData]);
 
+  // const capsMaterial = useMemo(() => {
+  //   const material = materials.caps.clone();
+  //   material.color = new THREE.Color(object.capsData);
+  //   return material;
+  // }, [object.capsData]);
+
   const capsMaterial = useMemo(() => {
-    const material = materials.caps.clone();
-    material.color = new THREE.Color(object.capsData);
+    const material = materials?.caps?.clone();
+    if (material instanceof THREE.MeshBasicMaterial) {
+      material.color = new THREE.Color(`#${object.capsData}`);
+    }
     return material;
   }, [object.capsData]);
 
+  // const innerMaterial = useMemo(() => {
+  //   const material = materials.inner.clone();
+  //   material.color = new THREE.Color(object.innerData);
+  //   return material;
+  // }, [object.innerData]);
+
   const innerMaterial = useMemo(() => {
-    const material = materials.inner.clone();
-    material.color = new THREE.Color(object.innerData);
+    const material = materials?.inner?.clone();
+    if (material instanceof THREE.MeshBasicMaterial) {
+      material.color = new THREE.Color(`#${object.innerData}`);
+    }
     return material;
   }, [object.innerData]);
 
+  // const soleMaterial = useMemo(() => {
+  //   const material = materials.sole.clone();
+  //   material.color = new THREE.Color(object.soleData);
+  //   return material;
+  // }, [object.soleData]);
+
   const soleMaterial = useMemo(() => {
-    const material = materials.sole.clone();
-    material.color = new THREE.Color(object.soleData);
+    const material = materials?.sole?.clone();
+    if (material instanceof THREE.MeshBasicMaterial) {
+      material.color = new THREE.Color(`#${object.soleData}`);
+    }
     return material;
   }, [object.soleData]);
 
+  // const stripesMaterial = useMemo(() => {
+  //   const material = materials.stripes.clone();
+  //   material.color = new THREE.Color(object.stripesData);
+  //   return material;
+  // }, [object.stripesData]);
+
   const stripesMaterial = useMemo(() => {
-    const material = materials.stripes.clone();
-    material.color = new THREE.Color(object.stripesData);
+    const material = materials?.stripes?.clone();
+    if (material instanceof THREE.MeshBasicMaterial) {
+      material.color = new THREE.Color(`#${object.stripesData}`);
+    }
     return material;
   }, [object.stripesData]);
 
+  // const bandMaterial = useMemo(() => {
+  //   const material = materials.band.clone();
+  //   material.color = new THREE.Color(object.bandData);
+  //   return material;
+  // }, [object.bandData]);
+
   const bandMaterial = useMemo(() => {
-    const material = materials.band.clone();
-    material.color = new THREE.Color(object.bandData);
+    const material = materials?.band?.clone();
+    if (material instanceof THREE.MeshBasicMaterial) {
+      material.color = new THREE.Color(`#${object.bandData}`);
+    }
     return material;
   }, [object.bandData]);
 
+  // const patchMaterial = useMemo(() => {
+  //   const material = materials.patch.clone();
+  //   material.color = new THREE.Color(object.patchData);
+  //   return material;
+  // }, [object.patchData]);
+
   const patchMaterial = useMemo(() => {
-    const material = materials.patch.clone();
-    material.color = new THREE.Color(object.patchData);
+    const material = materials?.patch?.clone();
+    if (material instanceof THREE.MeshBasicMaterial) {
+      material.color = new THREE.Color(`#${object.patchData}`);
+    }
     return material;
   }, [object.patchData]);
 

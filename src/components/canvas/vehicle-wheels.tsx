@@ -68,9 +68,14 @@ const useWheels = ({
     type: "Kinematic",
   });
 
+  // fix those errors
+  // @ts-ignore
   useCompoundBody(propsFunc, wheels[0]);
+  // @ts-ignore
   useCompoundBody(propsFunc, wheels[1]);
+  // @ts-ignore
   useCompoundBody(propsFunc, wheels[2]);
+  // @ts-ignore
   useCompoundBody(propsFunc, wheels[3]);
 
   return [wheels, wheelInfos];
