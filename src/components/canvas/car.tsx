@@ -72,13 +72,12 @@ const Car = ({ thirdPerson }: any) => {
     wheelRadius,
   });
 
-  // if (wheelInfos === undefined) return;
-  if (!wheelInfos) return null;
+  if (!wheelInfos || wheelInfos === undefined) return null;
 
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
       chassisBody,
-      wheelInfos,
+      wheelInfos: wheelInfos as WheelInfoOptions[],
       wheels,
     }),
     useRef<Group>(null)
