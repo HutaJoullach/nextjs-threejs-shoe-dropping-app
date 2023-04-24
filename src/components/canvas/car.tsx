@@ -72,7 +72,8 @@ const Car = ({ thirdPerson }: any) => {
     wheelRadius,
   });
 
-  if (wheelInfos === undefined) return;
+  // if (wheelInfos === undefined) return;
+  if (!wheelInfos) return null;
 
   const [vehicle, vehicleApi] = useRaycastVehicle(
     () => ({
