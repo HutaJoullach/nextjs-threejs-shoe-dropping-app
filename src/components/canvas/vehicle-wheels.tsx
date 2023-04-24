@@ -18,8 +18,8 @@ const useWheels = ({
 
   const wheelInfo = {
     radius,
-    directionLocal: [0, -1, 0],
-    axleLocal: [1, 0, 0],
+    directionLocal: [0, -1, 0] as [number, number, number],
+    axleLocal: [1, 0, 0] as [number, number, number],
     suspensionStiffness: 60,
     suspensionRestLength: 0.1,
     frictionSlip: 5,
@@ -35,22 +35,38 @@ const useWheels = ({
   const wheelInfos = [
     {
       ...wheelInfo,
-      chassisConnectionPointLocal: [-width * 0.65, height * 0.4, front],
+      chassisConnectionPointLocal: [-width * 0.65, height * 0.4, front] as [
+        number,
+        number,
+        number
+      ],
       isFrontWheel: true,
     },
     {
       ...wheelInfo,
-      chassisConnectionPointLocal: [width * 0.65, height * 0.4, front],
+      chassisConnectionPointLocal: [width * 0.65, height * 0.4, front] as [
+        number,
+        number,
+        number
+      ],
       isFrontWheel: true,
     },
     {
       ...wheelInfo,
-      chassisConnectionPointLocal: [-width * 0.65, height * 0.4, -front],
+      chassisConnectionPointLocal: [-width * 0.65, height * 0.4, -front] as [
+        number,
+        number,
+        number
+      ],
       isFrontWheel: false,
     },
     {
       ...wheelInfo,
-      chassisConnectionPointLocal: [width * 0.65, height * 0.4, -front],
+      chassisConnectionPointLocal: [width * 0.65, height * 0.4, -front] as [
+        number,
+        number,
+        number
+      ],
       isFrontWheel: false,
     },
   ];

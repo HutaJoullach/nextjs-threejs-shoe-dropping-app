@@ -14,11 +14,16 @@ interface IControls {
 
 // fix type errors
 type useControlsProps = {
-  vehicleApi: any;
+  // vehicleApi: any;
+  myVehicleApi: any;
   chassisApi: any;
 };
 
-const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
+const useControls = ({
+  myVehicleApi: vehicleApi,
+  chassisApi,
+}: useControlsProps) => {
+  // const useControls = ({ vehicleApi, chassisApi }: useControlsProps) => {
   let [controls, setControls] = useState<IControls>({});
 
   useEffect(() => {

@@ -1,6 +1,10 @@
 import { useEffect, useRef, MutableRefObject } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { useBox, useRaycastVehicle } from "@react-three/cannon";
+import {
+  useBox,
+  useRaycastVehicle,
+  WheelInfoOptions,
+} from "@react-three/cannon";
 import { Group, Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
@@ -38,48 +42,59 @@ const Car = ({ thirdPerson }: any) => {
     useRef<Group>(null)
   );
 
-  // type WheelInfos = {
-  //   chassisConnectionPointLocal: number[];
-  //   isFrontWheel: boolean;
-  //   radius: number;
-  //   directionLocal: number[];
-  //   axleLocal: number[];
-  //   suspensionStiffness: number;
-  //   suspensionRestLength: number;
-  //   frictionSlip: number;
-  //   dampingRelaxation: number;
-  //   dampingCompression: number;
-  //   maxSuspensionForce: number;
-  //   rollInfluence: number;
-  //   maxSuspensionTravel: number;
-  //   customSlidingRotationalSpeed: number;
-  //   useCustomSlidingRotationalSpeed: boolean;
-  // }[];
+  type UseWheels = {
+    wheels: MutableRefObject<null>[];
+    wheelInfos: WheelInfos;
+  };
 
-  // const [wheels, wheelInfos]: MutableRefObject<null>[] | WheelInfos = useWheels(
-  //   {
-  //     width,
-  //     height,
-  //     front,
-  //     wheelRadius,
-  //   }
-  // );
+  type WheelInfos = {
+    chassisConnectionPointLocal: [number, number, number];
+    isFrontWheel: boolean;
+    radius: number;
+    directionLocal: [number, number, number];
+    axleLocal: [number, number, number];
+    suspensionStiffness: number;
+    suspensionRestLength: number;
+    frictionSlip: number;
+    dampingRelaxation: number;
+    dampingCompression: number;
+    maxSuspensionForce: number;
+    rollInfluence: number;
+    maxSuspensionTravel: number;
+    customSlidingRotationalSpeed: number;
+    useCustomSlidingRotationalSpeed: boolean;
+  }[];
 
-  const { wheels, wheelInfos }: any = useWheels({
+  const { wheels, wheelInfos }: UseWheels = useWheels({
     width,
     height,
     front,
     wheelRadius,
   });
 
-  const [vehicle, vehicleApi] = useRaycastVehicle(
-    () => ({
-      chassisBody,
-      wheelInfos,
-      wheels,
-    }),
-    useRef<Group>(null)
-  );
+  // const [vehicle, vehicleApi] = useRaycastVehicle(
+  //   () => ({
+  //     chassisBody,
+  //     wheelInfos,
+  //     wheels,
+  //   }),
+  //   useRef<Group>(null)
+  // );
+
+  let myVehicle;
+  let myVehicleApi;
+  if (chassisBody && wheelInfos && wheels) {
+    const [vehicle, vehicleApi] = useRaycastVehicle(
+      () => ({
+        chassisBody,
+        wheelInfos,
+        wheels,
+      }),
+      useRef<Group>(null)
+    );
+    myVehicle = vehicle;
+    myVehicleApi = vehicleApi;
+  }
 
   // const [wheels, wheelInfos] = useWheels({ width, height, front, wheelRadius });
 
@@ -95,7 +110,8 @@ const Car = ({ thirdPerson }: any) => {
   //   useRef<Group>(null)
   // );
 
-  useControls({ vehicleApi, chassisApi });
+  // useControls({ vehicleApi, chassisApi });
+  useControls({ myVehicleApi, chassisApi });
 
   useFrame((state) => {
     if (!thirdPerson) return;
@@ -133,7 +149,8 @@ const Car = ({ thirdPerson }: any) => {
   }, [result]);
 
   return (
-    <group ref={vehicle} name="vehicle">
+    // <group ref={vehicle} name="vehicle">
+    <group ref={myVehicle} name="vehicle">
       <group ref={chassisBody} name="chassisBody">
         <primitive
           object={result}
