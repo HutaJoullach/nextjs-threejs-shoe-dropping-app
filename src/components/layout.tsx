@@ -3,21 +3,39 @@ import type { PropsWithChildren } from "react";
 import theme from "../styles/styles";
 import Navbar from "./navbar";
 
+import { IoMdClose } from "react-icons/io";
+
 import { useAtom } from "jotai";
 import { isContactModalOpenedAtom } from "../states/object-data";
 import { useHydrateAtoms } from "jotai/utils";
 
 const ContactModal = () => {
+  useHydrateAtoms([[isContactModalOpenedAtom, false] as const]);
+  const [isContactModalOpened, setIsContactModalOpened] = useAtom(
+    isContactModalOpenedAtom
+  );
+
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800/70 outline-none focus:outline-none`}
     >
       <div
-        className={`relative mx-auto my-6 h-full w-full md:h-auto md:w-4/6 lg:h-auto lg:w-3/6 xl:w-2/5`}
+        className={`${theme.bg.contactModalBackground} relative mx-auto my-6 h-full w-full md:h-auto md:w-4/6 lg:h-auto lg:w-3/6 xl:w-2/5`}
       >
         <form>
+          <div className="relative flex items-center justify-center rounded-t border-b-[1px] p-6">
+            <button
+              className="absolute left-9 border-0 p-1 transition hover:opacity-70"
+              onClick={() => {
+                if (isContactModalOpened)
+                  setIsContactModalOpened(!isContactModalOpened);
+              }}
+            >
+              <IoMdClose size={18} />
+            </button>
+          </div>
           <label className="flex flex-col">
-            <span className="mb-4 font-medium text-white">Name</span>
+            <span className="mb-4 font-medium text-white">name</span>
             <input
               type="text"
               name="name"
@@ -39,7 +57,7 @@ const ContactModal = () => {
             />
           </label>
           <label className="flex flex-col">
-            <span className="mb-4 font-medium text-white">Message</span>
+            <span className="mb-4 font-medium text-white">message</span>
             <textarea
               rows={7}
               name="message"
@@ -53,7 +71,7 @@ const ContactModal = () => {
             type="submit"
             className="bg-tertiary shadow-primary w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
           >
-            {false ? "Sending..." : "Send"}
+            {false ? "sending..." : "send"}
           </button>
         </form>
       </div>

@@ -52,6 +52,7 @@ const theme = {
     // cardBackground: "",
     utilityCardBackground: "bg-zinc-700",
     navbarBackground: "bg-red-200",
+    contactModalBackground: "bg-red-200",
     // sidebarBackground: "",
     // headerBarBackground: "",
   },
