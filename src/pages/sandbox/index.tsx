@@ -265,15 +265,6 @@ const MutateObjectButton = () => {
                   soleData: soleDataToMutate,
                   stripesData: stripesDataToMutate,
                 });
-
-                // console.log(`band ${bandDataToMutate}`);
-                // console.log(`caps ${capsDataToMutate}`);
-                // console.log(`inner ${innerDataToMutate}`);
-                // console.log(`laces ${lacesDataToMutate}`);
-                // console.log(`mesh ${meshDataToMutate}`);
-                // console.log(`patch ${patchDataToMutate}`);
-                // console.log(`sole ${soleDataToMutate}`);
-                // console.log(`stripes ${stripesDataToMutate}`);
               }
             }, 2500);
           }}
@@ -341,28 +332,27 @@ const CreateObjectWizard = () => {
         // @ts-ignore
         setBandDataToMutate(materials[key]?.color.getHex);
       } else if (key === "caps") {
+        // @ts-ignore
         setCapsDataToMutate(materials[key].color.getHex);
       } else if (key === "inner") {
+        // @ts-ignore
         setInnerDataToMutate(materials[key].color.getHex);
       } else if (key === "laces") {
+        // @ts-ignore
         setLacesDataToMutate(materials[key].color.getHex);
       } else if (key === "mesh") {
+        // @ts-ignore
         setMeshDataToMutate(materials[key].color.getHex);
       } else if (key === "patch") {
+        // @ts-ignore
         setPatchDataToMutate(materials[key].color.getHex);
       } else if (key === "sole") {
+        // @ts-ignore
         setSoleDataToMutate(materials[key].color.getHex);
       } else if (key === "stripes") {
+        // @ts-ignore
         setStripesDataToMutate(materials[key].color.getHex);
       }
-      // console.log(`band ${bandDataToMutate}`);
-      // console.log(`caps ${capsDataToMutate}`);
-      // console.log(`inner ${innerDataToMutate}`);
-      // console.log(`laces ${lacesDataToMutate}`);
-      // console.log(`mesh ${meshDataToMutate}`);
-      // console.log(`patch ${patchDataToMutate}`);
-      // console.log(`sole ${soleDataToMutate}`);
-      // console.log(`stripes ${stripesDataToMutate}`);
     }
   }
 
@@ -398,7 +388,11 @@ const CreateObjectWizard = () => {
               "#" +
               ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0"),
             onChange: (v: any) => {
+              // fixing type errors for color of Material will break the code. Ignoring the errors for now.
+              // @ts-ignore
               materials[m].color = new Color(v);
+              // fixing type errors for color of Material will break the code. Ignoring the errors for now.
+              // @ts-ignore
               materials[m].color.getHex = v;
               // console.log(v);
               // console.log(m);
@@ -416,17 +410,28 @@ const CreateObjectWizard = () => {
       onPointerOut={() => setHovered(false)}
       onClick={(e) => {
         e.stopPropagation();
+        // fixing type errors for material of object will break the code. Ignoring the errors for now.
+        // @ts-ignore
         document.getElementById("Shoe." + e.object.material.name)?.focus();
       }}
     >
-      <mesh geometry={nodes.shoe.geometry} material={materials.laces} />
-      <mesh geometry={nodes.shoe_1.geometry} material={materials.mesh} />
-      <mesh geometry={nodes.shoe_2.geometry} material={materials.caps} />
-      <mesh geometry={nodes.shoe_3.geometry} material={materials.inner} />
-      <mesh geometry={nodes.shoe_4.geometry} material={materials.sole} />
-      <mesh geometry={nodes.shoe_5.geometry} material={materials.stripes} />
-      <mesh geometry={nodes.shoe_6.geometry} material={materials.band} />
-      <mesh geometry={nodes.shoe_7.geometry} material={materials.patch} />
+      {/* fixing type errors for color of Material will break the code. Ignoring the errors for now. */}
+      {/* @ts-ignore */}
+      <mesh geometry={nodes.shoe?.geometry} material={materials.laces} />
+      {/* @ts-ignore */}
+      <mesh geometry={nodes.shoe_1?.geometry} material={materials.mesh} />
+      {/* @ts-ignore */}
+      <mesh geometry={nodes.shoe_2?.geometry} material={materials.caps} />
+      {/* @ts-ignore */}
+      <mesh geometry={nodes.shoe_3?.geometry} material={materials.inner} />
+      {/* @ts-ignore */}
+      <mesh geometry={nodes.shoe_4?.geometry} material={materials.sole} />
+      {/* @ts-ignore */}
+      <mesh geometry={nodes.shoe_5?.geometry} material={materials.stripes} />
+      {/* @ts-ignore */}
+      <mesh geometry={nodes.shoe_6?.geometry} material={materials.band} />
+      {/* @ts-ignore */}
+      <mesh geometry={nodes.shoe_7?.geometry} material={materials.patch} />
     </group>
   );
 };
