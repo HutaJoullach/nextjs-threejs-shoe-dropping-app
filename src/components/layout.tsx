@@ -20,12 +20,12 @@ const ContactModal = () => {
       className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800/70 outline-none focus:outline-none`}
     >
       <div
-        className={`${theme.bg.contactModalBackground} relative mx-auto my-6 h-full w-full md:h-auto md:w-4/6 lg:h-auto lg:w-3/6 xl:w-2/5`}
+        className={`${theme.bg.contactModalBackground} ${theme.rounded.utilityCardBorder} relative mx-auto my-6 h-full w-full p-3 md:h-auto md:w-4/6 lg:h-auto lg:w-3/6 xl:w-2/5`}
       >
         <form>
-          <div className="relative flex items-center justify-center rounded-t border-b-[1px] p-6">
+          <div className="relative flex items-center justify-center rounded-t p-4">
             <button
-              className="absolute left-9 border-0 p-1 transition hover:opacity-70"
+              className="absolute right-9 border-0 p-1 text-white transition hover:opacity-70"
               onClick={() => {
                 if (isContactModalOpened)
                   setIsContactModalOpened(!isContactModalOpened);
