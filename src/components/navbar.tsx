@@ -17,7 +17,7 @@ import {
 } from "../assets";
 
 import { useAtom } from "jotai";
-import { isEmailModalOpenedAtom } from "../states/object-data";
+import { isContactModalOpenedAtom } from "../states/object-data";
 import { useHydrateAtoms } from "jotai/utils";
 
 const Navbar = () => {
@@ -111,9 +111,9 @@ const Navbar = () => {
     const defaultListClassName =
       "hidden list-none flex-row items-center gap-10 sm:flex";
 
-    useHydrateAtoms([[isEmailModalOpenedAtom, false] as const]);
-    const [isEmailModalOpened, setIsEmailModalOpened] = useAtom(
-      isEmailModalOpenedAtom
+    useHydrateAtoms([[isContactModalOpenedAtom, false] as const]);
+    const [isContactModalOpened, setIsContactModalOpened] = useAtom(
+      isContactModalOpenedAtom
     );
 
     return (
@@ -166,8 +166,8 @@ const Navbar = () => {
           <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
             <button
               onClick={() => {
-                if (!isEmailModalOpened)
-                  setIsEmailModalOpened(!isEmailModalOpened);
+                if (!isContactModalOpened)
+                  setIsContactModalOpened(!isContactModalOpened);
               }}
             >
               <Image

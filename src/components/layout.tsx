@@ -4,14 +4,16 @@ import theme from "../styles/styles";
 import Navbar from "./navbar";
 
 import { useAtom } from "jotai";
-import { isEmailModalOpenedAtom } from "../states/object-data";
+import { isContactModalOpenedAtom } from "../states/object-data";
 import { useHydrateAtoms } from "jotai/utils";
 
 const ContactModal = () => {
   return (
-    <div className={`flex h-full w-full items-center justify-center`}>
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800/70 outline-none focus:outline-none`}
+    >
       <div
-        className={`flex flex-col-reverse gap-10 overflow-hidden xl:mt-12 xl:flex-row`}
+        className={`relative mx-auto my-6 h-full w-full md:h-auto md:w-4/6 lg:h-auto lg:w-3/6 xl:w-2/5`}
       >
         <form>
           <label className="flex flex-col">
@@ -60,9 +62,9 @@ const ContactModal = () => {
 };
 
 export const PageLayout = (props: PropsWithChildren) => {
-  useHydrateAtoms([[isEmailModalOpenedAtom, false] as const]);
-  const [isEmailModalOpened, setIsEmailModalOpened] = useAtom(
-    isEmailModalOpenedAtom
+  useHydrateAtoms([[isContactModalOpenedAtom, false] as const]);
+  const [isContactModalOpened, setIsContactModalOpened] = useAtom(
+    isContactModalOpenedAtom
   );
 
   return (
@@ -70,8 +72,8 @@ export const PageLayout = (props: PropsWithChildren) => {
       <div className="h-full w-full overflow-y-scroll md:max-w-7xl">
         <Navbar />
         <div className={`${theme.h.content} ${theme.top.content}`}>
-          {!!isEmailModalOpened && <ContactModal />}
-          {!isEmailModalOpened && <>{props.children}</>}
+          {!isContactModalOpened && <>{props.children}</>}
+          {!!isContactModalOpened && <ContactModal />}
           {/* {props.children} */}
         </div>
       </div>
