@@ -42,7 +42,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
   // ) as CustomGLTF;
 
   const { nodes, materials, scene } = useGLTF(
-    `${process.env.NEXT_PUBLIC_URL}/models/shoe-draco.glb`
+    "./models/shoe-draco.glb"
   ) as CustomGLTF;
 
   const position: [number, number, number] = [
