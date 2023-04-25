@@ -70,8 +70,9 @@ export const PageLayout = (props: PropsWithChildren) => {
       <div className="h-full w-full overflow-y-scroll md:max-w-7xl">
         <Navbar />
         <div className={`${theme.h.content} ${theme.top.content}`}>
-          {isEmailModalOpened && <ContactModal />}
-          {props.children}
+          {!!isEmailModalOpened && <ContactModal />}
+          {!isEmailModalOpened && <>{props.children}</>}
+          {/* {props.children} */}
         </div>
       </div>
     </main>
