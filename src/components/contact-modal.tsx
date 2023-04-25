@@ -101,7 +101,7 @@ const ContactModal = () => {
           <div className="relative flex items-center justify-between rounded-t p-4 font-medium text-white">
             <span>wanna get in touch? 📨📪</span>
             <button
-              className="absolute right-6 border-0 p-1 text-white transition hover:opacity-70"
+              className="border-0 p-1 text-white transition hover:opacity-70"
               onClick={() => {
                 if (isContactModalOpened)
                   setIsContactModalOpened(!isContactModalOpened);
@@ -111,7 +111,7 @@ const ContactModal = () => {
             </button>
           </div>
           <label className="flex flex-col">
-            <span className="mb-2 font-medium text-white">name</span>
+            <span className="mb-3 font-medium text-white">name</span>
             <input
               type="text"
               name="name"
@@ -124,7 +124,7 @@ const ContactModal = () => {
             />
           </label>
           <label className="flex flex-col">
-            <span className="mb-2 font-medium text-white">email</span>
+            <span className="mb-3 font-medium text-white">email</span>
             <input
               type="email"
               name="email"
@@ -137,7 +137,7 @@ const ContactModal = () => {
             />
           </label>
           <label className="flex flex-col">
-            <span className="mb-2 font-medium text-white">message</span>
+            <span className="mb-3 font-medium text-white">message</span>
             <textarea
               rows={7}
               name="message"
