@@ -16,12 +16,7 @@ const Ground = () => {
     useRef(null)
   );
 
-  const gridMap = useLoader(
-    TextureLoader,
-    process.env.NEXT_PUBLIC_URL
-      ? `${process.env.NEXT_PUBLIC_URL}/textures/grid.png`
-      : `http://localhost:3000/textures/grid.png`
-  );
+  const gridMap = useLoader(TextureLoader, "./textures/grid.png");
 
   // const aoMap = useLoader(
   //   TextureLoader,
