@@ -16,6 +16,10 @@ import {
   user02,
 } from "../assets";
 
+import { useAtom } from "jotai";
+import { isEmailModalOpenedAtom } from "../states/object-data";
+import { useHydrateAtoms } from "jotai/utils";
+
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
@@ -107,6 +111,11 @@ const Navbar = () => {
     const defaultListClassName =
       "hidden list-none flex-row items-center gap-10 sm:flex";
 
+    useHydrateAtoms([[isEmailModalOpenedAtom, false] as const]);
+    const [isEmailModalOpened, setIsEmailModalOpened] = useAtom(
+      isEmailModalOpenedAtom
+    );
+
     return (
       <ul
         className={
@@ -155,13 +164,20 @@ const Navbar = () => {
 
         <li className="cursor-pointer">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-red-300">
-            <Image
-              src={paperplane}
-              className="h-7 w-7 rounded-full"
-              alt="paperplane"
-              width={56}
-              height={56}
-            />
+            <button
+              onClick={() => {
+                if (!isEmailModalOpened)
+                  setIsEmailModalOpened(!isEmailModalOpened);
+              }}
+            >
+              <Image
+                src={paperplane}
+                className="h-7 w-7 rounded-full"
+                alt="paperplane"
+                width={56}
+                height={56}
+              />
+            </button>
           </div>
         </li>
 

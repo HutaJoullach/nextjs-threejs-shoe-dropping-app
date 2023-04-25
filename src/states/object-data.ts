@@ -5,6 +5,8 @@ export const isMainCanvasMountedAtom = atom<boolean>(true);
 export const isMutateObjectBtnClickedAtom = atom<boolean>(false);
 export const isDataRefetchedAtom = atom<boolean>(false);
 
+export const isEmailModalOpenedAtom = atom<boolean>(false);
+
 // interface objectDataToMutate {
 //   laces: string;
 //   mesh: string;
