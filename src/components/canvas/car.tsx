@@ -20,8 +20,8 @@
 
 //   let result = useLoader(
 //     GLTFLoader,
-//     process.env.PUBLIC_URL
-//       ? `${process.env.PUBLIC_URL}/models/car.glb`
+//     process.env.NEXT_PUBLIC_URL
+//       ? `${process.env.NEXT_PUBLIC_URL}/models/car.glb`
 //       : `http://localhost:3000/models/car.glb`
 //   ).scene;
 

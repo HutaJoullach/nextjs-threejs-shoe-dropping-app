@@ -478,8 +478,6 @@ const Scene = () => {
     return () => window.removeEventListener("keydown", keydownHandler);
   }, [thirdPerson]);
 
-  console.log(`here! ${process.env.NEXT_PUBLIC_URL}`);
-
   return (
     <Suspense fallback={null}>
       <Environment

@@ -37,8 +37,12 @@ export const ObjectContainer = (props: ObjectWithUser) => {
     materials: Record<string, THREE.Material>;
   }
 
+  // const { nodes, materials, scene } = useGLTF(
+  //   "http://localhost:3000/models/shoe-draco.glb"
+  // ) as CustomGLTF;
+
   const { nodes, materials, scene } = useGLTF(
-    "http://localhost:3000/models/shoe-draco.glb"
+    `${process.env.NEXT_PUBLIC_URL}/models/shoe-draco.glb`
   ) as CustomGLTF;
 
   const position: [number, number, number] = [

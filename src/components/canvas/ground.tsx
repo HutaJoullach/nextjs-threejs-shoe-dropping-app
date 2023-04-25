@@ -18,22 +18,22 @@ const Ground = () => {
 
   const gridMap = useLoader(
     TextureLoader,
-    process.env.PUBLIC_URL
-      ? `${process.env.PUBLIC_URL}/textures/grid.png`
+    process.env.NEXT_PUBLIC_URL
+      ? `${process.env.NEXT_PUBLIC_URL}/textures/grid.png`
       : `http://localhost:3000/textures/grid.png`
   );
 
   // const aoMap = useLoader(
   //   TextureLoader,
-  //   process.env.PUBLIC_URL
-  //     ? `${process.env.PUBLIC_URL}/textures/ground-ao.png`
+  //   process.env.NEXT_PUBLIC_URL
+  //     ? `${process.env.NEXT_PUBLIC_URL}/textures/ground-ao.png`
   //     : `http://localhost:3000/textures/ground-ao.png`
   // );
 
   const alphaMap = useLoader(
     TextureLoader,
-    process.env.PUBLIC_URL
-      ? `${process.env.PUBLIC_URL}/textures/alpha-map.png`
+    process.env.NEXT_PUBLIC_URL
+      ? `${process.env.NEXT_PUBLIC_URL}/textures/alpha-map.png`
       : `http://localhost:3000/textures/alpha-map.png`
   );
 
