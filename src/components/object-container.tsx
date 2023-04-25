@@ -131,7 +131,7 @@ export const ObjectContainer = (props: ObjectWithUser) => {
 
   return (
     <group ref={shoeBody} dispose={null} scale={0.06}>
-      <ambientLight intensity={0.8} />
+      <ambientLight intensity={0.05} />
       <mesh
         // The error geometry property does not exist on the Object3D type. Ignoring the errors for now.
         // @ts-ignore
