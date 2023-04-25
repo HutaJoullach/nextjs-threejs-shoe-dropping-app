@@ -19,6 +19,7 @@ import { Physics } from "@react-three/cannon";
 import { useControls } from "leva";
 import { toast } from "react-hot-toast";
 import { Color } from "three";
+import { GLTF as GLTFStd } from "three-stdlib";
 import {
   Environment,
   OrbitControls,
@@ -321,9 +322,13 @@ const CreateObjectWizard = () => {
   if (!user) return null;
 
   const [hovered, setHovered] = useState(false);
-  const { nodes, materials } = useGLTF(
-    "http://localhost:3000/models/shoe-draco.glb"
-  );
+
+  interface CustomGLTF extends GLTFStd {
+    nodes: Record<string, THREE.Object3D>;
+    materials: Record<string, THREE.Material>;
+  }
+
+  const { nodes, materials } = useGLTF("./models/shoe-draco.glb") as CustomGLTF;
 
   useEffect(() => {
     document.body.style.cursor = hovered ? "pointer" : "auto";
@@ -332,7 +337,9 @@ const CreateObjectWizard = () => {
   function updateObjectData() {
     for (let [key, value] of Object.entries(materials)) {
       if (key === "band") {
-        setBandDataToMutate(materials[key].color.getHex);
+        // fixing type errors for color of Material will break the code. Ignoring the errors for now.
+        // @ts-ignore
+        setBandDataToMutate(materials[key]?.color.getHex);
       } else if (key === "caps") {
         setCapsDataToMutate(materials[key].color.getHex);
       } else if (key === "inner") {
