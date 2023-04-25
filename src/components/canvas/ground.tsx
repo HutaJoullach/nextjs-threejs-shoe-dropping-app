@@ -25,12 +25,7 @@ const Ground = () => {
   //     : `http://localhost:3000/textures/ground-ao.png`
   // );
 
-  const alphaMap = useLoader(
-    TextureLoader,
-    process.env.NEXT_PUBLIC_URL
-      ? `${process.env.NEXT_PUBLIC_URL}/textures/alpha-map.png`
-      : `http://localhost:3000/textures/alpha-map.png`
-  );
+  const alphaMap = useLoader(TextureLoader, "./textures/alpha-map.png");
 
   const meshRef = useRef<Mesh>(null);
   const meshRef2 = useRef<Mesh>(null);

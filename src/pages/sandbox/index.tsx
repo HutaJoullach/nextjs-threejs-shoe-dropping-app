@@ -480,14 +480,7 @@ const Scene = () => {
 
   return (
     <Suspense fallback={null}>
-      <Environment
-        files={
-          process.env.VERCEL_URL
-            ? `${process.env.VERCEL_URL}/textures/vignaioli.hdr`
-            : `http://localhost:3000/textures/vignaioli.hdr`
-        }
-        background={"only"}
-      />
+      <Environment files={"./textures/vignaioli.hdr"} background={"only"} />
       <PerspectiveCamera makeDefault position={[-1, 1.9, 6.21]} fov={40} />
       {!thirdPerson && <OrbitControls target={[-2.64, -0.71, 0.03]} />}
 
