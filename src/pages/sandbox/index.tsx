@@ -478,12 +478,14 @@ const Scene = () => {
     return () => window.removeEventListener("keydown", keydownHandler);
   }, [thirdPerson]);
 
+  console.log(`here ${process.env.VERCEL_URL}`);
+
   return (
     <Suspense fallback={null}>
       <Environment
         files={
-          process.env.NEXT_PUBLIC_URL
-            ? `${process.env.NEXT_PUBLIC_URL}/textures/vignaioli.hdr`
+          process.env.VERCEL_URL
+            ? `${process.env.VERCEL_URL}/textures/vignaioli.hdr`
             : `http://localhost:3000/textures/vignaioli.hdr`
         }
         background={"only"}
