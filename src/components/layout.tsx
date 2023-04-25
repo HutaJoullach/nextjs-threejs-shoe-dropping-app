@@ -154,10 +154,10 @@ const ContactModal = () => {
           <button
             type="submit"
             disabled={true}
-            className="bg-tertiary shadow-primary absolute right-6 w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
+            className="bg-tertiary shadow-primary flex-end w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
           >
             {/* {isLoading ? "sending..." : "send"} */}
-            "scaffolding 🚧👷🏼‍♂️🏗️"
+            <span>scaffolding 🚧👷🏼‍♂️🏗️</span>
           </button>
         </form>
       </div>
