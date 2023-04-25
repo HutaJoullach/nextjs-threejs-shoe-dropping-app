@@ -98,7 +98,7 @@ const ContactModal = () => {
         className={`${theme.bg.contactModalBackground} ${theme.rounded.utilityCardBorder} relative mx-auto my-6 h-full w-full p-5 md:h-auto md:w-4/6 lg:h-auto lg:w-3/6 xl:w-2/5`}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="relative flex items-center justify-between rounded-t p-4 font-medium text-white">
+          <div className="relative flex items-center justify-between rounded-t p-4 text-lg font-bold text-white">
             <span>wanna get in touch? 📨📪</span>
             <button
               className="border-0 p-1 text-white transition hover:opacity-70"
