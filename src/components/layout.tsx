@@ -157,7 +157,7 @@ const ContactModal = () => {
             className="bg-tertiary shadow-primary absolute right-6 w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
           >
             {/* {isLoading ? "sending..." : "send"} */}
-            <span>scaffolding 🚧👷🏼‍♂️🏗️</span>
+            "scaffolding 🚧👷🏼‍♂️🏗️"
           </button>
         </form>
       </div>
