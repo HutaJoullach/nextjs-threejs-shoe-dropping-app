@@ -101,6 +101,7 @@ const ContactModal = () => {
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative flex items-center justify-center rounded-t p-4">
+            <span>wanna get in touch? 📨📪</span>
             <button
               className="absolute right-6 border-0 p-1 text-white transition hover:opacity-70"
               onClick={() => {
@@ -150,11 +151,11 @@ const ContactModal = () => {
               className="bg-tertiary placeholder:text-secondary rounded-lg border-none px-6 py-4 font-medium text-white outline-none"
             />
           </label>
-          <span className="py-3"></span>
+          <div className="py-3"></div>
           <button
             type="submit"
             disabled={true}
-            className="bg-tertiary shadow-primary flex-end w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
+            className="shadow-primary flex-end w-fit rounded-xl bg-red-300 px-8 py-3 font-bold text-white shadow-md outline-none"
           >
             {/* {isLoading ? "sending..." : "send"} */}
             <span>scaffolding 🚧👷🏼‍♂️🏗️</span>
