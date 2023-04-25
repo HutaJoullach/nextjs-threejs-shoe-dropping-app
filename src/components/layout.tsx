@@ -41,7 +41,7 @@ const ContactModal = () => {
               name="name"
               value=""
               onChange={() => {}}
-              placeholder="enter name"
+              placeholder="name"
               className="bg-tertiary placeholder:text-secondary rounded-lg border-none px-6 py-4 font-medium text-white outline-none"
             />
           </label>
@@ -52,7 +52,7 @@ const ContactModal = () => {
               name="email"
               value=""
               onChange={() => {}}
-              placeholder="enter email"
+              placeholder="email"
               className="bg-tertiary placeholder:text-secondary rounded-lg border-none px-6 py-4 font-medium text-white outline-none"
             />
           </label>
@@ -63,15 +63,17 @@ const ContactModal = () => {
               name="message"
               value=""
               onChange={() => {}}
-              placeholder="enter message"
+              placeholder="message"
               className="bg-tertiary placeholder:text-secondary rounded-lg border-none px-6 py-4 font-medium text-white outline-none"
             />
           </label>
+          <span className="py-3"></span>
           <button
             type="submit"
-            className="bg-tertiary shadow-primary right-6 w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
+            className="bg-tertiary shadow-primary absolute right-6 w-fit rounded-xl px-8 py-3 font-bold text-white shadow-md outline-none"
           >
-            {false ? "sending..." : "send"}
+            {/* {false ? "sending..." : "send"} */}
+            `scaffolding 🚧👷🏼‍♂️🏗️`
           </button>
         </form>
       </div>
