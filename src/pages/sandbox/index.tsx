@@ -10,7 +10,7 @@ import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { PageLayout } from "~/components/layout";
 import { ObjectContainer } from "~/components/object-container";
 import Ground from "~/components/canvas/ground";
-// import Car from "~/components/canvas/car";
+import Car from "~/components/canvas/car";
 import { caticon, arrowleftmdplain } from "../../assets";
 
 import { useUser } from "@clerk/nextjs";
@@ -498,7 +498,7 @@ const Scene = () => {
 
       <Ground />
       <RenderStoredObjects />
-      {/* <Car thirdPerson={thirdPerson} /> */}
+      <Car thirdPerson={thirdPerson} />
     </Suspense>
   );
 };
