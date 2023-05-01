@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Link from "next/link";
@@ -11,6 +12,10 @@ import StagCanvas from "~/components/canvas/stag";
 
 const Home: NextPage = () => {
   const user = useUser();
+
+  const [isRendered, setIsRendered] = useState(false);
+
+  setTimeout(() => setIsRendered(true), 2000);
 
   const Jumbotron = () => {
     return (
@@ -33,9 +38,7 @@ const Home: NextPage = () => {
             </p>
           </div>
         </div>
-        <div className="h-3/4">
-          <StagCanvas />
-        </div>
+        <div className="h-3/4">{isRendered && <StagCanvas />}</div>
       </div>
     );
   };

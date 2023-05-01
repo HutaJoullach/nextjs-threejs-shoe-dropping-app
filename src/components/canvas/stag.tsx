@@ -22,22 +22,12 @@ const Stag = ({ isMobile }: StagProps) => {
   // The link for website: https://quaternius.com/index.html
   // Thanks for the cool free assets :-)
 
-  const [loaded, setLoaded] = useState(false);
-
   useGLTF.preload("./models/Stag.gltf");
   const { scene, animations } = useGLTF("./models/Stag.gltf");
   const { ref, mixer, names, actions, clips } = useAnimations(
     animations,
     scene
   );
-
-  useEffect(() => {
-    if (scene && animations) {
-      setLoaded(true);
-      console.log(scene);
-      console.log(animations);
-    }
-  }, [scene, animations]);
 
   const currentAction = useRef<AnimationAction | null | undefined>(null);
   const nextAction = useRef<AnimationAction | null | undefined>(null);
@@ -120,28 +110,24 @@ const Stag = ({ isMobile }: StagProps) => {
   }, [controls]);
 
   return (
-    <>
-      {loaded && (
-        <mesh>
-          <hemisphereLight intensity={0.15} groundColor="black" />
-          <spotLight
-            position={[30, 50, 10]}
-            angle={0.12}
-            penumbra={1}
-            intensity={1}
-            castShadow
-            shadow-mapSize={1024}
-          />
-          <pointLight intensity={1} />
-          <primitive
-            object={scene}
-            scale={isMobile ? 1.1 : 1.2}
-            position={isMobile ? [0, -4, -1] : [0, -2.65, -1.5]}
-            rotation={[-0.01, 1.9, -0.1]}
-          />
-        </mesh>
-      )}
-    </>
+    <mesh>
+      <hemisphereLight intensity={0.15} groundColor="black" />
+      <spotLight
+        position={[30, 50, 10]}
+        angle={0.12}
+        penumbra={1}
+        intensity={1}
+        castShadow
+        shadow-mapSize={1024}
+      />
+      <pointLight intensity={1} />
+      <primitive
+        object={scene}
+        scale={isMobile ? 1.1 : 1.2}
+        position={isMobile ? [0, -4, -1] : [0, -2.65, -1.5]}
+        rotation={[-0.01, 1.9, -0.1]}
+      />
+    </mesh>
   );
 };
 
