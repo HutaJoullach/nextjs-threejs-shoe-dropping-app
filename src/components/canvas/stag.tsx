@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 
 import CanvasLoader from "./canvas-loader";
 
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { AnimationAction } from "three";
 import {
   OrbitControls,
@@ -12,7 +12,6 @@ import {
   Text,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 type StagProps = {
   isMobile?: boolean | undefined;
@@ -23,15 +22,20 @@ const Stag = ({ isMobile }: StagProps) => {
   // The link for website: https://quaternius.com/index.html
   // Thanks for the cool free assets :-)
 
-  // useGLTF.preload("./models/Stag.gltf");
-  // const { scene, animations } = useGLTF("./models/Stag.gltf");
+  const [loaded, setLoaded] = useState(false);
 
-  const { scene, animations } = useLoader(GLTFLoader, "./models/Stag.gltf");
-
+  useGLTF.preload("./models/Stag.gltf");
+  const { scene, animations } = useGLTF("./models/Stag.gltf");
   const { ref, mixer, names, actions, clips } = useAnimations(
     animations,
     scene
   );
+
+  useEffect(() => {
+    if (scene && animations) {
+      setLoaded(true);
+    }
+  }, [scene, animations]);
 
   const currentAction = useRef<AnimationAction | null | undefined>(null);
   const nextAction = useRef<AnimationAction | null | undefined>(null);
@@ -114,24 +118,28 @@ const Stag = ({ isMobile }: StagProps) => {
   }, [controls]);
 
   return (
-    <mesh>
-      <hemisphereLight intensity={0.15} groundColor="black" />
-      <spotLight
-        position={[30, 50, 10]}
-        angle={0.12}
-        penumbra={1}
-        intensity={1}
-        castShadow
-        shadow-mapSize={1024}
-      />
-      <pointLight intensity={1} />
-      <primitive
-        object={scene ?? scene}
-        scale={isMobile ? 1.1 : 1.2}
-        position={isMobile ? [0, -4, -1] : [0, -2.65, -1.5]}
-        rotation={[-0.01, 1.9, -0.1]}
-      />
-    </mesh>
+    <>
+      {loaded && (
+        <mesh>
+          <hemisphereLight intensity={0.15} groundColor="black" />
+          <spotLight
+            position={[30, 50, 10]}
+            angle={0.12}
+            penumbra={1}
+            intensity={1}
+            castShadow
+            shadow-mapSize={1024}
+          />
+          <pointLight intensity={1} />
+          <primitive
+            object={scene}
+            scale={isMobile ? 1.1 : 1.2}
+            position={isMobile ? [0, -4, -1] : [0, -2.65, -1.5]}
+            rotation={[-0.01, 1.9, -0.1]}
+          />
+        </mesh>
+      )}
+    </>
   );
 };
 
