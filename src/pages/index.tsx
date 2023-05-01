@@ -8,9 +8,12 @@ import { api } from "~/utils/api";
 
 import { motion } from "framer-motion";
 import StagCanvas from "~/components/canvas/stag";
+import { useGLTF } from "@react-three/drei";
 
 const Home: NextPage = () => {
   const user = useUser();
+
+  useGLTF.preload("./models/Stag.gltf");
 
   const Jumbotron = () => {
     return (
