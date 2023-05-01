@@ -34,6 +34,8 @@ const Stag = ({ isMobile }: StagProps) => {
   useEffect(() => {
     if (scene && animations) {
       setLoaded(true);
+      console.log(scene);
+      console.log(animations);
     }
   }, [scene, animations]);
 
