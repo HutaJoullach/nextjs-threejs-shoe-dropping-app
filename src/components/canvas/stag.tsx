@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 
 import CanvasLoader from "./canvas-loader";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { AnimationAction } from "three";
 import {
   OrbitControls,
@@ -12,6 +12,7 @@ import {
   Text,
 } from "@react-three/drei";
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 type StagProps = {
   isMobile?: boolean | undefined;
@@ -21,8 +22,12 @@ const Stag = ({ isMobile }: StagProps) => {
   // gltf file from Quaternius. Twitter account: https://twitter.com/quaternius
   // The link for website: https://quaternius.com/index.html
   // Thanks for the cool free assets :-)
-  useGLTF.preload("./models/Stag.gltf");
-  const { scene, animations } = useGLTF("./models/Stag.gltf");
+
+  // useGLTF.preload("./models/Stag.gltf");
+  // const { scene, animations } = useGLTF("./models/Stag.gltf");
+
+  const { scene, animations } = useLoader(GLTFLoader, "./models/Stag.gltf");
+
   const { ref, mixer, names, actions, clips } = useAnimations(
     animations,
     scene
