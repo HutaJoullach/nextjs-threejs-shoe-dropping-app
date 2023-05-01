@@ -126,7 +126,7 @@ const Stag = ({ isMobile }: StagProps) => {
       />
       <pointLight intensity={1} />
       <primitive
-        object={scene}
+        object={scene ?? scene}
         scale={isMobile ? 1.1 : 1.2}
         position={isMobile ? [0, -4, -1] : [0, -2.65, -1.5]}
         rotation={[-0.01, 1.9, -0.1]}
