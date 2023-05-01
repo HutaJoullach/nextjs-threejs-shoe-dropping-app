@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
   const [isRendered, setIsRendered] = useState(false);
 
-  setTimeout(() => setIsRendered(true), 2000);
+  setTimeout(() => setIsRendered(true), 1500);
 
   const Jumbotron = () => {
     return (
