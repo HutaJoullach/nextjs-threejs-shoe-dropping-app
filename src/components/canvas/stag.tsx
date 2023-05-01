@@ -21,6 +21,7 @@ const Stag = ({ isMobile }: StagProps) => {
   // gltf file from Quaternius. Twitter account: https://twitter.com/quaternius
   // The link for website: https://quaternius.com/index.html
   // Thanks for the cool free assets :-)
+  useGLTF.preload("./models/Stag.gltf");
   const { scene, animations } = useGLTF("./models/Stag.gltf");
   const { ref, mixer, names, actions, clips } = useAnimations(
     animations,
