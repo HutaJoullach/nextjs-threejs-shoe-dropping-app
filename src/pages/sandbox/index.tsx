@@ -213,8 +213,6 @@ const MutateObjectButton = () => {
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
 
-  if (!user) return null;
-
   return (
     <div
       className={`${theme.rounded.utilityCardBorder} fixed bottom-8 right-8 z-10 mt-2`}
@@ -240,6 +238,10 @@ const MutateObjectButton = () => {
 
         <button
           onClick={() => {
+            if (!user) {
+              return toast.error("Login to app and try again!");
+            }
+
             if (!isMutateObjectBtnClicked)
               setIsMutateObjectBtnClicked(!isMutateObjectBtnClicked);
             setTimeout(function () {
@@ -309,8 +311,6 @@ const CreateObjectWizard = () => {
 
   useHydrateAtoms([[isCowOpenedAtom, false] as const]);
   const [isCowOpened, setIsCowOpened] = useAtom(isCowOpenedAtom);
-
-  if (!user) return null;
 
   const [hovered, setHovered] = useState(false);
 
@@ -530,14 +530,14 @@ const Sandbox: NextPage = () => {
         <title>Sandbox</title>
       </Head>
       <PageLayout>
-        {isSignedIn && !isCowOpened && (
+        {!isCowOpened && (
           <div className="fixed right-2 z-10 mt-2">
             <div className="flex justify-center">
               <CowControlButton />
             </div>
           </div>
         )}
-        {isSignedIn && isCowOpened && (
+        {isCowOpened && (
           <div className={`flex h-full w-full items-center justify-center`}>
             <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
               <Environment preset="forest" />
@@ -569,7 +569,6 @@ const Sandbox: NextPage = () => {
               size={100}
               tolerance={0.001}
               iterations={5}
-              // step={1 / 60}
               shouldInvalidate={true}
               allowSleep={false}
               axisIndex={0}
