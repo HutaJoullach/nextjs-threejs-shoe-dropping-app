@@ -540,7 +540,13 @@ const Sandbox: NextPage = () => {
         {isCowOpened && (
           <div className={`flex h-full w-full items-center justify-center`}>
             <Canvas shadows camera={{ position: [0, 0, 1.66] }}>
-              <Environment preset="forest" />
+              {/* <Environment preset="forest" /> */}
+              {/* preset fail to load fallback */}
+              <Environment
+                files="./textures/vignaioli.hdr"
+                background
+                blur={0.5}
+              />
               <CreateObjectWizard />
               <ContactShadows position={[0, -0.8, 0]} color="#ffffff" />
               <OrbitControls autoRotate />
